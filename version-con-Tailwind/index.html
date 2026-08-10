@@ -1,12 +1,392 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=initial-scale=1.0">
-  <title>Document</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Essential | Catálogo Oficial</title>
   
+  <!-- Tailwind CSS CDN (Requisito Reto 5) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Orbitron & Rajdhani & Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Configuración Extendida de Tailwind -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            neon: { cyan: '#00f0ff', green: '#00ffcc' },
+            dark: { bg: '#050507', card: '#0a0a0e', surface: '#111118', border: '#1e1e2a' },
+            chrome: { light: '#e4e4e7', mid: '#a1a1aa', dark: '#52525b' }
+          },
+          fontFamily: {
+            heading: ['Orbitron', 'sans-serif'],
+            accent: ['Rajdhani', 'sans-serif'],
+            body: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Estilos Personalizados (Separación estricta Reto 5) -->
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="bg-dark-bg text-chrome-light min-h-screen w-full relative flex flex-col font-body">
+
+  <!-- ==========================================
+       FONDO CIBERNÉTICO SVG
+       ========================================== -->
+  <div class="cyber-bg">
+    <svg viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" fill="none" stroke="white" stroke-width="0.5">
+      <g>
+        <line x1="0" y1="900" x2="250" y2="0"/><line x1="50" y1="900" x2="280" y2="0"/>
+        <line x1="100" y1="900" x2="310" y2="0"/><line x1="150" y1="900" x2="340" y2="0"/>
+        <line x1="200" y1="900" x2="370" y2="0"/><line x1="0" y1="200" x2="380" y2="0"/>
+        <line x1="0" y1="400" x2="350" y2="0"/><line x1="0" y1="600" x2="320" y2="0"/>
+        <line x1="0" y1="800" x2="290" y2="0"/><line x1="0" y1="100" x2="400" y2="0"/>
+        <line x1="0" y1="300" x2="370" y2="0"/><line x1="0" y1="500" x2="340" y2="0"/>
+        <line x1="0" y1="700" x2="310" y2="0"/>
+      </g>
+      <g>
+        <line x1="1400" y1="900" x2="1150" y2="0"/><line x1="1350" y1="900" x2="1120" y2="0"/>
+        <line x1="1300" y1="900" x2="1090" y2="0"/><line x1="1250" y1="900" x2="1060" y2="0"/>
+        <line x1="1200" y1="900" x2="1030" y2="0"/><line x1="1400" y1="200" x2="1020" y2="0"/>
+        <line x1="1400" y1="400" x2="1050" y2="0"/><line x1="1400" y1="600" x2="1080" y2="0"/>
+        <line x1="1400" y1="800" x2="1110" y2="0"/><line x1="1400" y1="100" x2="1000" y2="0"/>
+        <line x1="1400" y1="300" x2="1030" y2="0"/><line x1="1400" y1="500" x2="1060" y2="0"/>
+        <line x1="1400" y1="700" x2="1090" y2="0"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- ==========================================
+       HEADER Y NAVEGACIÓN
+       ========================================== -->
+  <header class="sticky top-0 z-30 w-full transition-all bg-dark-bg border-b border-dark-border">
+    <div class="max-w-6xl mx-auto px-4 flex items-center justify-between relative z-10">
+      
+      <!-- Espaciador Izquierdo -->
+      <div class="w-32 hidden md:block"></div>
+
+      <!-- Logo Central -->
+      <div class="flex-1 flex justify-center">
+        <a href="index.html" class="block">
+          <img src="./img/logo.png" alt="NEW ESSENTIAL — sentí la esencia" class="h-24 md:h-24 w-auto object-contain logo-glow" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div style="display: none;" class="flex-col items-center gap-0.5">
+            <span class="font-heading font-black text-3xl tracking-widest chrome-text italic">new</span>
+            <span class="font-heading font-bold text-sm tracking-[0.6em] chrome-text">ESSENTIAL</span>
+            <span class="font-accent text-[10px] tracking-[0.3em] text-chrome-mid italic">— sentí la esencia —</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Íconos de Acción (Derecha) -->
+      <div class="flex items-center gap-5 w-32 justify-end">
+        <button class="icon-btn flex flex-col items-center gap-0.5 text-chrome-mid" aria-label="Buscar">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <span class="text-[9px] font-heading tracking-widest hidden md:block">SEARCH</span>
+        </button>
+        <button class="icon-btn flex flex-col items-center gap-0.5 text-chrome-mid" aria-label="Perfil">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span class="text-[9px] font-heading tracking-widest hidden md:block">PROFILE</span>
+        </button>
+        <!-- Ícono Carrito (Conectado a cart.js) -->
+        <button class="cart-icon-btn icon-btn flex flex-col items-center gap-0.5 text-chrome-mid relative" aria-label="Carrito">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="text-[9px] font-heading tracking-widest hidden md:block">CART</span>
+          <span id="header-cart-badge" class="hidden absolute -top-1 -right-2 w-4 h-4 rounded-full bg-neon-cyan text-dark-bg text-[9px] font-bold flex items-center justify-center leading-none">0</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Barra de Navegación Metálica -->
+    <nav class="chrome-bar relative z-10">
+      <div class="max-w-6xl mx-auto px-4">
+        <ul class="flex flex-wrap items-center justify-center py-2.5 gap-2 md:gap-0">
+          <li><a href="index.html" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">HOME</a></li>
+          <li class="text-gray-600 font-light text-lg select-none hidden md:block">|</li>
+          
+          <!-- Menú Desplegable CATALOGO — hover CSS en desktop -->
+          <li class="relative group">
+            <a href="index.html" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em] flex items-center gap-1">
+              CATALOGO
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="opacity-70 group-hover:rotate-180 transition-transform"><polyline points="6 9 12 15 18 9"/></svg>
+            </a>
+            <!-- Dropdown visible al hacer hover (CSS puro, sin JS) -->
+            <div class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+              <div class="chrome-filter rounded-sm shadow-xl flex flex-col min-w-[180px] overflow-hidden">
+                <a href="index.html" class="px-4 py-3 text-xs font-heading tracking-wider text-gray-900 font-bold border-b border-white/20 last:border-0 hover:bg-white/30 transition-colors">Remeras</a>
+                <a href="index.html" class="px-4 py-3 text-xs font-heading tracking-wider text-gray-900 font-bold border-b border-white/20 last:border-0 hover:bg-white/30 transition-colors">Pantalones</a>
+                <a href="index.html" class="px-4 py-3 text-xs font-heading tracking-wider text-gray-900 font-bold border-b border-white/20 last:border-0 hover:bg-white/30 transition-colors">Mystery Box</a>
+                <a href="index.html" class="px-4 py-3 text-xs font-heading tracking-wider text-gray-900 font-bold border-b border-white/20 last:border-0 hover:bg-white/30 transition-colors">Buzos</a>
+                <a href="index.html" class="px-4 py-3 text-xs font-heading tracking-wider text-gray-900 font-bold border-b border-white/20 last:border-0 hover:bg-white/30 transition-colors">Gorras</a>
+              </div>
+            </div>
+          </li>
+          
+          <li class="text-gray-600 font-light text-lg select-none hidden md:block">|</li>
+          <li><a href="#" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">NEW DROPS</a></li>
+          <li class="text-gray-600 font-light text-lg select-none hidden md:block">|</li>
+          <li><a href="quienes_somos.html" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">NOSOTROS</a></li>
+          <li class="text-gray-600 font-light text-lg select-none hidden md:block">|</li>
+          <li><a href="contacto.html" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">CONTACTO</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ==========================================
+       CONTENIDO PRINCIPAL
+       ========================================== -->
+  <main class="flex-1 relative z-10 w-full">
+    
+    <!-- Sección Hero -->
+    <section class="max-w-6xl mx-auto px-4 mt-3">
+      <div class="hero-frame rounded-none overflow-hidden relative scanlines min-h-[260px]">
+        <div class="hero-inner relative flex items-stretch min-h-[260px]">
+          <!-- Texto -->
+          <div class="relative z-10 flex flex-col justify-center px-8 py-10 w-1/2 md:w-5/12">
+            <h1 class="hero-heading mb-6">SENTÍ LA ESENCIA<br/>DEL FUTURO</h1>
+            <a href="#catalogo" class="cta-btn w-fit">VER COLECCIÓN</a>
+          </div>
+          <!-- Imagen -->
+          <div class="absolute right-0 top-0 bottom-0 w-1/2 md:w-7/12 overflow-hidden">
+            <img src="./img/hero-bg.jpg" alt="Modelo Y2K" class="w-full h-full object-cover object-center" style="mask-image: linear-gradient(to right, transparent 0%, black 25%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 25%);">
+            <div class="absolute inset-0" style="background: linear-gradient(to right, #080812 0%, transparent 30%);"></div>
+          </div>
+          <!-- Esquinas neón -->
+          <div class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-neon-cyan/40 z-20"></div>
+          <div class="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-neon-cyan/40 z-20"></div>
+          <div class="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-neon-cyan/40 z-20"></div>
+          <div class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-neon-cyan/40 z-20"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección Catálogo (Filtros y Grilla) -->
+    <section id="catalogo" class="max-w-6xl mx-auto      <!-- Barra de Filtros Estática (siempre visible, sin JS) -->
+      <div class="w-full mb-8">
+        <!-- Título de la barra, acabado cromático -->
+        <div class="w-full chrome-filter px-4 py-3 flex items-center">
+          <span class="font-accent font-bold tracking-widest text-gray-900 uppercase">FILTROS</span>
+        </div>
+        <!-- Panel de filtros siempre desplegado, 3 columnas en tablet/PC -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
+
+          <!-- Filtro: Categoría -->
+          <div class="bg-dark-card border border-dark-border px-4 py-3">
+            <p class="font-accent font-bold text-sm tracking-wider text-chrome-light uppercase mb-3">Categoría</p>
+            <div class="space-y-2">
+              <label class="flex items-center gap-2 cursor-pointer group">
+                <input type="checkbox" class="accent-neon-cyan w-3.5 h-3.5">
+                <span class="text-sm text-chrome-light group-hover:text-[#00f0ff] font-body">Remeras</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer group">
+                <input type="checkbox" class="accent-neon-cyan w-3.5 h-3.5">
+                <span class="text-sm text-chrome-light group-hover:text-[#00f0ff] font-body">Pantalones</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer group">
+                <input type="checkbox" class="accent-neon-cyan w-3.5 h-3.5">
+                <span class="text-sm text-chrome-light group-hover:text-[#00f0ff] font-body">Buzos</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer group">
+                <input type="checkbox" class="accent-neon-cyan w-3.5 h-3.5">
+                <span class="text-sm text-chrome-light group-hover:text-[#00f0ff] font-body">Gorras</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Filtro: Drops -->
+          <div class="bg-dark-card border border-dark-border px-4 py-3">
+            <p class="font-accent font-bold text-sm tracking-wider text-chrome-light uppercase mb-3">Drops</p>
+            <div class="space-y-2">
+              <label class="flex items-center gap-2 cursor-pointer group">
+                <input type="checkbox" class="accent-neon-cyan w-3.5 h-3.5">
+                <span class="text-sm text-chrome-light group-hover:text-[#00f0ff] font-body">Drop 01</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer group">
+                <input type="checkbox" class="accent-neon-cyan w-3.5 h-3.5">
+                <span class="text-sm text-chrome-light group-hover:text-[#00f0ff] font-body">Cyber-Core</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Filtro: Color -->
+          <div class="bg-dark-card border border-dark-border px-4 py-3">
+            <p class="font-accent font-bold text-sm tracking-wider text-chrome-light uppercase mb-3">Color</p>
+            <div class="space-y-2">
+              <label class="flex items-center gap-2 cursor-pointer group">
+                <input type="checkbox" class="accent-neon-cyan w-3.5 h-3.5">
+                <span class="text-sm text-chrome-light group-hover:text-[#00f0ff] font-body">Black</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer group">
+                <input type="checkbox" class="accent-neon-cyan w-3.5 h-3.5">
+                <span class="text-sm text-chrome-light group-hover:text-[#00f0ff] font-body">Silver</span>
+              </label>
+            </div>
+          </div>
+
+        </div>
+      </div>        </div>
+      </div>
+
+      <!-- SECCIÓN: GRILLA DE 4 PRODUCTOS ESTÁTICOS -->
+      <div class="w-full relative z-10">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+          <!-- TARJETA DE PRODUCTO: REMERA OVERSIZE SEVEN WORDS -->
+          <article class="product-card overflow-hidden group">
+            <a href="remera-cyber.html" class="block relative overflow-hidden bg-dark-card border border-dark-border">
+              <!-- Imagen del Producto -->
+              <div class="aspect-square overflow-hidden relative">
+                <img
+                  src="./img/cyber-print-tee.jpg"
+                  alt="New Essential Remera Oversize Seven Words"
+                  class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <!-- Badge Superior Izquierdo -->
+                <div class="absolute top-2 left-2 z-10">
+                  <span class="bg-[#00f0ff] text-dark-bg text-[9px] font-heading font-bold px-2 py-0.5 tracking-wider uppercase">NEW</span>
+                </div>
+                <!-- Ícono Favorito Superior Derecho -->
+                <span
+                  class="absolute top-2 right-2 z-10 p-1.5 bg-dark-bg/60 border border-dark-border text-chrome-mid"
+                  aria-label="Favorito"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                  </svg>
+                </span>
+              </div>
+              <!-- Info del Producto -->
+              <div class="p-3 border-t border-dark-border">
+                <h3 class="font-heading text-white text-[9px] font-bold tracking-wider uppercase leading-snug mb-2 line-clamp-2">
+                  NEW ESSENTIAL REMERA OVERSIZE SEVEN WORDS
+                </h3>
+                <p class="font-accent font-bold text-sm tracking-wide" style="color: #00f0ff;">ARS 24.999</p>
+              </div>
+            </a>
+          </article>
+
+          <!-- TARJETA DE PRODUCTO: CARGO SEVEN WORDS -->
+          <article class="product-card overflow-hidden group">
+            <a href="pantalon-cargo.html" class="block relative overflow-hidden bg-dark-card border border-dark-border">
+              <div class="aspect-square overflow-hidden relative">
+                <img
+                  src="./img/cargo-pants.jpg"
+                  alt="New Essential Cargo Seven Words"
+                  class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div class="absolute top-2 left-2 z-10">
+                  <span class="bg-[#00f0ff] text-dark-bg text-[9px] font-heading font-bold px-2 py-0.5 tracking-wider uppercase">DROP 01</span>
+                </div>
+                <span
+                  class="absolute top-2 right-2 z-10 p-1.5 bg-dark-bg/60 border border-dark-border text-chrome-mid"
+                  aria-label="Favorito"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                  </svg>
+                </span>
+              </div>
+              <div class="p-3 border-t border-dark-border">
+                <h3 class="font-heading text-white text-[9px] font-bold tracking-wider uppercase leading-snug mb-2 line-clamp-2">
+                  NEW ESSENTIAL CARGO SEVEN WORDS
+                </h3>
+                <p class="font-accent font-bold text-sm tracking-wide" style="color: #00f0ff;">ARS 39.999</p>
+              </div>
+            </a>
+          </article>
+
+          <!-- TARJETA DE PRODUCTO: BUZO SEVEN WORDS -->
+          <article class="product-card overflow-hidden group">
+            <a href="buzo-cargo.html" class="block relative overflow-hidden bg-dark-card border border-dark-border">
+              <div class="aspect-square overflow-hidden relative">
+                <img
+                  src="./img/cargo-paint.jpg"
+                  alt="New Essential Buzo Seven Words"
+                  class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div class="absolute top-2 left-2 z-10">
+                  <span class="bg-[#00f0ff] text-dark-bg text-[9px] font-heading font-bold px-2 py-0.5 tracking-wider uppercase">NEW</span>
+                </div>
+                <span
+                  class="absolute top-2 right-2 z-10 p-1.5 bg-dark-bg/60 border border-dark-border text-chrome-mid"
+                  aria-label="Favorito"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                  </svg>
+                </span>
+              </div>
+              <div class="p-3 border-t border-dark-border">
+                <h3 class="font-heading text-white text-[9px] font-bold tracking-wider uppercase leading-snug mb-2 line-clamp-2">
+                  NEW ESSENTIAL BUZO SEVEN WORDS
+                </h3>
+                <p class="font-accent font-bold text-sm tracking-wide" style="color: #00f0ff;">ARS 34.999</p>
+              </div>
+            </a>
+          </article>
+
+          <!-- TARJETA DE PRODUCTO: GORRA SEVEN WORDS -->
+          <article class="product-card overflow-hidden group">
+            <a href="gorra-trucker.html" class="block relative overflow-hidden bg-dark-card border border-dark-border">
+              <div class="aspect-square overflow-hidden relative">
+                <img
+                  src="./img/trucker-hat.jpg"
+                  alt="New Essential Gorra Seven Words"
+                  class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div class="absolute top-2 left-2 z-10">
+                  <span class="bg-[#00f0ff] text-dark-bg text-[9px] font-heading font-bold px-2 py-0.5 tracking-wider uppercase">DROP 01</span>
+                </div>
+                <span
+                  class="absolute top-2 right-2 z-10 p-1.5 bg-dark-bg/60 border border-dark-border text-chrome-mid"
+                  aria-label="Favorito"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                  </svg>
+                </span>
+              </div>
+              <div class="p-3 border-t border-dark-border">
+                <h3 class="font-heading text-white text-[9px] font-bold tracking-wider uppercase leading-snug mb-2 line-clamp-2">
+                  NEW ESSENTIAL GORRA SEVEN WORDS
+                </h3>
+                <p class="font-accent font-bold text-sm tracking-wide" style="color: #00f0ff;">ARS 14.999</p>
+              </div>
+            </a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================
+       FOOTER
+       ========================================== -->
+  <footer class="mt-auto border-t border-dark-border bg-dark-bg/90 backdrop-blur-md relative z-10">
+    <div class="max-w-6xl mx-auto px-4 py-8">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="flex items-center gap-2">
+          <span class="font-heading font-bold text-sm chrome-text italic tracking-widest">new ESSENTIAL</span>
+          <span class="text-chrome-dark text-xs">© 2026. ALL RIGHTS RESERVED.</span>
+        </div>
+        <div class="flex gap-4">
+          <a href="#" class="social-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" class="social-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>

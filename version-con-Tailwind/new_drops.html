@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto | New Essential</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            neon: { cyan: '#00f0ff', green: '#00ffcc' },
+            dark: { bg: '#050507', card: '#0a0a0e', surface: '#111118', border: '#1e1e2a' },
+            chrome: { light: '#e4e4e7', mid: '#a1a1aa', dark: '#52525b' }
+          },
+          fontFamily: {
+            heading: ['Orbitron', 'sans-serif'],
+            accent: ['Rajdhani', 'sans-serif'],
+            body: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="bg-dark-bg text-chrome-light min-h-screen w-full relative flex flex-col font-body">
+
+  <div class="cyber-bg">
+    <svg viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" fill="none" stroke="white" stroke-width="0.5">
+      <g>
+        <line x1="0" y1="900" x2="250" y2="0"/><line x1="50" y1="900" x2="280" y2="0"/>
+        <line x1="100" y1="900" x2="310" y2="0"/><line x1="150" y1="900" x2="340" y2="0"/>
+        <line x1="200" y1="900" x2="370" y2="0"/><line x1="0" y1="200" x2="380" y2="0"/>
+        <line x1="0" y1="400" x2="350" y2="0"/><line x1="0" y1="600" x2="320" y2="0"/>
+        <line x1="0" y1="800" x2="290" y2="0"/><line x1="0" y1="100" x2="400" y2="0"/>
+        <line x1="0" y1="300" x2="370" y2="0"/><line x1="0" y1="500" x2="340" y2="0"/>
+        <line x1="0" y1="700" x2="310" y2="0"/>
+      </g>
+      <g>
+        <line x1="1400" y1="900" x2="1150" y2="0"/><line x1="1350" y1="900" x2="1120" y2="0"/>
+        <line x1="1300" y1="900" x2="1090" y2="0"/><line x1="1250" y1="900" x2="1060" y2="0"/>
+        <line x1="1200" y1="900" x2="1030" y2="0"/><line x1="1400" y1="200" x2="1020" y2="0"/>
+        <line x1="1400" y1="400" x2="1050" y2="0"/><line x1="1400" y1="600" x2="1080" y2="0"/>
+        <line x1="1400" y1="800" x2="1110" y2="0"/><line x1="1400" y1="100" x2="1000" y2="0"/>
+        <line x1="1400" y1="300" x2="1030" y2="0"/><line x1="1400" y1="500" x2="1060" y2="0"/>
+        <line x1="1400" y1="700" x2="1090" y2="0"/>
+      </g>
+    </svg>
+  </div>
+
+  <header class="sticky top-0 z-30 w-full transition-all bg-dark-bg border-b border-dark-border">
+    <div class="max-w-6xl mx-auto px-4 py-0 flex items-center justify-between relative z-10">
+      
+      <!-- Espaciador Izquierdo -->
+      <div class="w-32 hidden md:block"></div>
+
+      <!-- Logo Central -->
+      <div class="flex-1 flex justify-center">
+        <a href="index.html" class="block">
+          <img src="./img/logo.png" alt="NEW ESSENTIAL — sentí la esencia" class="h-20 md:h-24 w-auto object-contain logo-glow" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        </a>
+      </div>
+
+      <!-- Íconos de Acción (Derecha) -->
+      <div class="flex items-center gap-5 w-32 justify-end">
+        <button class="icon-btn flex flex-col items-center gap-0.5 text-chrome-mid" aria-label="Buscar">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <span class="text-[9px] font-heading tracking-widest hidden md:block">SEARCH</span>
+        </button>
+        <button class="icon-btn flex flex-col items-center gap-0.5 text-chrome-mid" aria-label="Perfil">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span class="text-[9px] font-heading tracking-widest hidden md:block">PROFILE</span>
+        </button>
+        <!-- Ícono Carrito (Conectado a cart.js) -->
+        <button class="cart-icon-btn icon-btn flex flex-col items-center gap-0.5 text-chrome-mid relative" aria-label="Carrito">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="text-[9px] font-heading tracking-widest hidden md:block">CART</span>
+          <span id="header-cart-badge" class="hidden absolute -top-1 -right-2 w-4 h-4 rounded-full bg-neon-cyan text-dark-bg text-[9px] font-bold flex items-center justify-center leading-none">0</span>
+        </button>
+      </div>
+    </div>
+    <nav class="chrome-bar relative z-10">
+      <div class="max-w-6xl mx-auto px-4">
+        <ul class="flex flex-wrap items-center justify-center py-2.5 gap-2 md:gap-0">
+          <li><a href="index.html" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">HOME</a></li>
+          <li class="text-gray-600 font-light text-lg select-none hidden md:block">|</li>
+          
+          <!-- Menú Desplegable CATALOGO -->
+          <li class="relative group">
+            <a href="index.html" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em] flex items-center gap-1">
+              CATALOGO
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="opacity-70 group-hover:rotate-180 transition-transform"><polyline points="6 9 12 15 18 9"/></svg>
+            </a>
+            <!-- Dropdown -->
+            <div class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+              <div class="chrome-filter rounded-sm shadow-xl flex flex-col min-w-[180px] overflow-hidden">
+                <a href="#" class="px-4 py-3 text-xs font-heading tracking-wider text-gray-900 font-bold border-b border-white/20 last:border-0 hover:bg-white/30 transition-colors">Remeras</a>
+                <a href="#" class="px-4 py-3 text-xs font-heading tracking-wider text-gray-900 font-bold border-b border-white/20 last:border-0 hover:bg-white/30 transition-colors">Pantalones</a>
+                <a href="#" class="px-4 py-3 text-xs font-heading tracking-wider text-gray-900 font-bold border-b border-white/20 last:border-0 hover:bg-white/30 transition-colors">Mystery Box</a>
+                <a href="#" class="px-4 py-3 text-xs font-heading tracking-wider text-gray-900 font-bold border-b border-white/20 last:border-0 hover:bg-white/30 transition-colors">Buzos</a>
+                <a href="#" class="px-4 py-3 text-xs font-heading tracking-wider text-gray-900 font-bold border-b border-white/20 last:border-0 hover:bg-white/30 transition-colors">Gorras</a>
+              </div>
+            </div>
+          </li>
+          
+          <li class="text-gray-600 font-light text-lg select-none hidden md:block">|</li>
+          <li><a href="#" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">NEW DROPS</a></li>
+          <li class="text-gray-600 font-light text-lg select-none hidden md:block">|</li>
+          <li><a href="quienes_somos.html" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">NOSOTROS</a></li>
+          <li class="text-gray-600 font-light text-lg select-none hidden md:block">|</li>
+          <li><a href="contacto.html" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">CONTACTO</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- CONTENIDO -->
+  <main class="flex-1 relative z-10 w-full pt-12 pb-20">
+    <section id="catalogo" class="max-w-6xl mx-auto px-4 py-6 mt-4">
+      <h1 class="hero-heading text-center mb-10">NEW DROPS</h1>
+      <div class="flex flex-col lg:flex-row gap-4 items-start relative">
+        <!-- Grilla de Productos Dinámica -->
+        <div class="flex-1">
+          <!-- Este div será llenado dinámicamente por main.js (1 col mobile, 2 tablet, 4 PC) -->
+          <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <!-- Render JS -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="mt-auto border-t border-dark-border bg-dark-bg/90 backdrop-blur-md relative z-10">
+    <div class="max-w-6xl mx-auto px-4 py-8 text-center">
+      <span class="font-heading font-bold text-sm chrome-text italic tracking-widest">new ESSENTIAL</span>
+    </div>
+  </footer>
+</body>
+</html>
