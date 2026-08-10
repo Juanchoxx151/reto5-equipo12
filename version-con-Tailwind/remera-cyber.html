@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="New Essential Remera Oversize Seven Words — Indumentaria Y2K brutalista. ARS 24.999.">
+  <title>Remera Oversize Seven Words | New Essential</title>
+
+  <!-- TAILWIND CSS VIA CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- FUENTES: Orbitron, Rajdhani, Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CONFIGURACIÓN DE COLORES Y TIPOGRAFÍAS DEL TEMA -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            neon: { cyan: '#00f0ff', green: '#00ffcc' },
+            dark: { bg: '#050507', card: '#0a0a0e', surface: '#111118', border: '#1e1e2a' },
+            chrome: { light: '#e4e4e7', mid: '#a1a1aa', dark: '#52525b' }
+          },
+          fontFamily: {
+            heading: ['Orbitron', 'sans-serif'],
+            accent:  ['Rajdhani', 'sans-serif'],
+            body:    ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- HOJA DE ESTILOS PERSONALIZADA -->
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="bg-dark-bg text-chrome-light min-h-screen w-full relative flex flex-col font-body">
+
+  <!-- FONDO CIBERNÉTICO SVG -->
+  <div class="cyber-bg">
+    <svg viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" fill="none" stroke="white" stroke-width="0.5">
+      <g>
+        <line x1="0" y1="900" x2="250" y2="0"/><line x1="50" y1="900" x2="280" y2="0"/>
+        <line x1="100" y1="900" x2="310" y2="0"/><line x1="150" y1="900" x2="340" y2="0"/>
+        <line x1="200" y1="900" x2="370" y2="0"/><line x1="0" y1="200" x2="380" y2="0"/>
+        <line x1="0" y1="400" x2="350" y2="0"/><line x1="0" y1="600" x2="320" y2="0"/>
+        <line x1="0" y1="800" x2="290" y2="0"/>
+      </g>
+      <g>
+        <line x1="1400" y1="900" x2="1150" y2="0"/><line x1="1350" y1="900" x2="1120" y2="0"/>
+        <line x1="1300" y1="900" x2="1090" y2="0"/><line x1="1250" y1="900" x2="1060" y2="0"/>
+        <line x1="1200" y1="900" x2="1030" y2="0"/><line x1="1400" y1="200" x2="1020" y2="0"/>
+        <line x1="1400" y1="400" x2="1050" y2="0"/><line x1="1400" y1="600" x2="1080" y2="0"/>
+      </g>
+    </svg>
+  </div>
+
+   <!-- ==========================================
+       HEADER Y NAVEGACIÓN
+       ========================================== -->
+  <header class="sticky top-0 z-30 w-full transition-all bg-dark-bg border-b border-dark-border">
+    <div class="max-w-6xl mx-auto px-4 flex items-center justify-between relative z-10">
+      
+      <!-- Espaciador Izquierdo -->
+      <div class="w-32 hidden md:block"></div>
+
+      <!-- Logo Central -->
+      <div class="flex-1 flex justify-center">
+        <a href="index.html" class="block">
+          <img src="./img/logo.png" alt="NEW ESSENTIAL — sentí la esencia" class="h-24 md:h-24 w-auto object-contain logo-glow" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div style="display: none;" class="flex-col items-center gap-0.5">
+            <span class="font-heading font-black text-3xl tracking-widest chrome-text italic">new</span>
+            <span class="font-heading font-bold text-sm tracking-[0.6em] chrome-text">ESSENTIAL</span>
+            <span class="font-accent text-[10px] tracking-[0.3em] text-chrome-mid italic">— sentí la esencia —</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Íconos de Acción (Derecha) -->
+      <div class="flex items-center gap-5 w-32 justify-end">
+        <button class="icon-btn flex flex-col items-center gap-0.5 text-chrome-mid" aria-label="Buscar">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <span class="text-[9px] font-heading tracking-widest hidden md:block">SEARCH</span>
+        </button>
+        <button class="icon-btn flex flex-col items-center gap-0.5 text-chrome-mid" aria-label="Perfil">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span class="text-[9px] font-heading tracking-widest hidden md:block">PROFILE</span>
+        </button>
+        <!-- Ícono Carrito (Conectado a cart.js) -->
+        <button class="cart-icon-btn icon-btn flex flex-col items-center gap-0.5 text-chrome-mid relative" aria-label="Carrito">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="text-[9px] font-heading tracking-widest hidden md:block">CART</span>
+          <span id="header-cart-badge" class="hidden absolute -top-1 -right-2 w-4 h-4 rounded-full bg-neon-cyan text-dark-bg text-[9px] font-bold flex items-center justify-center leading-none">0</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Barra de Navegación Metálica -->
+    <nav class="chrome-bar relative z-10">
+      <div class="max-w-6xl mx-auto px-4">
+        <ul class="flex flex-wrap items-center justify-center py-2.5 gap-2 md:gap-0">
+          <li><a href="index.html" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">HOME</a></li>
+          <li class="text-gray-600 font-light text-lg select-none hidden md:block">|</li>
+          
+          <!-- Menú Desplegable CATALOGO — hover CSS en desktop -->
+          <li class="relative group">
+            <a href="index.html" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em] flex items-center gap-1">
+              CATALOGO
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="opacity-70 group-hover:rotate-180 transition-transform"><polyline points="6 9 12 15 18 9"/></svg>
+            </a>
+            <!-- Dropdown visible al hacer hover -->
+            <div class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+              <div class="chrome-filter rounded-sm shadow-xl flex flex-col min-w-[180px] overflow-hidden">
+                <a href="index.html" class="px-4 py-3 text-xs font-heading tracking-wider text-gray-900 font-bold border-b border-white/20 last:border-0 hover:bg-white/30 transition-colors">Remeras</a>
+                <a href="index.html" class="px-4 py-3 text-xs font-heading tracking-wider text-gray-900 font-bold border-b border-white/20 last:border-0 hover:bg-white/30 transition-colors">Pantalones</a>
+                <a href="index.html" class="px-4 py-3 text-xs font-heading tracking-wider text-gray-900 font-bold border-b border-white/20 last:border-0 hover:bg-white/30 transition-colors">Mystery Box</a>
+                <a href="index.html" class="px-4 py-3 text-xs font-heading tracking-wider text-gray-900 font-bold border-b border-white/20 last:border-0 hover:bg-white/30 transition-colors">Buzos</a>
+                <a href="index.html" class="px-4 py-3 text-xs font-heading tracking-wider text-gray-900 font-bold border-b border-white/20 last:border-0 hover:bg-white/30 transition-colors">Gorras</a>
+              </div>
+            </div>
+          </li>
+          
+          <li class="text-gray-600 font-light text-lg select-none hidden md:block">|</li>
+          <li><a href="new_drops.html" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">NEW DROPS</a></li>
+          <li class="text-gray-600 font-light text-lg select-none hidden md:block">|</li>
+          <li><a href="quienes_somos.html" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">NOSOTROS</a></li>
+          <li class="text-gray-600 font-light text-lg select-none hidden md:block">|</li>
+          <li><a href="contacto.html" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">CONTACTO</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL DEL PRODUCTO -->
+  <main class="flex-1 relative z-10 w-full pt-6 pb-20">
+    <div class="max-w-6xl mx-auto px-4 md:px-6">
+
+      <!-- BOTÓN VOLVER AL CATÁLOGO -->
+      <a href="index.html" class="inline-flex items-center gap-2 text-chrome-light hover:text-[#00f0ff] transition-colors mb-8 font-heading text-xs tracking-[0.2em] uppercase">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        [ VOLVER AL CATÁLOGO ]
+      </a>
+
+      <!-- LAYOUT DOS COLUMNAS: GALERÍA / INFO -->
+      <div class="flex flex-col lg:flex-row gap-10 lg:gap-16">
+
+        <!-- COLUMNA IZQUIERDA: IMAGEN PRINCIPAL -->
+        <div class="w-full lg:w-1/2">
+          <div class="relative aspect-square bg-dark-surface border border-dark-border overflow-hidden scanlines">
+            <img
+              src="./img/remera_nueva.png"
+              alt="New Essential Remera Oversize Seven Words"
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+
+        <!-- COLUMNA DERECHA: INFORMACIÓN Y ACCIONES -->
+        <div class="w-full lg:w-1/2 flex flex-col">
+
+          <!-- CATEGORÍA Y NOMBRE -->
+          <span class="font-heading text-[#00f0ff] text-xs tracking-[0.25em] uppercase mb-3 block">[ REMERAS ]</span>
+          <h1 class="font-heading font-bold text-2xl md:text-3xl text-chrome-light tracking-wide leading-tight mb-4">
+            NEW ESSENTIAL REMERA OVERSIZE SEVEN WORDS
+          </h1>
+
+          <!-- PRECIO -->
+          <p class="font-accent text-3xl font-bold mb-8" style="color:#00f0ff;">ARS 24.999</p>
+
+          <hr class="border-dark-border mb-8">
+
+          <!-- SELECTOR DE COLOR (ESTÁTICO) -->
+          <div class="mb-8">
+            <p class="font-heading text-[10px] text-chrome-light tracking-[0.2em] mb-3 uppercase">
+              <span class="text-chrome-mid">COLOR://</span> Negro
+            </p>
+          </div>
+
+          <!-- TALLES -->
+          <div class="mb-8">
+            <p class="font-heading text-[10px] text-chrome-light tracking-[0.2em] mb-3 uppercase">
+              <span class="text-chrome-mid">SIZE://</span>
+            </p>
+            <div class="grid grid-cols-4 gap-2">
+              <span class="size-btn available flex items-center justify-center h-11 font-heading text-xs tracking-wider border rounded-sm transition duration-300 hover:border-neon-cyan hover:text-neon-cyan hover:shadow-[0_0_12px_rgba(0,240,255,0.6)] hover:brightness-110">S</span>
+              <span class="size-btn available flex items-center justify-center h-11 font-heading text-xs tracking-wider border rounded-sm transition duration-300 hover:border-neon-cyan hover:text-neon-cyan hover:shadow-[0_0_12px_rgba(0,240,255,0.6)] hover:brightness-110">M</span>
+              <span class="size-btn available flex items-center justify-center h-11 font-heading text-xs tracking-wider border rounded-sm transition duration-300 hover:border-neon-cyan hover:text-neon-cyan hover:shadow-[0_0_12px_rgba(0,240,255,0.6)] hover:brightness-110">L</span>
+              <span class="size-btn available flex items-center justify-center h-11 font-heading text-xs tracking-wider border rounded-sm transition duration-300 hover:border-neon-cyan hover:text-neon-cyan hover:shadow-[0_0_12px_rgba(0,240,255,0.6)] hover:brightness-110">XL</span>
+            </div>
+          </div>
+
+          <!-- DESCRIPCIÓN -->
+          <div class="font-body text-sm text-chrome-mid leading-relaxed mb-8">
+            <p>Remera oversize de algodón 100% peso pesado. Fit amplio, caída estructurada. Estampado de alta densidad con gráfica editorial Seven Words. Cuello redondo reforzado, terminaciones brutas.</p>
+          </div>
+
+          <!-- BOTÓN AGREGAR AL CARRITO (DECORATIVO, SIN JS) -->
+          <a href="contacto.html" class="cta-btn w-full flex items-center justify-center gap-3">
+            CONSULTAR DISPONIBILIDAD
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="mt-auto border-t border-dark-border bg-dark-bg/90 relative z-10">
+    <div class="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="flex items-center gap-2">
+        <span class="font-heading font-bold text-sm chrome-text italic tracking-widest">new ESSENTIAL</span>
+        <span class="text-chrome-dark text-xs">© 2026. ALL RIGHTS RESERVED.</span>
+      </div>
+      <div class="flex gap-4">
+        <a href="#" class="social-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="#" class="social-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
