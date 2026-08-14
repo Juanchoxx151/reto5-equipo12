@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>New Essential | Catálogo Oficial</title>
   
-  <!-- Tailwind CSS CDN (Requisito Reto 5) -->
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   
   <!-- Google Fonts: Orbitron & Rajdhani & Inter -->
@@ -31,13 +31,13 @@
     }
   </script>
   
-  <!-- Estilos Personalizados (Separación estricta Reto 5) -->
+  <!-- Estilos Personalizados -->
   <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body class="bg-dark-bg text-chrome-light min-h-screen w-full relative flex flex-col font-body">
 
-  <!-- ==========================================
-       FONDO CIBERNÉTICO SVG
+    <!-- ==========================================
+       FONDO SVG
        ========================================== -->
   <div class="cyber-bg">
     <svg viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" fill="none" stroke="white" stroke-width="0.5">
@@ -66,7 +66,7 @@
        HEADER Y NAVEGACIÓN
        ========================================== -->
   <header class="sticky top-0 z-30 w-full transition-all bg-dark-bg border-b border-dark-border">
-    <div class="max-w-6xl mx-auto px-4 flex items-center justify-between relative z-10">
+    <div class="w-full px-4 flex items-center relative z-10">
       
       <!-- Espaciador Izquierdo -->
       <div class="w-32 hidden md:block"></div>
@@ -75,17 +75,13 @@
       <div class="flex-1 flex justify-center">
         <a href="index.html" class="block">
           <img src="./img/logo.png" alt="NEW ESSENTIAL — sentí la esencia" class="h-24 md:h-24 w-auto object-contain logo-glow" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div style="display: none;" class="flex-col items-center gap-0.5">
-            <span class="font-heading font-black text-3xl tracking-widest chrome-text italic">new</span>
-            <span class="font-heading font-bold text-sm tracking-[0.6em] chrome-text">ESSENTIAL</span>
-            <span class="font-accent text-[10px] tracking-[0.3em] text-chrome-mid italic">— sentí la esencia —</span>
-          </div>
+          
         </a>
       </div>
 
-      <!-- Íconos de Acción (Derecha) -->
-      <div class="flex items-center gap-5 w-32 justify-end">
-        <button class="icon-btn flex flex-col items-center gap-0.5 text-chrome-mid" aria-label="Buscar">
+      <!-- Íconos de Acción (Derecha) — ml-auto los fija al extremo derecho en mobile y desktop -->
+      <div class="flex items-center gap-5 ml-auto">
+        <button class="icon-btn flex flex-col items-center gap-0.5 text-chrome-mid " aria-label="Buscar">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
           <span class="text-[9px] font-heading tracking-widest hidden md:block">SEARCH</span>
         </button>
@@ -93,7 +89,7 @@
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           <span class="text-[9px] font-heading tracking-widest hidden md:block">PROFILE</span>
         </button>
-        <!-- Ícono Carrito (Conectado a cart.js) -->
+        
         <button class="cart-icon-btn icon-btn flex flex-col items-center gap-0.5 text-chrome-mid relative" aria-label="Carrito">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
           <span class="text-[9px] font-heading tracking-widest hidden md:block">CART</span>
@@ -109,18 +105,18 @@
           <li><a href="index.html" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">HOME</a></li>
           <li class="text-gray-600 font-light text-lg select-none hidden md:block">|</li>
           
-          <!-- Menú Desplegable CATALOGO — hover CSS en desktop -->
+          <!-- Menú Desplegable CATALOGO — hover en desktop, click nativo en mobile (SIN JS) -->
           <li class="relative group">
-            <a href="index.html" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em] flex items-center gap-1">
+            <!-- Checkbox oculto que controla el estado de abierto/cerrado al hacer click -->
+            <input type="checkbox" id="catalogo-toggle" class="peer hidden">
+            <label for="catalogo-toggle" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em] flex items-center gap-1 cursor-pointer select-none">
               CATALOGO
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="opacity-70 group-hover:rotate-180 transition-transform"><polyline points="6 9 12 15 18 9"/></svg>
-            </a>
-            <!-- Dropdown visible al hacer hover -->
-            <div class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+            </label>
+            <!-- Dropdown: visible al hacer hover (group-hover) O al tocar/cliquear (peer-checked) -->
+            <div class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible transition-all duration-300 z-50 group-hover:opacity-100 group-hover:visible peer-checked:opacity-100 peer-checked:visible">
               <div class="chrome-filter rounded-sm shadow-xl flex flex-col min-w-[180px] overflow-hidden">
                 <a href="index.html" class="px-4 py-3 text-xs font-heading tracking-wider text-gray-900 font-bold border-b border-white/20 last:border-0 hover:bg-white/30 transition-colors">Remeras</a>
                 <a href="index.html" class="px-4 py-3 text-xs font-heading tracking-wider text-gray-900 font-bold border-b border-white/20 last:border-0 hover:bg-white/30 transition-colors">Pantalones</a>
-                <a href="index.html" class="px-4 py-3 text-xs font-heading tracking-wider text-gray-900 font-bold border-b border-white/20 last:border-0 hover:bg-white/30 transition-colors">Mystery Box</a>
                 <a href="index.html" class="px-4 py-3 text-xs font-heading tracking-wider text-gray-900 font-bold border-b border-white/20 last:border-0 hover:bg-white/30 transition-colors">Buzos</a>
                 <a href="index.html" class="px-4 py-3 text-xs font-heading tracking-wider text-gray-900 font-bold border-b border-white/20 last:border-0 hover:bg-white/30 transition-colors">Gorras</a>
               </div>
@@ -144,20 +140,20 @@
   <main class="flex-1 relative z-10 w-full">
     
     <!-- Sección Hero -->
-    <section class="max-w-6xl mx-auto px-4 mt-12">
-      <div class="w-full border border-gray-800 rounded-lg overflow-hidden bg-black grid grid-cols-1 md:grid-cols-2 mb-6">
+    <section class="max-w-6xl mx-auto px-4 mt-3">
+      <div class="w-full border border-gray-800 rounded-lg overflow-hidden bg-black grid grid-cols-1 md:grid-cols-2 mb-6 transition-all duration-500 hover:border-[#00f0ff] hover:shadow-[0_0_20px_rgba(0,240,255,0.4)]">
         <!-- Columna Izquierda (Texto y Botón) -->
         <div class="p-6 md:p-10 flex flex-col justify-center items-start bg-gradient-to-r from-black via-gray-950 to-transparent">
-          <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold font-heading mb-6 text-chrome-light leading-tight tracking-wider">SENTÍ LA ESENCIA<br/>DEL FUTURO</h1>
+          <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold font-heading mb-6 text-chrome-light leading-tight tracking-wider">SIETE PALABRAS: E.S.E.N.C.I.A</h1>
           <a href="#catalogo" class="cta-btn w-fit">VER COLECCIÓN</a>
         </div>
-        <!-- Columna Derecha (Video Grande Adaptable) -->
-        <div class="w-full h-64 md:h-full relative overflow-hidden pointer-events-none">
-          <video src="./img/hero-bg.mp4" autoplay loop muted playsinline class="w-full h-full object-cover object-center block"></video>
-        
-        <!-- DIFUMINADO IZQUIERDO (Capita de sombra suave) -->
-    <div class="absolute inset-y-0 left-0 w-24 md:w-32 bg-gradient-to-r from-black to-transparent pointer-events-none"></div>
-      </div>
+        <!-- Columna Derecha (Video) -->
+        <div class="w-full h-64 md:h-full relative overflow-hidden pointer-events-none ">
+          
+          <video src="./videos/hero-bg.mp4" autoplay loop muted playsinline class="w-full h-full object-cover object-center block"></video>
+          <!-- DIFUMINADO IZQUIERDO/SUPERIOR: Se funde con el texto arriba (mobile) o a la izquierda (desktop) -->
+          <div class="absolute top-0 left-0 right-0 md:bottom-0 h-24 md:h-full md:w-32 bg-gradient-to-b md:bg-gradient-to-r from-black to-transparent pointer-events-none z-10"></div>
+        </div>
     </section>
 
     <!-- Sección Catálogo (Filtros y Grilla) -->
@@ -232,21 +228,18 @@
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
           <!-- TARJETA DE PRODUCTO: REMERA OVERSIZE SEVEN WORDS -->
-          <article class="product-card overflow-hidden group">
-            <a href="remera-cyber.html" class="block relative overflow-hidden bg-dark-card border border-dark-border">
-              <!-- Imagen del Producto -->
+          <article class="product-card overflow-hidden group h-full">
+            <a href="remera-cyber.html" class="block h-full relative overflow-hidden bg-dark-card border border-dark-border">
               <div class="aspect-square overflow-hidden relative">
                 <img
                   src="./img/remera_nueva.png"
                   alt="New Essential Remera Oversize Seven Words"
-                  class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                  class="w-full h-full object-cover object-center block transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
-                <!-- Badge Superior Izquierdo -->
                 <div class="absolute top-2 left-2 z-10">
                   <span class="bg-[#00f0ff] text-dark-bg text-[9px] font-heading font-bold px-2 py-0.5 tracking-wider uppercase"> DROP 01</span>
                 </div>
-                <!-- Ícono Favorito Superior Derecho -->
                 <span
                   class="absolute top-2 right-2 z-10 p-1.5 bg-dark-bg/60 border border-dark-border text-chrome-mid"
                   aria-label="Favorito"
@@ -256,7 +249,6 @@
                   </svg>
                 </span>
               </div>
-              <!-- Info del Producto -->
               <div class="p-3 border-t border-dark-border">
                 <h3 class="font-heading text-white text-[9px] font-bold tracking-wider uppercase leading-snug mb-2 line-clamp-2">
                   NEW ESSENTIAL REMERA OVERSIZE SEVEN WORDS
@@ -267,13 +259,13 @@
           </article>
 
           <!-- TARJETA DE PRODUCTO: CARGO SEVEN WORDS -->
-          <article class="product-card overflow-hidden group">
-            <a href="pantalon-cargo.html" class="block relative overflow-hidden bg-dark-card border border-dark-border">
+          <article class="product-card overflow-hidden group h-full">
+            <a href="pantalon-cargo.html" class="block h-full relative overflow-hidden bg-dark-card border border-dark-border">
               <div class="aspect-square overflow-hidden relative">
                 <img
                   src="./img/pantalon_nuevo.png"
                   alt="New Essential Cargo Seven Words"
-                  class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                  class="w-full h-full object-cover object-center block transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
                 <div class="absolute top-2 left-2 z-10">
@@ -298,13 +290,13 @@
           </article>
 
           <!-- TARJETA DE PRODUCTO: BUZO SEVEN WORDS -->
-          <article class="product-card overflow-hidden group">
-            <a href="buzo-cargo.html" class="block relative overflow-hidden bg-dark-card border border-dark-border">
+          <article class="product-card overflow-hidden group h-full">
+            <a href="buzo-cargo.html" class="block h-full relative overflow-hidden bg-dark-card border border-dark-border">
               <div class="aspect-square overflow-hidden relative">
                 <img
                   src="./img/buzo_nuevo.png"
                   alt="New Essential Buzo Seven Words"
-                  class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                  class="w-full h-full object-cover object-center block transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
                 <div class="absolute top-2 left-2 z-10">
@@ -329,13 +321,13 @@
           </article>
 
           <!-- TARJETA DE PRODUCTO: GORRA SEVEN WORDS -->
-          <article class="product-card overflow-hidden group">
-            <a href="gorra-trucker.html" class="block relative overflow-hidden bg-dark-card border border-dark-border">
+          <article class="product-card overflow-hidden group h-full">
+            <a href="gorra-trucker.html" class="block h-full relative overflow-hidden bg-dark-card border border-dark-border">
               <div class="aspect-square overflow-hidden relative">
                 <img
                   src="./img/gorra.png"
                   alt="New Essential Gorra Seven Words"
-                  class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                  class="w-full h-full object-cover object-center block transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
                 <div class="absolute top-2 left-2 z-10">
@@ -380,6 +372,7 @@
         </div>
       </div>
     </div>
+
   </footer>
 
 </body>

@@ -30,24 +30,38 @@
 </head>
 <body class="bg-dark-bg text-chrome-light min-h-screen w-full relative flex flex-col font-body">
 
-  <!-- FONDO CIBERNÉTICO SVG -->
+    <!-- ==========================================
+       FONDO SVG
+       ========================================== -->
   <div class="cyber-bg">
     <svg viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" fill="none" stroke="white" stroke-width="0.5">
       <g>
         <line x1="0" y1="900" x2="250" y2="0"/><line x1="50" y1="900" x2="280" y2="0"/>
-        <line x1="100" y1="900" x2="310" y2="0"/>
+        <line x1="100" y1="900" x2="310" y2="0"/><line x1="150" y1="900" x2="340" y2="0"/>
+        <line x1="200" y1="900" x2="370" y2="0"/><line x1="0" y1="200" x2="380" y2="0"/>
+        <line x1="0" y1="400" x2="350" y2="0"/><line x1="0" y1="600" x2="320" y2="0"/>
+        <line x1="0" y1="800" x2="290" y2="0"/><line x1="0" y1="100" x2="400" y2="0"/>
+        <line x1="0" y1="300" x2="370" y2="0"/><line x1="0" y1="500" x2="340" y2="0"/>
+        <line x1="0" y1="700" x2="310" y2="0"/>
       </g>
       <g>
         <line x1="1400" y1="900" x2="1150" y2="0"/><line x1="1350" y1="900" x2="1120" y2="0"/>
+        <line x1="1300" y1="900" x2="1090" y2="0"/><line x1="1250" y1="900" x2="1060" y2="0"/>
+        <line x1="1200" y1="900" x2="1030" y2="0"/><line x1="1400" y1="200" x2="1020" y2="0"/>
+        <line x1="1400" y1="400" x2="1050" y2="0"/><line x1="1400" y1="600" x2="1080" y2="0"/>
+        <line x1="1400" y1="800" x2="1110" y2="0"/><line x1="1400" y1="100" x2="1000" y2="0"/>
+        <line x1="1400" y1="300" x2="1030" y2="0"/><line x1="1400" y1="500" x2="1060" y2="0"/>
+        <line x1="1400" y1="700" x2="1090" y2="0"/>
       </g>
     </svg>
   </div>
 
-   <!-- ==========================================
+
+    <!-- ==========================================
        HEADER Y NAVEGACIÓN
        ========================================== -->
   <header class="sticky top-0 z-30 w-full transition-all bg-dark-bg border-b border-dark-border">
-    <div class="max-w-6xl mx-auto px-4 flex items-center justify-between relative z-10">
+    <div class="w-full px-4 flex items-center relative z-10">
       
       <!-- Espaciador Izquierdo -->
       <div class="w-32 hidden md:block"></div>
@@ -56,17 +70,13 @@
       <div class="flex-1 flex justify-center">
         <a href="index.html" class="block">
           <img src="./img/logo.png" alt="NEW ESSENTIAL — sentí la esencia" class="h-24 md:h-24 w-auto object-contain logo-glow" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div style="display: none;" class="flex-col items-center gap-0.5">
-            <span class="font-heading font-black text-3xl tracking-widest chrome-text italic">new</span>
-            <span class="font-heading font-bold text-sm tracking-[0.6em] chrome-text">ESSENTIAL</span>
-            <span class="font-accent text-[10px] tracking-[0.3em] text-chrome-mid italic">— sentí la esencia —</span>
-          </div>
+        
         </a>
       </div>
 
-      <!-- Íconos de Acción (Derecha) -->
-      <div class="flex items-center gap-5 w-32 justify-end">
-        <button class="icon-btn flex flex-col items-center gap-0.5 text-chrome-mid" aria-label="Buscar">
+      <!-- Íconos de Acción (Derecha) — ml-auto los fija al extremo derecho en mobile y desktop -->
+      <div class="flex items-center gap-5 ml-auto">
+        <button class="icon-btn flex flex-col items-center gap-0.5 text-chrome-mid " aria-label="Buscar">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
           <span class="text-[9px] font-heading tracking-widest hidden md:block">SEARCH</span>
         </button>
@@ -74,7 +84,7 @@
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           <span class="text-[9px] font-heading tracking-widest hidden md:block">PROFILE</span>
         </button>
-        <!-- Ícono Carrito (Conectado a cart.js) -->
+       
         <button class="cart-icon-btn icon-btn flex flex-col items-center gap-0.5 text-chrome-mid relative" aria-label="Carrito">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
           <span class="text-[9px] font-heading tracking-widest hidden md:block">CART</span>
@@ -90,18 +100,18 @@
           <li><a href="index.html" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">HOME</a></li>
           <li class="text-gray-600 font-light text-lg select-none hidden md:block">|</li>
           
-          <!-- Menú Desplegable CATALOGO — hover CSS en desktop -->
+          <!-- Menú Desplegable CATALOGO — hover en desktop, click nativo en mobile (SIN JS) -->
           <li class="relative group">
-            <a href="index.html" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em] flex items-center gap-1">
+            <!-- Checkbox oculto que controla el estado de abierto/cerrado al hacer click -->
+            <input type="checkbox" id="catalogo-toggle" class="peer hidden">
+            <label for="catalogo-toggle" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em] flex items-center gap-1 cursor-pointer select-none">
               CATALOGO
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="opacity-70 group-hover:rotate-180 transition-transform"><polyline points="6 9 12 15 18 9"/></svg>
-            </a>
-            <!-- Dropdown visible al hacer hover -->
-            <div class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+            </label>
+            <!-- Dropdown: visible al hacer hover (group-hover) O al tocar/cliquear (peer-checked) -->
+            <div class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible transition-all duration-300 z-50 group-hover:opacity-100 group-hover:visible peer-checked:opacity-100 peer-checked:visible">
               <div class="chrome-filter rounded-sm shadow-xl flex flex-col min-w-[180px] overflow-hidden">
                 <a href="index.html" class="px-4 py-3 text-xs font-heading tracking-wider text-gray-900 font-bold border-b border-white/20 last:border-0 hover:bg-white/30 transition-colors">Remeras</a>
                 <a href="index.html" class="px-4 py-3 text-xs font-heading tracking-wider text-gray-900 font-bold border-b border-white/20 last:border-0 hover:bg-white/30 transition-colors">Pantalones</a>
-                <a href="index.html" class="px-4 py-3 text-xs font-heading tracking-wider text-gray-900 font-bold border-b border-white/20 last:border-0 hover:bg-white/30 transition-colors">Mystery Box</a>
                 <a href="index.html" class="px-4 py-3 text-xs font-heading tracking-wider text-gray-900 font-bold border-b border-white/20 last:border-0 hover:bg-white/30 transition-colors">Buzos</a>
                 <a href="index.html" class="px-4 py-3 text-xs font-heading tracking-wider text-gray-900 font-bold border-b border-white/20 last:border-0 hover:bg-white/30 transition-colors">Gorras</a>
               </div>
@@ -119,12 +129,13 @@
     </nav>
   </header>
 
+
   <!-- CONTENIDO: FORMULARIO DE CONTACTO -->
   <main class="flex-1 relative z-10 w-full pt-12 pb-20">
     <div class="max-w-2xl mx-auto px-4">
 
       <!-- TÍTULO DE SECCIÓN -->
-      <h1 class="hero-heading text-center mb-12">CONECTATE</h1>
+      <h1 class="hero-heading text-center mb-12">CONTACTANOS</h1>
 
       <!-- FORMULARIO ESTÁTICO HTML -->
       <!-- El formulario está diseñado para integrarse con un servicio externo como Formspree o Netlify Forms -->
