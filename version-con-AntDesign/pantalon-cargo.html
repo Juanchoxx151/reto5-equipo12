@@ -6,9 +6,13 @@
   <meta name="description" content="New Essential Cargo Seven Words — Pantalón cargo Y2K brutalista. ARS 39.999.">
   <title>Cargo Seven Words | New Essential (Ant Design)</title>
 
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@500;600;700&family=Michroma&display=swap" rel="stylesheet">
+  
+  <!-- CSS de Ant Design por CDN (Tema Oscuro) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.24.16/antd.dark.min.css">
 
+  <!-- ESTILOS PERSONALIZADOS -->
   <style>
     :root {
       --bg-dark: #050507;
@@ -21,58 +25,216 @@
       --chrome-dark: #52525b;
     }
 
-    body { background-color: var(--bg-dark); color: var(--chrome-light); font-family: 'Inter', sans-serif; margin: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--chrome-light);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
     .font-heading { font-family: 'Michroma', 'Orbitron', sans-serif; }
     .font-accent { font-family: 'Rajdhani', sans-serif; }
+    .font-body { font-family: 'Inter', sans-serif; }
 
-    .cyber-bg { position: fixed; inset: 0; z-index: 0; opacity: 0.15; pointer-events: none; }
+    /* Fondo Cibernético SVG */
+    .cyber-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      opacity: 0.15;
+      pointer-events: none;
+      overflow: hidden;
+    }
 
+    .cyber-bg svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* EFECTO CROMADO/METÁLICO */
     .chrome-bg {
-      background: linear-gradient(180deg, #111111 0%, #a1a1aa 35%, #ffffff 50%, #a1a1aa 65%, #111111 100%);
+      background: linear-gradient(180deg,
+        #6b6b6b 0%, #b0b0b0 15%, #e8e8e8 30%,
+        #f5f5f5 45%, #d0d0d0 60%, #9a9a9a 75%,
+        #707070 90%, #555 100%
+      );
+      border-top: 1px solid rgba(255,255,255,0.55);
+      border-bottom: 1px solid rgba(0,0,0,0.5);
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
     }
-    .nav-link-custom { color: #050507; text-decoration: none; font-size: 13px; letter-spacing: 2px; font-weight: 900; padding: 10px 25px; transition: all 0.3s; display: inline-flex; align-items: center; gap: 4px; }
-    .nav-link-custom:hover { color: #000000; text-shadow: 0 0 8px rgba(0, 240, 255, 0.8); }
-    .nav-separator { color: #333; user-select: none; font-weight: 300; font-size: 18px; }
 
-    .cta-btn {
-      display: flex; align-items: center; justify-content: center; gap: 10px;
-      width: 100%; background-color: transparent; color: var(--neon-cyan); text-decoration: none;
-      border: 1px solid var(--neon-cyan); padding: 14px 24px; font-family: 'Orbitron', sans-serif;
-      font-weight: 700; font-size: 14px; letter-spacing: 2px; text-transform: uppercase;
-      cursor: pointer; transition: all 0.3s ease;
+    .chrome-text {
+      background: linear-gradient(180deg, #fff 0%, #c0c0c0 50%, #808080 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    .cta-btn:hover { background-color: var(--neon-cyan); color: var(--bg-dark); box-shadow: 0 0 15px rgba(0, 240, 255, 0.4); }
 
-    .icon-btn { background: transparent; border: none; cursor: pointer; }
+    .logo-glow {
+      filter: brightness(1.3) saturate(1.4)
+              drop-shadow(0 0 12px rgba(0,240,255,0.55))
+              drop-shadow(0 0 28px rgba(0,240,255,0.2));
+      transition: filter 0.3s ease;
+    }
 
+    .nav-link-custom {
+      color: #050507 !important;
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 2px;
+      font-weight: 900;
+      padding: 10px 20px;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .nav-link-custom:hover {
+      color: #000000 !important;
+      text-shadow: 0 0 8px rgba(0, 240, 255, 0.8);
+    }
+
+    .nav-separator {
+      color: #555;
+      user-select: none;
+      font-weight: 300;
+      font-size: 18px;
+    }
+
+    .icon-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: var(--chrome-mid);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      transition: color 0.3s;
+    }
+    .icon-btn:hover {
+      color: var(--neon-cyan);
+    }
+
+    /* Botón Volver */
     .back-link {
-      display: inline-flex; align-items: center; gap: 8px; color: var(--chrome-light);
-      text-decoration: none; font-family: 'Michroma', 'Orbitron', sans-serif; font-size: 11px;
-      letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 32px; transition: color 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--chrome-light);
+      text-decoration: none;
+      font-family: 'Orbitron', 'Michroma', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      transition: color 0.3s;
     }
-    .back-link:hover { color: var(--neon-cyan); }
+    .back-link:hover {
+      color: var(--neon-cyan);
+    }
 
+    /* Botón CTA Neón */
+    .cta-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      background-color: transparent;
+      color: var(--neon-cyan) !important;
+      text-decoration: none;
+      border: 1px solid var(--neon-cyan);
+      padding: 14px 24px;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .cta-btn:hover {
+      background-color: var(--neon-cyan);
+      color: var(--bg-dark) !important;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+    }
+
+    /* Selector de Talles */
     .size-btn {
-      display: flex; align-items: center; justify-content: center; height: 44px;
-      font-family: 'Michroma', 'Orbitron', sans-serif; font-size: 12px; letter-spacing: 1px;
-      border: 1px solid var(--border-dark); color: var(--chrome-light); transition: all 0.3s;
-      cursor: pointer; background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 44px;
+      font-family: 'Orbitron', 'Michroma', sans-serif;
+      font-size: 12px;
+      letter-spacing: 1px;
+      border: 1px solid var(--border-dark);
+      color: var(--chrome-light);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.3s;
+      user-select: none;
     }
-    .size-btn:hover { border-color: var(--neon-cyan); color: var(--neon-cyan); box-shadow: 0 0 12px rgba(0,240,255,0.6); }
+    .size-btn:hover, .size-btn.active {
+      border-color: var(--neon-cyan);
+      color: var(--neon-cyan);
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
+      background: rgba(0, 240, 255, 0.05);
+    }
 
+    /* Dropdown Menú Ant Design */
     .ant-dropdown-menu {
-      background: linear-gradient(180deg, #111111 0%, #a1a1aa 35%, #ffffff 50%, #a1a1aa 65%, #111111 100%) !important;
-      border-radius: 0 !important; padding: 0 !important; min-width: 180px;
+      background: linear-gradient(180deg,
+        #555 0%, #888 20%, #aaa 40%, #999 60%, #666 80%, #444 100%
+      ) !important;
+      border-radius: 0 !important;
+      padding: 0 !important;
+      min-width: 180px;
+      border: 1px solid rgba(255,255,255,0.25);
     }
     .ant-dropdown-menu-item {
-      font-family: 'Michroma', 'Orbitron', sans-serif !important; font-size: 11px !important;
-      letter-spacing: 1px !important; color: #050507 !important; font-weight: bold !important;
-      padding: 12px 16px !important; border-bottom: 1px solid rgba(255,255,255,0.2) !important;
+      font-family: 'Orbitron', 'Michroma', sans-serif !important;
+      font-size: 11px !important;
+      letter-spacing: 1px !important;
+      color: #111 !important;
+      font-weight: bold !important;
+      padding: 12px 16px !important;
+      border-bottom: 1px solid rgba(255,255,255,0.2) !important;
     }
-    .ant-dropdown-menu-item:hover { background: rgba(255,255,255,0.3) !important; }
+    .ant-dropdown-menu-item:last-child {
+      border-bottom: none !important;
+    }
+    .ant-dropdown-menu-item:hover {
+      background: rgba(255,255,255,0.3) !important;
+    }
+    .ant-dropdown-menu-item a {
+      color: #111 !important;
+      text-decoration: none;
+    }
+
+    /* Social Icons */
+    .social-icon {
+      color: var(--chrome-mid);
+      transition: color 0.3s;
+    }
+    .social-icon:hover {
+      color: var(--neon-cyan);
+    }
   </style>
 
+  <!-- Librerías de React y Ant Design por CDN -->
   <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/antd/4.24.16/antd.min.js"></script>
@@ -80,6 +242,9 @@
 </head>
 <body>
 
+  <!-- ==========================================
+       FONDO CIBERNÉTICO SVG
+       ========================================== -->
   <div class="cyber-bg">
     <svg viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" fill="none" stroke="white" strokeWidth="0.5">
       <g>
@@ -99,9 +264,11 @@
   <script type="text/babel">
     const { Layout, Row, Col, Badge, Menu, Dropdown } = antd;
     const { Content, Footer } = Layout;
+    const { useState } = React;
 
     function PantalonCargoApp() {
       const talles = ['28', '30', '32', '34'];
+      const [selectedSize, setSelectedSize] = useState('30');
 
       const catalogoMenu = (
         <Menu>
@@ -114,77 +281,110 @@
       );
 
       return (
-        <Layout style={{ background: 'transparent', minHeight: '100vh' }}>
+        <Layout style={{ background: 'transparent', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
 
-          {/* HEADER Y NAVEGACIÓN */}
+          {/* ==========================================
+               HEADER Y NAVEGACIÓN
+               ========================================== */}
           <header style={{ position: 'sticky', top: 0, zIndex: 50, width: '100%' }}>
-            <div style={{ background: '#050507', padding: '15px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #1e1e2a' }}>
-              <div style={{ width: '150px' }}></div>
+            
+            <div style={{ background: '#050507', padding: '10px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #1e1e2a', maxWidth: '1152px', margin: '0 auto', width: '100%' }}>
+              <div style={{ width: '128px' }}></div>
+
               <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
-                <a href="index.html">
-                  <img src="./img/logo.png" alt="NEW ESSENTIAL — sentí la esencia" style={{ height: '70px', width: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 0 15px rgba(0,240,255,0.8))' }} />
+                <a href="index.html" style={{ display: 'block' }}>
+                  <img
+                    src="./img/logo.png"
+                    alt="NEW ESSENTIAL — sentí la esencia"
+                    className="logo-glow"
+                    style={{ height: '96px', width: 'auto', objectFit: 'contain' }}
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      if (e.target.nextSibling) e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                  <div style={{ display: 'none', flexDirection: 'column', alignItems: 'center' }}>
+                    <span className="font-heading chrome-text" style={{ fontSize: '28px', fontWeight: '900', letterSpacing: '4px', fontStyle: 'italic' }}>new</span>
+                    <span className="font-heading chrome-text" style={{ fontSize: '14px', fontWeight: 'bold', letterSpacing: '6px' }}>ESSENTIAL</span>
+                    <span className="font-accent" style={{ fontSize: '10px', letterSpacing: '3px', color: '#a1a1aa', fontStyle: 'italic' }}>— sentí la esencia —</span>
+                  </div>
                 </a>
               </div>
-              <div style={{ display: 'flex', gap: '25px', color: '#a1a1aa', width: '150px', justifyContent: 'flex-end' }}>
-                <button className="icon-btn" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', color: '#a1a1aa' }}>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '20px', width: '128px', justifyContent: 'flex-end' }}>
+                <button className="icon-btn" aria-label="Buscar">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-                  <span className="font-heading" style={{ fontSize: '9px', marginTop: '4px', letterSpacing: '1px' }}>SEARCH</span>
+                  <span className="font-heading" style={{ fontSize: '9px', letterSpacing: '1px' }}>SEARCH</span>
                 </button>
-                <button className="icon-btn" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', color: '#a1a1aa' }}>
+                <button className="icon-btn" aria-label="Perfil">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                  <span className="font-heading" style={{ fontSize: '9px', marginTop: '4px', letterSpacing: '1px' }}>PROFILE</span>
+                  <span className="font-heading" style={{ fontSize: '9px', letterSpacing: '1px' }}>PROFILE</span>
                 </button>
-                <button className="icon-btn" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', color: '#a1a1aa', position: 'relative' }}>
-                  <Badge count={0} size="small" style={{ backgroundColor: '#00f0ff', color: '#050507', position: 'absolute', top: '-5px', right: '-10px' }} />
+                <button className="icon-btn" style={{ position: 'relative' }} aria-label="Carrito">
+                  <Badge count={0} size="small" style={{ backgroundColor: '#00f0ff', color: '#050507', position: 'absolute', top: '-4px', right: '-8px', fontSize: '9px', fontWeight: 'bold' }} />
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-                  <span className="font-heading" style={{ fontSize: '9px', marginTop: '4px', letterSpacing: '1px' }}>CART</span>
+                  <span className="font-heading" style={{ fontSize: '9px', letterSpacing: '1px' }}>CART</span>
                 </button>
               </div>
             </div>
 
-            <nav className="chrome-bg" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '8px 0', borderTop: '1px solid #333', borderBottom: '1px solid #000' }}>
-              <a href="index.html" className="font-heading nav-link-custom">HOME</a>
-              <span className="nav-separator">|</span>
-              <Dropdown overlay={catalogoMenu} trigger={['hover']}>
-                <a href="index.html" className="font-heading nav-link-custom">
-                  CATALOGO
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 12 15 18 9"/></svg>
-                </a>
-              </Dropdown>
-              <span className="nav-separator">|</span>
-              <a href="new_drops.html" className="font-heading nav-link-custom">NEW DROPS</a>
-              <span className="nav-separator">|</span>
-              <a href="quienes_somos.html" className="font-heading nav-link-custom">NOSOTROS</a>
-              <span className="nav-separator">|</span>
-              <a href="contacto.html" className="font-heading nav-link-custom">CONTACTO</a>
+            <nav className="chrome-bg" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '10px 16px' }}>
+              <div style={{ maxWidth: '1152px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
+                <a href="index.html" className="font-heading nav-link-custom">HOME</a>
+                <span className="nav-separator">|</span>
+
+                <Dropdown overlay={catalogoMenu} trigger={['hover']}>
+                  <a href="index.html" className="font-heading nav-link-custom">
+                    CATALOGO
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 12 15 18 9"/></svg>
+                  </a>
+                </Dropdown>
+
+                <span className="nav-separator">|</span>
+                <a href="new_drops.html" className="font-heading nav-link-custom">NEW DROPS</a>
+                <span className="nav-separator">|</span>
+                <a href="quienes_somos.html" className="font-heading nav-link-custom">NOSOTROS</a>
+                <span className="nav-separator">|</span>
+                <a href="contacto.html" className="font-heading nav-link-custom">CONTACTO</a>
+              </div>
             </nav>
+
           </header>
 
-          {/* CONTENIDO PRINCIPAL DEL PRODUCTO */}
-          <Content style={{ position: 'relative', zIndex: 10, padding: '24px 20px 80px', maxWidth: '1152px', margin: '0 auto', width: '100%' }}>
+          {/* ==========================================
+               CONTENIDO PRINCIPAL DEL PRODUCTO
+               ========================================== */}
+          <Content style={{ position: 'relative', zIndex: 10, flex: '1 0 auto', padding: '24px 16px 80px', maxWidth: '1152px', margin: '0 auto', width: '100%' }}>
 
+            {/* BOTÓN VOLVER */}
             <a href="index.html" className="back-link">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
               [ VOLVER AL CATÁLOGO ]
             </a>
 
-            <Row gutter={[64, 32]}>
+            <Row gutter={[40, 32]}>
               {/* IMAGEN PRINCIPAL */}
               <Col xs={24} lg={12}>
                 <div style={{ position: 'relative', aspectRatio: '1/1', background: '#111118', border: '1px solid #1e1e2a', overflow: 'hidden' }}>
-                  <img src="./img/pantalon_nuevo.png" alt="New Essential Cargo Seven Words" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <img
+                    src="./img/pantalon_nuevo.png"
+                    alt="New Essential Cargo Seven Words"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
                 </div>
               </Col>
 
               {/* INFORMACIÓN Y ACCIONES */}
-              <Col xs={24} lg={12}>
+              <Col xs={24} lg={12} style={{ display: 'flex', flexDirection: 'column' }}>
                 <span className="font-heading" style={{ color: '#00f0ff', fontSize: '12px', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '12px', display: 'block' }}>
                   [ PANTALONES ]
                 </span>
-                <h1 className="font-heading" style={{ color: '#e4e4e7', fontWeight: 'bold', fontSize: '1.8rem', letterSpacing: '0.5px', lineHeight: '1.3', marginBottom: '16px' }}>
+
+                <h1 className="font-heading" style={{ color: '#e4e4e7', fontWeight: 'bold', fontSize: 'clamp(1.5rem, 2.5vw, 1.9rem)', letterSpacing: '0.5px', lineHeight: '1.3', marginBottom: '16px' }}>
                   NEW ESSENTIAL CARGO SEVEN WORDS
                 </h1>
-                <p className="font-accent" style={{ color: '#00f0ff', fontSize: '1.8rem', fontWeight: 'bold', marginBottom: '32px' }}>
+
+                <p className="font-accent" style={{ color: '#00f0ff', fontSize: '1.9rem', fontWeight: 'bold', marginBottom: '32px' }}>
                   ARS 39.999
                 </p>
 
@@ -205,14 +405,19 @@
                   <Row gutter={8}>
                     {talles.map((talle) => (
                       <Col span={6} key={talle}>
-                        <div className="size-btn">{talle}</div>
+                        <div
+                          className={`size-btn ${selectedSize === talle ? 'active' : ''}`}
+                          onClick={() => setSelectedSize(talle)}
+                        >
+                          {talle}
+                        </div>
                       </Col>
                     ))}
                   </Row>
                 </div>
 
                 {/* DESCRIPCIÓN */}
-                <div style={{ color: '#a1a1aa', fontSize: '14px', lineHeight: '1.7', marginBottom: '32px' }}>
+                <div style={{ color: '#a1a1aa', fontSize: '14px', lineHeight: '1.7', marginBottom: '32px' }} className="font-body">
                   <p>Pantalón cargo de gabardina pesada. Corte recto con bolsillos laterales de parche y cierre de pinza. Tiro medio, pretina elástica en espalda. Terminación con ojales de metal y tiritas de ajuste.</p>
                 </div>
 
@@ -226,19 +431,23 @@
 
           </Content>
 
-          {/* FOOTER */}
-          <Footer style={{ background: '#050507', borderTop: '1px solid #1e1e2a', padding: '30px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', zIndex: 10 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span className="font-heading" style={{ color: '#a1a1aa', fontStyle: 'italic', fontWeight: 'bold', fontSize: '14px' }}>new ESSENTIAL</span>
-              <span style={{ color: '#52525b', fontSize: '12px' }}>© 2026. ALL RIGHTS RESERVED.</span>
-            </div>
-            <div style={{ display: 'flex', gap: '15px', color: '#a1a1aa' }}>
-              <a href="#" style={{ color: '#a1a1aa' }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-              </a>
-              <a href="#" style={{ color: '#a1a1aa' }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-              </a>
+          {/* ==========================================
+               FOOTER
+               ========================================== */}
+          <Footer style={{ background: 'rgba(5, 5, 7, 0.95)', borderTop: '1px solid #1e1e2a', padding: '32px 16px', zIndex: 10 }}>
+            <div style={{ maxWidth: '1152px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '16px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <span className="font-heading chrome-text" style={{ fontStyle: 'italic', fontWeight: 'bold', fontSize: '14px', letterSpacing: '2px' }}>new ESSENTIAL</span>
+                <span style={{ color: '#52525b', fontSize: '12px' }}>© 2026. ALL RIGHTS RESERVED.</span>
+              </div>
+              <div style={{ display: 'flex', gap: '16px' }}>
+                <a href="#" className="social-icon" aria-label="Facebook">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
+                <a href="#" className="social-icon" aria-label="Instagram">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+              </div>
             </div>
           </Footer>
 

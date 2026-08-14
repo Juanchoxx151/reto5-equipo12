@@ -16,21 +16,34 @@
     :root {
       --bg-dark: #050507;
       --bg-card: #0a0a0e;
+      --bg-surface: #111118;
       --border-dark: #1e1e2a;
       --neon-cyan: #00f0ff;
       --chrome-light: #e4e4e7;
       --chrome-mid: #a1a1aa;
+      --chrome-dark: #52525b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
       background-color: var(--bg-dark);
       color: var(--chrome-light);
       font-family: 'Inter', sans-serif;
-      margin: 0;
+      overflow-x: hidden;
     }
 
     .font-heading { font-family: 'Michroma', 'Orbitron', sans-serif; }
     .font-accent { font-family: 'Rajdhani', sans-serif; }
+    .font-body { font-family: 'Inter', sans-serif; }
 
     /* Fondo Cibernético SVG */
     .cyber-bg {
@@ -39,41 +52,96 @@
       z-index: 0;
       opacity: 0.15;
       pointer-events: none;
+      overflow: hidden;
+    }
+
+    .cyber-bg svg {
+      width: 100%;
+      height: 100%;
     }
 
     /* EFECTO CROMADO/METÁLICO PARA BARRAS */
     .chrome-bg {
-      background: linear-gradient(180deg, #111111 0%, #a1a1aa 35%, #ffffff 50%, #a1a1aa 65%, #111111 100%);
+      background: linear-gradient(180deg,
+        #6b6b6b 0%, #b0b0b0 15%, #e8e8e8 30%,
+        #f5f5f5 45%, #d0d0d0 60%, #9a9a9a 75%,
+        #707070 90%, #555 100%
+      );
+      border-top: 1px solid rgba(255,255,255,0.55);
+      border-bottom: 1px solid rgba(0,0,0,0.5);
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
     }
 
+    .chrome-filter {
+      background: linear-gradient(180deg,
+        #555 0%, #888 20%, #aaa 40%, #999 60%, #666 80%, #444 100%
+      );
+      border: 1px solid rgba(255,255,255,0.25);
+      border-bottom: 1px solid rgba(0,0,0,0.5);
+    }
+
+    .chrome-text {
+      background: linear-gradient(180deg, #fff 0%, #c0c0c0 50%, #808080 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .logo-glow {
+      filter: brightness(1.3) saturate(1.4)
+              drop-shadow(0 0 12px rgba(0,240,255,0.55))
+              drop-shadow(0 0 28px rgba(0,240,255,0.2));
+      transition: filter 0.3s ease;
+    }
+
     .nav-link-custom {
-      color: #050507;
+      color: #050507 !important;
       text-decoration: none;
       font-size: 13px;
       letter-spacing: 2px;
       font-weight: 900;
-      padding: 10px 25px;
+      padding: 10px 20px;
       transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
     }
 
     .nav-link-custom:hover {
-      color: #000000;
+      color: #000000 !important;
       text-shadow: 0 0 8px rgba(0, 240, 255, 0.8);
     }
 
     .nav-separator {
-      color: #333;
+      color: #555;
       user-select: none;
       font-weight: 300;
       font-size: 18px;
     }
+
+    .icon-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: var(--chrome-mid);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      transition: color 0.3s;
+    }
+    .icon-btn:hover {
+      color: var(--neon-cyan);
+    }
     
     /* Botón CTA Neón */
     .cta-btn {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
       background-color: transparent;
-      color: var(--neon-cyan);
+      color: var(--neon-cyan) !important;
       border: 1px solid var(--neon-cyan);
       padding: 12px 24px;
       font-family: 'Orbitron', sans-serif;
@@ -81,40 +149,105 @@
       font-size: 14px;
       letter-spacing: 2px;
       text-transform: uppercase;
+      text-decoration: none;
       cursor: pointer;
       transition: all 0.3s ease;
     }
     .cta-btn:hover {
       background-color: var(--neon-cyan);
-      color: var(--bg-dark);
+      color: var(--bg-dark) !important;
       box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
     }
 
-    /* Tarjetas y Checkboxes */
+    /* Tarjetas Ant Design */
+    .product-card-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
+    .product-card-link:hover {
+      color: inherit;
+    }
     .ant-card {
-      background: var(--bg-card);
-      border-color: var(--border-dark);
-      border-radius: 0;
-      transition: transform 0.3s ease;
+      background: var(--bg-card) !important;
+      border: 1px solid var(--border-dark) !important;
+      border-radius: 0 !important;
+      overflow: hidden;
+      transition: border-color 0.3s ease;
+    }
+    .ant-card:hover {
+      border-color: rgba(0, 240, 255, 0.4) !important;
+    }
+    .ant-card-cover {
+      margin: 0 !important;
     }
     .ant-card-cover img {
       border-radius: 0 !important;
       transition: transform 0.5s ease;
     }
-    .ant-card:hover .ant-card-cover img {
+    .product-card-link:hover .ant-card-cover img {
       transform: scale(1.05);
     }
     
+    /* Checkbox de Ant Design */
+    .ant-checkbox-inner {
+      background-color: var(--bg-dark) !important;
+      border-color: var(--border-dark) !important;
+      border-radius: 0 !important;
+    }
     .ant-checkbox-checked .ant-checkbox-inner {
-      background-color: #fff;
-      border-color: #fff;
+      background-color: var(--neon-cyan) !important;
+      border-color: var(--neon-cyan) !important;
     }
     .ant-checkbox-inner::after {
-      border-color: #000 !important;
+      border-color: #050507 !important;
     }
     .ant-checkbox-wrapper {
-      color: #e4e4e7;
+      color: var(--chrome-light) !important;
       font-size: 13px;
+      transition: color 0.3s;
+    }
+    .ant-checkbox-wrapper:hover {
+      color: var(--neon-cyan) !important;
+    }
+
+    /* Dropdown Menú de Ant Design */
+    .ant-dropdown-menu {
+      background: linear-gradient(180deg,
+        #555 0%, #888 20%, #aaa 40%, #999 60%, #666 80%, #444 100%
+      ) !important;
+      border-radius: 0 !important;
+      padding: 0 !important;
+      min-width: 180px;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+    .ant-dropdown-menu-item {
+      font-family: 'Orbitron', 'Michroma', sans-serif !important;
+      font-size: 11px !important;
+      letter-spacing: 1px !important;
+      color: #111 !important;
+      font-weight: bold !important;
+      padding: 12px 16px !important;
+      border-bottom: 1px solid rgba(255,255,255,0.2) !important;
+    }
+    .ant-dropdown-menu-item:last-child {
+      border-bottom: none !important;
+    }
+    .ant-dropdown-menu-item:hover {
+      background: rgba(255,255,255,0.3) !important;
+    }
+    .ant-dropdown-menu-item a {
+      color: #111 !important;
+      text-decoration: none;
+    }
+
+    /* Social Icons */
+    .social-icon {
+      color: var(--chrome-mid);
+      transition: color 0.3s;
+    }
+    .social-icon:hover {
+      color: var(--neon-cyan);
     }
   </style>
 
@@ -126,18 +259,28 @@
 </head>
 <body>
 
-  <!-- Contenedor del Fondo SVG -->
+  <!-- ==========================================
+       FONDO CIBERNÉTICO SVG
+       ========================================== -->
   <div class="cyber-bg">
     <svg viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" fill="none" stroke="white" strokeWidth="0.5">
       <g>
         <line x1="0" y1="900" x2="250" y2="0"/><line x1="50" y1="900" x2="280" y2="0"/>
         <line x1="100" y1="900" x2="310" y2="0"/><line x1="150" y1="900" x2="340" y2="0"/>
         <line x1="200" y1="900" x2="370" y2="0"/><line x1="0" y1="200" x2="380" y2="0"/>
+        <line x1="0" y1="400" x2="350" y2="0"/><line x1="0" y1="600" x2="320" y2="0"/>
+        <line x1="0" y1="800" x2="290" y2="0"/><line x1="0" y1="100" x2="400" y2="0"/>
+        <line x1="0" y1="300" x2="370" y2="0"/><line x1="0" y1="500" x2="340" y2="0"/>
+        <line x1="0" y1="700" x2="310" y2="0"/>
       </g>
       <g>
         <line x1="1400" y1="900" x2="1150" y2="0"/><line x1="1350" y1="900" x2="1120" y2="0"/>
         <line x1="1300" y1="900" x2="1090" y2="0"/><line x1="1250" y1="900" x2="1060" y2="0"/>
         <line x1="1200" y1="900" x2="1030" y2="0"/><line x1="1400" y1="200" x2="1020" y2="0"/>
+        <line x1="1400" y1="400" x2="1050" y2="0"/><line x1="1400" y1="600" x2="1080" y2="0"/>
+        <line x1="1400" y1="800" x2="1110" y2="0"/><line x1="1400" y1="100" x2="1000" y2="0"/>
+        <line x1="1400" y1="300" x2="1030" y2="0"/><line x1="1400" y1="500" x2="1060" y2="0"/>
+        <line x1="1400" y1="700" x2="1090" y2="0"/>
       </g>
     </svg>
   </div>
@@ -145,165 +288,285 @@
   <div id="root"></div>
 
   <script type="text/babel">
-    const { Layout, Row, Col, Card, Checkbox, Badge } = antd;
+    const { Layout, Row, Col, Card, Checkbox, Badge, Menu, Dropdown } = antd;
     const { Content, Footer } = Layout;
 
     function CatalogoApp() {
       const productos = [
-        { id: 1, title: 'NEW ESSENTIAL REMERA OVERSIZE SEVEN WORDS', price: 'ARS 24.999', img: './img/remera_nueva.png', drop: 'DROP 01' },
-        { id: 2, title: 'NEW ESSENTIAL CARGO SEVEN WORDS', price: 'ARS 39.999', img: './img/pantalon_nuevo.png', drop: 'DROP 01' },
-        { id: 3, title: 'NEW ESSENTIAL BUZO SEVEN WORDS', price: 'ARS 34.999', img: './img/buzo_nuevo.png', drop: 'DROP 01' },
-        { id: 4, title: 'NEW ESSENTIAL GORRA SEVEN WORDS', price: 'ARS 14.999', img: './img/gorra.png', drop: 'DROP 01' }
+        { 
+          id: 1, 
+          title: 'NEW ESSENTIAL REMERA OVERSIZE SEVEN WORDS', 
+          price: 'ARS 24.999', 
+          img: './img/remera_nueva.png', 
+          drop: 'DROP 01',
+          link: 'remera-cyber.html'
+        },
+        { 
+          id: 2, 
+          title: 'NEW ESSENTIAL CARGO SEVEN WORDS', 
+          price: 'ARS 39.999', 
+          img: './img/pantalon_nuevo.png', 
+          drop: 'DROP 01',
+          link: 'pantalon-cargo.html'
+        },
+        { 
+          id: 3, 
+          title: 'NEW ESSENTIAL BUZO SEVEN WORDS', 
+          price: 'ARS 34.999', 
+          img: './img/buzo_nuevo.png', 
+          drop: 'DROP 01',
+          link: 'buzo-cargo.html'
+        },
+        { 
+          id: 4, 
+          title: 'NEW ESSENTIAL GORRA SEVEN WORDS', 
+          price: 'ARS 14.999', 
+          img: './img/gorra.png', 
+          drop: 'DROP 01',
+          link: 'gorra-trucker.html'
+        }
       ];
 
-      const filtrosData = [
-        { titulo: 'CATEGORÍA', opciones: ['Remeras', 'Pantalones', 'Buzos', 'Gorras'] },
-        { titulo: 'DROPS', opciones: ['Drop 01', 'Cyber-Core'] },
-        { titulo: 'COLOR', opciones: ['Black', 'Silver'] }
-      ];
+      const catalogoMenu = (
+        <Menu>
+          <Menu.Item key="remeras"><a href="index.html">Remeras</a></Menu.Item>
+          <Menu.Item key="pantalones"><a href="index.html">Pantalones</a></Menu.Item>
+          <Menu.Item key="mystery"><a href="index.html">Mystery Box</a></Menu.Item>
+          <Menu.Item key="buzos"><a href="index.html">Buzos</a></Menu.Item>
+          <Menu.Item key="gorras"><a href="index.html">Gorras</a></Menu.Item>
+        </Menu>
+      );
 
       return (
-        <Layout style={{ background: 'transparent', minHeight: '100vh' }}>
+        <Layout style={{ background: 'transparent', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
           
-          {/* HEADER Y NAVEGACIÓN */}
+          {/* ==========================================
+               HEADER Y NAVEGACIÓN
+               ========================================== */}
           <header style={{ position: 'sticky', top: 0, zIndex: 50, width: '100%' }}>
             
-            {/* Parte Superior */}
-            <div style={{ background: '#050507', padding: '15px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <div style={{ width: '150px' }}></div>
+            {/* Barra Superior con Logo e Íconos */}
+            <div style={{ background: '#050507', padding: '10px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #1e1e2a', maxWidth: '1152px', margin: '0 auto', width: '100%' }}>
               
-              {/* Logo Oficial con Brillo Neón Fuerte */}
+              {/* Espaciador Izquierdo */}
+              <div style={{ width: '128px' }}></div>
+              
+              {/* Logo Central */}
               <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
-                <a href="index.html">
+                <a href="index.html" style={{ display: 'block' }}>
                   <img 
                     src="./img/logo.png" 
-                    alt="NEW ESSENTIAL" 
+                    alt="NEW ESSENTIAL — sentí la esencia" 
+                    className="logo-glow"
                     style={{ 
-                      height: '70px', 
+                      height: '96px', 
                       width: 'auto', 
-                      objectFit: 'contain', 
-                      filter: 'drop-shadow(0 0 15px rgba(0,240,255,0.8))' 
+                      objectFit: 'contain' 
                     }} 
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      if (e.target.nextSibling) e.target.nextSibling.style.display = 'flex';
+                    }}
                   />
+                  <div style={{ display: 'none', flexDirection: 'column', alignItems: 'center' }}>
+                    <span className="font-heading chrome-text" style={{ fontSize: '28px', fontWeight: '900', letterSpacing: '4px', fontStyle: 'italic' }}>new</span>
+                    <span className="font-heading chrome-text" style={{ fontSize: '14px', fontWeight: 'bold', letterSpacing: '6px' }}>ESSENTIAL</span>
+                    <span className="font-accent" style={{ fontSize: '10px', letterSpacing: '3px', color: '#a1a1aa', fontStyle: 'italic' }}>— sentí la esencia —</span>
+                  </div>
                 </a>
               </div>
 
-              {/* Íconos de Acción */}
-              <div style={{ display: 'flex', gap: '25px', color: '#a1a1aa', width: '150px', justifyContent: 'flex-end' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer' }}>
+              {/* Íconos de Acción (Derecha) */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '20px', width: '128px', justifyContent: 'flex-end' }}>
+                <button className="icon-btn" aria-label="Buscar">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-                  <span className="font-heading" style={{ fontSize: '9px', marginTop: '4px', letterSpacing: '1px' }}>SEARCH</span>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer' }}>
+                  <span className="font-heading" style={{ fontSize: '9px', letterSpacing: '1px' }}>SEARCH</span>
+                </button>
+                <button className="icon-btn" aria-label="Perfil">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                  <span className="font-heading" style={{ fontSize: '9px', marginTop: '4px', letterSpacing: '1px' }}>PROFILE</span>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer', position: 'relative' }}>
-                  <Badge count={0} size="small" style={{ backgroundColor: '#00f0ff', color: '#050507', position: 'absolute', top: '-5px', right: '-10px' }} />
+                  <span className="font-heading" style={{ fontSize: '9px', letterSpacing: '1px' }}>PROFILE</span>
+                </button>
+                <button className="icon-btn" style={{ position: 'relative' }} aria-label="Carrito">
+                  <Badge count={0} size="small" style={{ backgroundColor: '#00f0ff', color: '#050507', position: 'absolute', top: '-4px', right: '-8px', fontSize: '9px', fontWeight: 'bold' }} />
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-                  <span className="font-heading" style={{ fontSize: '9px', marginTop: '4px', letterSpacing: '1px' }}>CART</span>
-                </div>
+                  <span className="font-heading" style={{ fontSize: '9px', letterSpacing: '1px' }}>CART</span>
+                </button>
               </div>
             </div>
 
-            {/* Menú Cromado */}
-            <nav className="chrome-bg" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '8px 0', borderTop: '1px solid #333', borderBottom: '1px solid #000' }}>
-              <a href="index.html" className="font-heading nav-link-custom">HOME</a>
-              <span className="nav-separator">|</span>
-              <a href="#catalogo" className="font-heading nav-link-custom">CATALOGO ⌵</a>
-              <span className="nav-separator">|</span>
-              <a href="new_drops.html" className="font-heading nav-link-custom">NEW DROPS</a>
-              <span className="nav-separator">|</span>
-              <a href="quienes_somos.html" className="font-heading nav-link-custom">NOSOTROS</a>
-              <span className="nav-separator">|</span>
-              <a href="contacto.html" className="font-heading nav-link-custom">CONTACTO</a>
+            {/* Barra de Navegación Metálica */}
+            <nav className="chrome-bg" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '10px 16px' }}>
+              <div style={{ maxWidth: '1152px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
+                <a href="index.html" className="font-heading nav-link-custom">HOME</a>
+                <span className="nav-separator">|</span>
+                
+                {/* Menú Desplegable CATALOGO */}
+                <Dropdown overlay={catalogoMenu} trigger={['hover']}>
+                  <a href="index.html" className="font-heading nav-link-custom">
+                    CATALOGO
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 12 15 18 9"/></svg>
+                  </a>
+                </Dropdown>
+
+                <span className="nav-separator">|</span>
+                <a href="new_drops.html" className="font-heading nav-link-custom">NEW DROPS</a>
+                <span className="nav-separator">|</span>
+                <a href="quienes_somos.html" className="font-heading nav-link-custom">NOSOTROS</a>
+                <span className="nav-separator">|</span>
+                <a href="contacto.html" className="font-heading nav-link-custom">CONTACTO</a>
+              </div>
             </nav>
             
           </header>
 
-          <Content style={{ position: 'relative', zIndex: 10, padding: '40px 20px', maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
+          {/* ==========================================
+               CONTENIDO PRINCIPAL
+               ========================================== */}
+          <Content style={{ position: 'relative', zIndex: 10, flex: '1 0 auto', width: '100%', maxWidth: '1152px', margin: '0 auto', padding: '48px 16px 80px' }}>
             
             {/* SECCIÓN HERO */}
-            <Row style={{ background: '#000', border: '1px solid #1e1e2a', marginBottom: '40px' }}>
-              <Col xs={24} md={12} style={{ padding: '50px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <h1 className="font-heading" style={{ color: '#e4e4e7', fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '30px' }}>
-                  SENTÍ LA ESENCIA<br/>DEL FUTURO
-                </h1>
-                <div>
-                  <button className="cta-btn">VER COLECCIÓN</button>
-                </div>
-              </Col>
-              <Col xs={24} md={12} style={{ height: '350px', background: '#111' }}>
-                <video src="./img/hero-bg.mp4" autoPlay loop muted playsInline style={{ width: '100%', height: '100%', objectFit: 'cover' }}></video>
-              </Col>
-            </Row>
-
-            {/* TITULO DE FILTROS CROMADO */}
-            <div className="chrome-bg" style={{ padding: '12px 20px', marginBottom: '0px', border: '1px solid #000' }}>
-              <span className="font-heading" style={{ color: '#050507', fontWeight: '900', letterSpacing: '2px', fontSize: '14px' }}>FILTROS</span>
+            <div style={{ background: '#000', border: '1px solid #1e1e2a', borderRadius: '8px', overflow: 'hidden', marginBottom: '48px' }}>
+              <Row>
+                {/* Columna Izquierda: Texto y Botón CTA */}
+                <Col xs={24} md={12} style={{ padding: '40px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', background: 'linear-gradient(90deg, #000 0%, #0a0a0e 70%, transparent 100%)' }}>
+                  <h1 className="font-heading" style={{ color: '#e4e4e7', fontSize: 'clamp(1.5rem, 3vw, 2.3rem)', fontWeight: 'bold', lineHeight: '1.2', letterSpacing: '1px', marginBottom: '24px' }}>
+                    SENTÍ LA ESENCIA<br/>DEL FUTURO
+                  </h1>
+                  <a href="#catalogo" className="cta-btn">
+                    VER COLECCIÓN
+                  </a>
+                </Col>
+                
+                {/* Columna Derecha: Video Hero Adaptable */}
+                <Col xs={24} md={12} style={{ height: '320px', position: 'relative', overflow: 'hidden', pointerEvents: 'none' }}>
+                  <video 
+                    src="./img/hero-bg.mp4" 
+                    autoPlay 
+                    loop 
+                    muted 
+                    playsInline 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  ></video>
+                  {/* Capa de difuminado izquierdo */}
+                  <div style={{ position: 'absolute', inset: '0', width: '120px', background: 'linear-gradient(to right, #000, transparent)', pointerEvents: 'none' }}></div>
+                </Col>
+              </Row>
             </div>
-            
-            {/* CAJAS DE FILTROS IGUAL A LA IMAGEN */}
-            <Row style={{ marginBottom: '40px', background: '#050507', border: '1px solid #1e1e2a', borderTop: 'none' }}>
-              {filtrosData.map((filtro, idx) => (
-                <Col xs={24} md={8} key={idx} style={{ padding: '20px', borderRight: idx !== 2 ? '1px solid #1e1e2a' : 'none' }}>
-                  <p className="font-heading" style={{ color: '#e4e4e7', fontWeight: 'bold', fontSize: '11px', letterSpacing: '1px', marginBottom: '15px' }}>{filtro.titulo}</p>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                    {filtro.opciones.map((opc, i) => (
-                      <Checkbox key={i}>{opc}</Checkbox>
-                    ))}
+
+            {/* SECCIÓN CATÁLOGO (FILTROS Y GRILLA) */}
+            <section id="catalogo">
+              
+              {/* Barra de Título de Filtros Cromada */}
+              <div className="chrome-filter" style={{ padding: '12px 16px', display: 'flex', alignItems: 'center' }}>
+                <span className="font-accent" style={{ color: '#111', fontWeight: 'bold', letterSpacing: '2px', textTransform: 'uppercase', fontSize: '14px' }}>FILTROS</span>
+              </div>
+              
+              {/* Panel de Filtros en 3 Columnas */}
+              <Row gutter={[16, 16]} style={{ marginTop: '8px', marginBottom: '32px' }}>
+                
+                {/* Filtro: Categoría */}
+                <Col xs={24} md={8}>
+                  <div style={{ background: '#0a0a0e', border: '1px solid #1e1e2a', padding: '16px' }}>
+                    <p className="font-accent" style={{ color: '#e4e4e7', fontWeight: 'bold', fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '12px' }}>CATEGORÍA</p>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      <Checkbox><span className="font-body">Remeras</span></Checkbox>
+                      <Checkbox><span className="font-body">Pantalones</span></Checkbox>
+                      <Checkbox><span className="font-body">Buzos</span></Checkbox>
+                      <Checkbox><span className="font-body">Gorras</span></Checkbox>
+                    </div>
                   </div>
                 </Col>
-              ))}
-            </Row>
 
-            {/* GRILLA DE PRODUCTOS */}
-            <Row gutter={[24, 24]}>
-              {productos.map(prod => (
-                <Col xs={12} md={8} lg={6} key={prod.id}>
-                  <Card
-                    hoverable
-                    cover={
-                      <div style={{ position: 'relative', overflow: 'hidden', aspectRatio: '1/1' }}>
-                        
-                        {/* Etiqueta DROP */}
-                        <div style={{ position: 'absolute', top: '10px', left: '10px', background: '#00f0ff', color: '#050507', padding: '4px 8px', fontSize: '10px', fontWeight: 'bold', zIndex: 2 }} className="font-heading">
-                          {prod.drop}
-                        </div>
-
-                        {/* Icono de Corazón */}
-                        <div style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 2, background: 'rgba(0,0,0,0.5)', padding: '5px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a1a1aa" strokeWidth="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                        </div>
-
-                        <img alt={prod.title} src={prod.img} style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-                             onError={(e) => {e.target.src = 'https://via.placeholder.com/400x400/1e1e2a/ffffff?text=FOTO+PROD'}} />
-                      </div>
-                    }
-                    bodyStyle={{ padding: '15px', borderTop: '1px solid #1e1e2a', background: '#0a0a0e' }}
-                  >
-                    <h3 className="font-heading" style={{ color: '#fff', fontSize: '10px', textTransform: 'uppercase', marginBottom: '10px', height: '28px', lineHeight: '1.4' }}>
-                      {prod.title}
-                    </h3>
-                    <p className="font-heading" style={{ color: '#00f0ff', fontWeight: 'bold', margin: 0, fontSize: '13px' }}>
-                      {prod.price}
-                    </p>
-                  </Card>
+                {/* Filtro: Drops */}
+                <Col xs={24} md={8}>
+                  <div style={{ background: '#0a0a0e', border: '1px solid #1e1e2a', padding: '16px' }}>
+                    <p className="font-accent" style={{ color: '#e4e4e7', fontWeight: 'bold', fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '12px' }}>DROPS</p>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      <Checkbox><span className="font-body">Drop 01</span></Checkbox>
+                      <Checkbox><span className="font-body">Cyber-Core</span></Checkbox>
+                    </div>
+                  </div>
                 </Col>
-              ))}
-            </Row>
+
+                {/* Filtro: Color */}
+                <Col xs={24} md={8}>
+                  <div style={{ background: '#0a0a0e', border: '1px solid #1e1e2a', padding: '16px' }}>
+                    <p className="font-accent" style={{ color: '#e4e4e7', fontWeight: 'bold', fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '12px' }}>COLOR</p>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      <Checkbox><span className="font-body">Black</span></Checkbox>
+                      <Checkbox><span className="font-body">Silver</span></Checkbox>
+                    </div>
+                  </div>
+                </Col>
+
+              </Row>
+
+              {/* GRILLA DE 4 PRODUCTOS */}
+              <Row gutter={[24, 24]}>
+                {productos.map(prod => (
+                  <Col xs={12} md={8} lg={6} key={prod.id}>
+                    <a href={prod.link} className="product-card-link">
+                      <Card
+                        hoverable
+                        cover={
+                          <div style={{ position: 'relative', overflow: 'hidden', aspectRatio: '1/1', background: '#111118' }}>
+                            
+                            {/* Etiqueta DROP */}
+                            <div style={{ position: 'absolute', top: '8px', left: '8px', background: '#00f0ff', color: '#050507', padding: '2px 8px', fontSize: '9px', fontWeight: 'bold', zIndex: 2 }} className="font-heading">
+                              {prod.drop}
+                            </div>
+
+                            {/* Ícono de Favorito */}
+                            <span style={{ position: 'absolute', top: '8px', right: '8px', zIndex: 2, background: 'rgba(5, 5, 7, 0.6)', border: '1px solid #1e1e2a', padding: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a1a1aa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                              </svg>
+                            </span>
+
+                            <img 
+                              alt={prod.title} 
+                              src={prod.img} 
+                              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} 
+                              loading="lazy"
+                              onError={(e) => { e.target.src = 'https://via.placeholder.com/400x400/1e1e2a/ffffff?text=PRODUCTO'; }}
+                            />
+                          </div>
+                        }
+                        bodyStyle={{ padding: '12px', borderTop: '1px solid #1e1e2a', background: '#0a0a0e' }}
+                      >
+                        <h3 className="font-heading" style={{ color: '#fff', fontSize: '9px', fontWeight: 'bold', letterSpacing: '1px', textTransform: 'uppercase', lineHeight: '1.4', marginBottom: '8px', minHeight: '26px' }}>
+                          {prod.title}
+                        </h3>
+                        <p className="font-accent" style={{ color: '#00f0ff', fontWeight: 'bold', margin: 0, fontSize: '14px', letterSpacing: '0.5px' }}>
+                          {prod.price}
+                        </p>
+                      </Card>
+                    </a>
+                  </Col>
+                ))}
+              </Row>
+
+            </section>
 
           </Content>
 
-          {/* FOOTER ALINEADO SEGÚN IMAGEN */}
-          <Footer style={{ background: '#050507', padding: '30px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 10 }}>
-            <div>
-              <span className="font-heading" style={{ color: '#a1a1aa', fontStyle: 'italic', fontWeight: 'bold', fontSize: '14px', marginRight: '10px' }}>new ESSENTIAL</span>
-              <span style={{ color: '#52525b', fontSize: '12px' }}>© 2026. ALL RIGHTS RESERVED.</span>
-            </div>
-            <div style={{ display: 'flex', gap: '15px', color: '#a1a1aa' }}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{cursor: 'pointer'}}><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{cursor: 'pointer'}}><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          {/* ==========================================
+               FOOTER
+               ========================================== */}
+          <Footer style={{ background: 'rgba(5, 5, 7, 0.95)', borderTop: '1px solid #1e1e2a', padding: '32px 16px', zIndex: 10 }}>
+            <div style={{ maxWidth: '1152px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '16px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <span className="font-heading chrome-text" style={{ fontStyle: 'italic', fontWeight: 'bold', fontSize: '14px', letterSpacing: '2px' }}>new ESSENTIAL</span>
+                <span style={{ color: '#52525b', fontSize: '12px' }}>© 2026. ALL RIGHTS RESERVED.</span>
+              </div>
+              <div style={{ display: 'flex', gap: '16px' }}>
+                <a href="#" className="social-icon" aria-label="Facebook">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
+                <a href="#" className="social-icon" aria-label="Instagram">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+              </div>
             </div>
           </Footer>
 
