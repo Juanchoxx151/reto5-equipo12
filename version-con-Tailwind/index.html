@@ -72,18 +72,18 @@
       </div>
     </div>
 
-    <!-- Barra de Navegación Metálica -->
+    <!-- Barra de Navegación -->
     <nav class="bg-gray-400 relative z-10">
       <div class="max-w-6xl mx-auto px-4">
         <ul class="flex flex-wrap items-center justify-center py-2.5 gap-2 md:gap-0">
-          <li><a href="index.html" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">HOME</a></li>
+          <li><a href="index.html" class="text-gray-950 font-bold hover:underline font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">HOME</a></li>
           <li class="text-gray-600 font-light text-lg select-none hidden md:block">|</li>
           
           <!-- Menú Desplegable CATALOGO — hover en desktop, click nativo en mobile (SIN JS) -->
           <li class="relative group">
             <!-- Checkbox oculto que controla el estado de abierto/cerrado al hacer click -->
             <input type="checkbox" id="catalogo-toggle" class="peer hidden">
-            <label for="catalogo-toggle" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em] flex items-center gap-1 cursor-pointer select-none">
+            <label for="catalogo-toggle" class="text-gray-950 font-bold hover:underline font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em] flex items-center gap-1 cursor-pointer select-none">
               CATALOGO
             </label>
             <!-- Dropdown: visible al hacer hover (group-hover) O al tocar/cliquear (peer-checked) -->
@@ -98,11 +98,11 @@
           </li>
           
           <li class="text-gray-600 font-light text-lg select-none hidden md:block">|</li>
-          <li><a href="new_drops.html" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">NEW DROPS</a></li>
+          <li><a href="new_drops.html" class="text-gray-950 font-bold hover:underline font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">NEW DROPS</a></li>
           <li class="text-gray-600 font-light text-lg select-none hidden md:block">|</li>
-          <li><a href="quienes_somos.html" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">NOSOTROS</a></li>
+          <li><a href="quienes_somos.html" class="text-gray-950 font-bold hover:underline font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">NOSOTROS</a></li>
           <li class="text-gray-600 font-light text-lg select-none hidden md:block">|</li>
-          <li><a href="contacto.html" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">CONTACTO</a></li>
+          <li><a href="contacto.html" class="text-gray-950 font-bold hover:underline font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">CONTACTO</a></li>
         </ul>
       </div>
     </nav>
@@ -119,7 +119,7 @@
         <!-- Columna Izquierda (Texto y Botón) -->
         <div class="p-6 md:p-10 flex flex-col justify-center items-start bg-gradient-to-r from-black via-gray-950 to-transparent">
           <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold font-heading mb-6 text-chrome-light leading-tight tracking-wider">SIETE PALABRAS: E.S.E.N.C.I.A</h1>
-          <a href="#catalogo" class="cta-btn w-fit">VER COLECCIÓN</a>
+          <a href="#catalogo" class="inline-flex items-center justify-center gap-3 px-[28px] py-[10px] border-2 border-[#00f0ff] text-[#00f0ff] font-['Orbitron',sans-serif] font-semibold text-[0.75rem] tracking-[0.2em]">VER COLECCIÓN</a>
         </div>
         <!-- Columna Derecha (Video) -->
         <div class="w-full h-64 md:h-full relative overflow-hidden pointer-events-none ">
@@ -171,10 +171,7 @@
                 <input type="checkbox" class="accent-neon-cyan w-3.5 h-3.5">
                 <span class="text-sm text-chrome-light group-hover:text-[#00f0ff] font-body">Drop 01</span>
               </label>
-              <label class="flex items-center gap-2 cursor-pointer group">
-                <input type="checkbox" class="accent-neon-cyan w-3.5 h-3.5">
-                <span class="text-sm text-chrome-light group-hover:text-[#00f0ff] font-body">Cyber-Core</span>
-              </label>
+          
             </div>
           </div>
 
@@ -184,17 +181,13 @@
             <div class="space-y-2">
               <label class="flex items-center gap-2 cursor-pointer group">
                 <input type="checkbox" class="accent-neon-cyan w-3.5 h-3.5">
-                <span class="text-sm text-chrome-light group-hover:text-[#00f0ff] font-body">Black</span>
-              </label>
-              <label class="flex items-center gap-2 cursor-pointer group">
-                <input type="checkbox" class="accent-neon-cyan w-3.5 h-3.5">
-                <span class="text-sm text-chrome-light group-hover:text-[#00f0ff] font-body">Silver</span>
+                <span class="text-sm text-chrome-light group-hover:text-[#00f0ff] font-body">Negro</span>
               </label>
             </div>
           </div>
 
         </div>
-      </div>        </div>
+      </div>        
       </div>
 
       <!-- SECCIÓN: GRILLA DE 4 PRODUCTOS ESTÁTICOS -->
@@ -202,26 +195,20 @@
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
           <!-- TARJETA DE PRODUCTO: REMERA OVERSIZE SEVEN WORDS -->
-          <article class=" product-card overflow-hidden group h-full">
+          <article class="  transition-all hover:-translate-y-[3px] overflow-hidden group h-full ">
+              
             <a href="remera-drop.html" class="block h-full relative overflow-hidden bg-dark-card border border-dark-border">
               <div class="aspect-square overflow-hidden relative">
                 <img
                   src="./img/remera_nueva.png"
                   alt="New Essential Remera Oversize Seven Words"
-                  class="w-full h-full object-cover object-center block transition-transform duration-500 group-hover:scale-105"
+                  class="w-full h-full object-cover object-center block"
                   loading="lazy"
                 />
                 <div class="absolute top-2 left-2 z-10">
                   <span class="bg-[#00f0ff] text-dark-bg text-[9px] font-heading font-bold px-2 py-0.5 tracking-wider uppercase"> DROP 01</span>
                 </div>
-                <span
-                  class="absolute top-2 right-2 z-10 p-1.5 bg-dark-bg/60 border border-dark-border text-chrome-mid"
-                  aria-label="Favorito"
-                >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                  </svg>
-                </span>
+              
               </div>
               <div class="p-3 border-t border-dark-border">
                 <h3 class="font-heading text-white text-[9px] font-bold tracking-wider uppercase leading-snug mb-2 line-clamp-2">
@@ -233,26 +220,19 @@
           </article>
 
           <!-- TARJETA DE PRODUCTO: CARGO SEVEN WORDS -->
-          <article class="product-card overflow-hidden group h-full">
+          <article class="  transition-all hover:-translate-y-[3px] overflow-hidden group h-full">
             <a href="pantalon-cargo.html" class="block h-full relative overflow-hidden bg-dark-card border border-dark-border">
               <div class="aspect-square overflow-hidden relative">
                 <img
                   src="./img/pantalon_nuevo.png"
                   alt="New Essential Cargo Seven Words"
-                  class="w-full h-full object-cover object-center block transition-transform duration-500 group-hover:scale-105"
+                  class="w-full h-full object-cover object-center block"
                   loading="lazy"
                 />
                 <div class="absolute top-2 left-2 z-10">
                   <span class="bg-[#00f0ff] text-dark-bg text-[9px] font-heading font-bold px-2 py-0.5 tracking-wider uppercase">DROP 01</span>
                 </div>
-                <span
-                  class="absolute top-2 right-2 z-10 p-1.5 bg-dark-bg/60 border border-dark-border text-chrome-mid"
-                  aria-label="Favorito"
-                >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                  </svg>
-                </span>
+                
               </div>
               <div class="p-3 border-t border-dark-border">
                 <h3 class="font-heading text-white text-[9px] font-bold tracking-wider uppercase leading-snug mb-2 line-clamp-2">
@@ -264,26 +244,19 @@
           </article>
 
           <!-- TARJETA DE PRODUCTO: BUZO SEVEN WORDS -->
-          <article class="product-card overflow-hidden group h-full">
+          <article class="  transition-all hover:-translate-y-[3px] overflow-hidden group h-full">
             <a href="buzo-oversize.html" class="block h-full relative overflow-hidden bg-dark-card border border-dark-border">
               <div class="aspect-square overflow-hidden relative">
                 <img
                   src="./img/buzo_nuevo.png"
                   alt="New Essential Buzo Seven Words"
-                  class="w-full h-full object-cover object-center block transition-transform duration-500 group-hover:scale-105"
+                  class="w-full h-full object-cover object-center block"
                   loading="lazy"
                 />
                 <div class="absolute top-2 left-2 z-10">
                   <span class="bg-[#00f0ff] text-dark-bg text-[9px] font-heading font-bold px-2 py-0.5 tracking-wider uppercase">DROP 01</span>
                 </div>
-                <span
-                  class="absolute top-2 right-2 z-10 p-1.5 bg-dark-bg/60 border border-dark-border text-chrome-mid"
-                  aria-label="Favorito"
-                >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                  </svg>
-                </span>
+                
               </div>
               <div class="p-3 border-t border-dark-border">
                 <h3 class="font-heading text-white text-[9px] font-bold tracking-wider uppercase leading-snug mb-2 line-clamp-2">
@@ -295,26 +268,19 @@
           </article>
 
           <!-- TARJETA DE PRODUCTO: GORRA SEVEN WORDS -->
-          <article class="product-card overflow-hidden group h-full">
+          <article class="  transition-all hover:-translate-y-[3px] overflow-hidden group h-full">
             <a href="gorra-trucker.html" class="block h-full relative overflow-hidden bg-dark-card border border-dark-border">
               <div class="aspect-square overflow-hidden relative">
                 <img
                   src="./img/gorra.png"
                   alt="New Essential Gorra Seven Words"
-                  class="w-full h-full object-cover object-center block transition-transform duration-500 group-hover:scale-105"
+                  class="w-full h-full object-cover object-center block"
                   loading="lazy"
                 />
                 <div class="absolute top-2 left-2 z-10">
                   <span class="bg-[#00f0ff] text-dark-bg text-[9px] font-heading font-bold px-2 py-0.5 tracking-wider uppercase">DROP 01</span>
                 </div>
-                <span
-                  class="absolute top-2 right-2 z-10 p-1.5 bg-dark-bg/60 border border-dark-border text-chrome-mid"
-                  aria-label="Favorito"
-                >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                  </svg>
-                </span>
+              
               </div>
               <div class="p-3 border-t border-dark-border">
                 <h3 class="font-heading text-white text-[9px] font-bold tracking-wider uppercase leading-snug mb-2 line-clamp-2">
@@ -333,16 +299,12 @@
   <!-- ==========================================
        FOOTER
        ========================================== -->
-  <footer class="mt-auto border-t border-dark-border bg-dark-bg/90 backdrop-blur-md relative z-10">
+  <footer class="mt-auto border-t border-dark-border bg-dark-bg/90 relative z-10">
     <div class="max-w-6xl mx-auto px-4 py-8">
       <div class="flex flex-col md:flex-row justify-between items-center gap-4">
         <div class="flex items-center gap-2">
-          <span class="font-heading font-bold text-sm chrome-text italic tracking-widest">new ESSENTIAL</span>
-          <span class="text-chrome-dark text-xs">© 2026. ALL RIGHTS RESERVED.</span>
-        </div>
-        <div class="flex gap-4">
-          <a href="#" class="social-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-          <a href="#" class="social-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <span class="font-heading font-bold text-sm italic tracking-widest">new ESSENTIAL</span>
+          <span class="text-xs">© 2026. ALL RIGHTS RESERVED.</span>
         </div>
       </div>
     </div>

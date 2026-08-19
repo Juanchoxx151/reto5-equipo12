@@ -1,23 +1,5 @@
-/* ── Tarjetas de Producto ── */
-.product-card {
-  background: #0a0a0e;
-  border: 1px solid #2a2a35;
-  transition: all 0.35s ease;
-  cursor: pointer;
-  position: relative;
-}
-.product-card:hover {
-  border-color: rgba(0,240,255,0.35);
-  box-shadow: 0 0 18px rgba(0,240,255,0.12), 0 4px 20px rgba(0,0,0,0.6);
-  transform: translateY(-3px);
-}
-.product-card:hover .product-img {
-  transform: scale(1.07); /* Zoom leve a la imagen */
-}
-.product-img {
-  transition: transform 0.6s ease;
-}
-/* ── Íconos y Navegación ── */
+/* 
+/* ── Íconos y Navegación ── 
 .icon-btn { transition: color 0.25s, filter 0.25s; }
 .icon-btn:hover { color: #00f0ff; filter: drop-shadow(0 0 6px rgba(0,240,255,0.6)); }
 
@@ -27,7 +9,7 @@
 .nav-link { transition: color 0.2s; color: #1a1a1a; font-weight: 700; }
 .nav-link:hover { color: #000; text-decoration: underline; }
 
-/* ── Botones de Talle Interactivas ── */
+/* ── Botones de Talle Interactivas ── 
 .size-btn {
   position: relative;
   border-radius: 2px;
@@ -54,8 +36,8 @@
   cursor: not-allowed;
 }
 
-/* ── Botón Call To Action (Animado) */
-.cta-btn {
+/* ── Botón Call To Action (Animado) 
+.boton-cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -73,16 +55,11 @@
   cursor: pointer;
   transition: all 0.3s ease;
   text-decoration: none;
-  animation: neon-pulse 2.5s ease-in-out infinite; /* Llama a la animación */
 }
 
-.cta-btn:hover {
+.boton-cta:hover {
   background: rgba(0,240,255,0.12);
   box-shadow: 0 0 18px rgba(0,240,255,0.55), inset 0 0 12px rgba(0,240,255,0.1);
 }
 
-@keyframes neon-pulse {
-  0%, 100% { box-shadow: 0 0 8px rgba(0,240,255,0.35), inset 0 0 8px rgba(0,240,255,0.07); }
-  50%       { box-shadow: 0 0 18px rgba(0,240,255,0.6), inset 0 0 14px rgba(0,240,255,0.12); }
-}
-
+/*

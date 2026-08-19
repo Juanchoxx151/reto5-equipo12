@@ -72,18 +72,18 @@
       </div>
     </div>
 
-    <!-- Barra de Navegación Metálica -->
+    <!-- Barra de Navegación -->
     <nav class="bg-gray-400 relative z-10">
       <div class="max-w-6xl mx-auto px-4">
         <ul class="flex flex-wrap items-center justify-center py-2.5 gap-2 md:gap-0">
-          <li><a href="index.html" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">HOME</a></li>
+          <li><a href="index.html" class="text-gray-950 font-bold hover:underline font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">HOME</a></li>
           <li class="text-gray-600 font-light text-lg select-none hidden md:block">|</li>
           
           <!-- Menú Desplegable CATALOGO — hover en desktop, click nativo en mobile (SIN JS) -->
           <li class="relative group">
             <!-- Checkbox oculto que controla el estado de abierto/cerrado al hacer click -->
             <input type="checkbox" id="catalogo-toggle" class="peer hidden">
-            <label for="catalogo-toggle" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em] flex items-center gap-1 cursor-pointer select-none">
+            <label for="catalogo-toggle" class="text-gray-950 font-bold hover:underline font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em] flex items-center gap-1 cursor-pointer select-none">
               CATALOGO
             </label>
             <!-- Dropdown: visible al hacer hover (group-hover) O al tocar/cliquear (peer-checked) -->
@@ -98,16 +98,15 @@
           </li>
           
           <li class="text-gray-600 font-light text-lg select-none hidden md:block">|</li>
-          <li><a href="new_drops.html" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">NEW DROPS</a></li>
+          <li><a href="new_drops.html" class="text-gray-950 font-bold hover:underline font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">NEW DROPS</a></li>
           <li class="text-gray-600 font-light text-lg select-none hidden md:block">|</li>
-          <li><a href="quienes_somos.html" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">NOSOTROS</a></li>
+          <li><a href="quienes_somos.html" class="text-gray-950 font-bold hover:underline font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">NOSOTROS</a></li>
           <li class="text-gray-600 font-light text-lg select-none hidden md:block">|</li>
-          <li><a href="contacto.html" class="nav-link font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">CONTACTO</a></li>
+          <li><a href="contacto.html" class="text-gray-950 font-bold hover:underline font-heading text-xs md:text-sm px-3 md:px-6 tracking-[0.18em]">CONTACTO</a></li>
         </ul>
       </div>
     </nav>
   </header>
-
 
   <!-- ==========================================
        CONTENIDO PRINCIPAL
@@ -118,12 +117,16 @@
     <section id="catalogo" class="max-w-6xl mx-auto px-4 md:px-6 pb-20">
       <h1 class="hero-heading text-center mb-10">NEW DROPS</h1>
       
-      <!-- Barra de Filtros Estática -->
+      <!-- Sección Catálogo (Filtros y Grilla) -->
+    <section id="catalogo" class="max-w-6xl mx-auto px-4 py-10">
       <div class="w-full mb-8">
-        <div class="w-full chrome-filter px-4 py-3 flex items-center">
+        <!-- Título de la barra -->
+        <div class=" bg-gray-400 w-full px-4 py-3 flex items-center">
           <span class="font-accent font-bold tracking-widest text-gray-900 uppercase">FILTROS</span>
         </div>
+        <!-- Panel de filtros siempre desplegado, 3 columnas en tablet/PC -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
+
           <!-- Filtro: Categoría -->
           <div class="bg-dark-card border border-dark-border px-4 py-3">
             <p class="font-accent font-bold text-sm tracking-wider text-chrome-light uppercase mb-3">Categoría</p>
@@ -152,13 +155,10 @@
             <p class="font-accent font-bold text-sm tracking-wider text-chrome-light uppercase mb-3">Drops</p>
             <div class="space-y-2">
               <label class="flex items-center gap-2 cursor-pointer group">
-                <input type="checkbox" class="accent-neon-cyan w-3.5 h-3.5" checked>
-                <span class="text-sm text-[#00f0ff] font-body">Drop 01</span>
-              </label>
-              <label class="flex items-center gap-2 cursor-pointer group">
                 <input type="checkbox" class="accent-neon-cyan w-3.5 h-3.5">
-                <span class="text-sm text-chrome-light group-hover:text-[#00f0ff] font-body">Cyber-Core</span>
+                <span class="text-sm text-chrome-light group-hover:text-[#00f0ff] font-body">Drop 01</span>
               </label>
+          
             </div>
           </div>
 
@@ -168,16 +168,12 @@
             <div class="space-y-2">
               <label class="flex items-center gap-2 cursor-pointer group">
                 <input type="checkbox" class="accent-neon-cyan w-3.5 h-3.5">
-                <span class="text-sm text-chrome-light group-hover:text-[#00f0ff] font-body">Black</span>
-              </label>
-              <label class="flex items-center gap-2 cursor-pointer group">
-                <input type="checkbox" class="accent-neon-cyan w-3.5 h-3.5">
-                <span class="text-sm text-chrome-light group-hover:text-[#00f0ff] font-body">Silver</span>
+                <span class="text-sm text-chrome-light group-hover:text-[#00f0ff] font-body">Negro</span>
               </label>
             </div>
           </div>
+
         </div>
-      </div>
 
       <!-- SECCIÓN: GRILLA DE 4 PRODUCTOS ESTÁTICOS -->
       <div class="w-full relative z-10">
