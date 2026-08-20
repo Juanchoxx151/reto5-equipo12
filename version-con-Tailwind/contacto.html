@@ -26,7 +26,6 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body class="bg-dark-bg text-chrome-light min-h-screen w-full relative flex flex-col font-body">
 
@@ -42,23 +41,23 @@
       <!-- Logo Central -->
       <div class="flex-1 flex justify-center">
         <a href="index.html" class="block">
-          <img src="./img/logo.png" alt="NEW ESSENTIAL — sentí la esencia" class="h-24 md:h-24 w-auto object-contain logo-glow" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <img src="./img/logo.png" alt="NEW ESSENTIAL — sentí la esencia" class="h-24 md:h-24 w-auto object-contain">
           
         </a>
       </div>
 
       <!-- Íconos de Acción (Derecha) — ml-auto los fija al extremo derecho en mobile y desktop -->
       <div class="flex items-center gap-5 ml-auto">
-        <button class="icon-btn flex flex-col items-center gap-0.5 text-chrome-mid " aria-label="Buscar">
+        <button class="flex flex-col items-center gap-0.5 text-chrome-mid " aria-label="Buscar">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
           <span class="text-[9px] font-heading tracking-widest hidden md:block">SEARCH</span>
         </button>
-        <button class="icon-btn flex flex-col items-center gap-0.5 text-chrome-mid" aria-label="Perfil">
+        <button class="flex flex-col items-center gap-0.5 text-chrome-mid" aria-label="Perfil">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           <span class="text-[9px] font-heading tracking-widest hidden md:block">PROFILE</span>
         </button>
         
-        <button class="cart-icon-btn icon-btn flex flex-col items-center gap-0.5 text-chrome-mid relative" aria-label="Carrito">
+        <button class="flex flex-col items-center gap-0.5 text-chrome-mid relative" aria-label="Carrito">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
           <span class="text-[9px] font-heading tracking-widest hidden md:block">CART</span>
           <span id="header-cart-badge" class=" absolute -top-1 -right-2 w-4 h-4 rounded-full bg-neon-cyan text-dark-bg text-[9px] font-bold flex items-center justify-center leading-none">0</span>
@@ -111,7 +110,7 @@
 
       <!-- FORMULARIO ESTÁTICO HTML -->
       <!-- El formulario está diseñado para integrarse con un servicio externo como Formspree o Netlify Forms -->
-      <div class="bg-dark-card border border-dark-border p-8 scanlines">
+      <div class="bg-dark-card border border-dark-border p-8">
         <form action="#" method="POST" class="space-y-6">
 
           <!-- CAMPO: NOMBRE -->
@@ -124,7 +123,7 @@
               id="nombre"
               name="nombre"
               placeholder="INGRESÁ TU NOMBRE..."
-              class="w-full bg-dark-bg border border-dark-border focus:border-[#00f0ff] text-chrome-light p-3 outline-none transition-colors font-body text-sm"
+              class="w-full bg-dark-bg border border-dark-border focus:border-neon-cyan text-chrome-light p-3 outline-none transition-colors font-body text-sm"
             >
           </div>
 
@@ -157,7 +156,7 @@
           </div>
 
           <!-- BOTÓN DE ENVÍO -->
-          <button type="submit" class="cta-btn w-full flex items-center justify-center gap-3">
+          <button type="submit" class="w-full flex items-center justify-center gap-3">
             ENVIAR TRANSMISIÓN
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
           </button>
