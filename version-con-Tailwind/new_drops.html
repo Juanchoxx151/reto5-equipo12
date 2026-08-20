@@ -17,7 +17,7 @@
       theme: {
         extend: {
           colors: {
-            neon: { cyan: '#00f0ff', green: '#00ffcc' },
+            neon: { cyan: '#00f0ff'},
             dark: { bg: '#050507', card: '#0a0a0e', surface: '#111118', border: '#1e1e2a' },
             chrome: { light: '#e4e4e7', mid: '#a1a1aa', dark: '#52525b' }
           },
@@ -115,7 +115,7 @@
 
     <!-- Sección Catálogo (Filtros y Grilla) -->
     <section id="catalogo" class="max-w-6xl mx-auto px-4 md:px-6 pb-20">
-      <h1 class="hero-heading text-center mb-10">NEW DROPS</h1>
+      <h1 class="font-heading font-bold text-5xl text-center mb-5 ">NEW DROPS</h1>
       
       <!-- Sección Catálogo (Filtros y Grilla) -->
     <section id="catalogo" class="max-w-6xl mx-auto px-4 py-10">
@@ -128,7 +128,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
 
           <!-- Filtro: Categoría -->
-          <div class="bg-dark-card border border-dark-border px-4 py-3">
+          <div class="bg-dark-card border border-dark-border px-4 py-3 mb-3">
             <p class="font-accent font-bold text-sm tracking-wider text-chrome-light uppercase mb-3">Categoría</p>
             <div class="space-y-2">
               <label class="flex items-center gap-2 cursor-pointer group">
@@ -151,7 +151,7 @@
           </div>
 
           <!-- Filtro: Drops -->
-          <div class="bg-dark-card border border-dark-border px-4 py-3">
+          <div class="bg-dark-card border border-dark-border px-4 py-3 mb-3">
             <p class="font-accent font-bold text-sm tracking-wider text-chrome-light uppercase mb-3">Drops</p>
             <div class="space-y-2">
               <label class="flex items-center gap-2 cursor-pointer group">
@@ -163,7 +163,7 @@
           </div>
 
           <!-- Filtro: Color -->
-          <div class="bg-dark-card border border-dark-border px-4 py-3">
+          <div class="bg-dark-card border border-dark-border px-4 py-3 mb-3">
             <p class="font-accent font-bold text-sm tracking-wider text-chrome-light uppercase mb-3">Color</p>
             <div class="space-y-2">
               <label class="flex items-center gap-2 cursor-pointer group">
@@ -312,21 +312,14 @@
     </section>
   </main>
 
-  <!-- ==========================================
-       FOOTER
-       ========================================== -->
-  <footer class="mt-auto border-t border-dark-border bg-dark-bg/90 backdrop-blur-md relative z-10">
-    <div class="max-w-6xl mx-auto px-4 py-8">
-      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-        <div class="flex items-center gap-2">
-          <span class="font-heading font-bold text-sm chrome-text italic tracking-widest">new ESSENTIAL</span>
-          <span class="text-chrome-dark text-xs">© 2026. ALL RIGHTS RESERVED.</span>
-        </div>
-        <div class="flex gap-4">
-          <a href="#" class="social-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-          <a href="#" class="social-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-        </div>
+  <!-- PIE DE PÁGINA -->
+  <footer class="mt-auto border-t border-dark-border bg-dark-bg/90 relative z-10">
+    <div class="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row justify-center items-center gap-4 text-center">
+      <div class="flex items-center gap-2">
+        <span class="font-heading font-bold text-sm italic tracking-widest">new ESSENTIAL</span>
+        <span class="text-chrome-dark text-xs">© 2026. ALL RIGHTS RESERVED.</span>
       </div>
+      
     </div>
   </footer>
 
