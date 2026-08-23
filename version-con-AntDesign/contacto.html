@@ -4,347 +4,252 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="New Essential — Contacto. Escribinos para consultas de disponibilidad y pedidos.">
-  <title>Contacto | New Essential (Ant Design)</title>
+  <title>Contacto | New Essential</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Michroma&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <!-- Tipografía (igual que la versión Tailwind) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.24.16/antd.dark.min.css">
+  <!-- React + ReactDOM (CDN, versiones fijas y estables) -->
+  <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js" crossorigin></script>
 
-  <style>
-    :root {
-      --bg-dark: #050507;
-      --bg-card: #0a0a0e;
-      --border-dark: #1e1e2a;
-      --neon-cyan: #00f0ff;
-      --chrome-light: #e4e4e7;
-      --chrome-mid: #a1a1aa;
-      --chrome-dark: #52525b;
-    }
+  <!-- dayjs: requerido por AntDesign -->
+  <script src="https://unpkg.com/dayjs@1.11.10/dayjs.min.js"></script>
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <!-- AntDesign (CDN, UMD, versión fija). No carga ningún .css — AntDesign v5 inyecta
+       sus propios estilos vía JS (CSS-in-JS), por eso esta versión no necesita
+       hoja de estilos propia. -->
+  <script src="https://unpkg.com/antd@5.17.0/dist/antd.min.js"></script>
 
-    html, body {
-      width: 100%;
-      min-height: 100vh;
-      background-color: var(--bg-dark);
-      color: var(--chrome-light);
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-    }
-
-    .font-heading { font-family: 'Michroma', 'Orbitron', sans-serif; }
-    .font-accent { font-family: 'Rajdhani', sans-serif; }
-
-    .container-custom { width: 100%; max-width: 1152px; margin: 0 auto; padding: 0 16px; }
-
-    .cyber-bg { position: fixed; inset: 0; z-index: 0; opacity: 0.15; pointer-events: none; overflow: hidden; }
-    .cyber-bg svg { width: 100%; height: 100%; object-fit: cover; }
-
-    .chrome-bg {
-      background: linear-gradient(180deg, #6b6b6b 0%, #b0b0b0 15%, #e8e8e8 30%, #f5f5f5 45%, #d0d0d0 60%, #9a9a9a 75%, #707070 90%, #555 100%);
-      border-top: 1px solid rgba(255,255,255,0.55);
-      border-bottom: 1px solid rgba(0,0,0,0.5);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.8);
-    }
-    .chrome-text {
-      background: linear-gradient(180deg, #fff 0%, #c0c0c0 50%, #808080 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .logo-glow {
-      filter: brightness(1.3) saturate(1.4) drop-shadow(0 0 10px rgba(0,240,255,0.55));
-      max-height: 80px;
-      width: auto;
-      object-fit: contain;
-    }
-    @media (min-width: 768px) { .logo-glow { max-height: 96px; } }
-
-    .nav-list { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; list-style: none; gap: 4px; padding: 6px 0; }
-
-    .nav-link-custom {
-      color: #050507 !important;
-      text-decoration: none;
-      font-size: 11px;
-      letter-spacing: 1.5px;
-      font-weight: 900;
-      padding: 8px 12px;
-      transition: all 0.2s ease-in-out;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-    @media (min-width: 768px) {
-      .nav-link-custom { font-size: 13px; letter-spacing: 2px; padding: 10px 18px; }
-    }
-    .nav-link-custom:hover { color: #000 !important; text-shadow: 0 0 8px rgba(0,240,255,0.8); }
-
-    .nav-separator { color: #666; user-select: none; font-size: 14px; }
-
-    .dropdown-container { position: relative; }
-    .dropdown-menu-pure {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      min-width: 170px;
-      max-width: calc(100vw - 32px);
-      z-index: 100;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.8);
-    }
-    .dropdown-container:hover .dropdown-menu-pure,
-    .dropdown-container:focus-within .dropdown-menu-pure { display: block; }
-
-    .dropdown-item {
-      display: block;
-      padding: 10px 16px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 11px;
-      font-weight: bold;
-      color: #111 !important;
-      text-decoration: none;
-      border-bottom: 1px solid rgba(255,255,255,0.2);
-      transition: background 0.2s;
-    }
-    .dropdown-item:last-child { border-bottom: none; }
-    .dropdown-item:hover { background: rgba(255,255,255,0.3); }
-
-    .icon-btn {
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      color: var(--chrome-mid);
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2px;
-      transition: color 0.3s;
-      padding: 4px;
-    }
-    .icon-btn:hover { color: var(--neon-cyan); }
-    .icon-label { font-size: 8px; letter-spacing: 1px; }
-
-    .cta-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: 100%;
-      background-color: transparent;
-      color: var(--neon-cyan) !important;
-      border: 1px solid var(--neon-cyan);
-      padding: 14px 24px;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
-      font-size: 14px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .cta-btn:hover { background-color: var(--neon-cyan); color: var(--bg-dark) !important; box-shadow: 0 0 15px rgba(0,240,255,0.4); }
-
-    .ant-layout { background: transparent !important; }
-    .ant-layout-header { background: var(--bg-dark) !important; padding: 0 !important; height: auto !important; line-height: normal !important; }
-    .ant-layout-content { position: relative; z-index: 10; padding: 48px 16px 80px; max-width: 672px; margin: 0 auto; width: 100%; }
-    .ant-layout-footer { background: rgba(5,5,7,0.95) !important; border-top: 1px solid var(--border-dark); padding: 24px 16px !important; color: var(--chrome-mid); }
-
-    .contact-title { font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 900; text-align: center; margin-bottom: 48px; letter-spacing: 2px; color: var(--chrome-light); }
-
-    .contact-card { background: var(--bg-card); border: 1px solid var(--border-dark); padding: 32px; }
-
-    .ant-form-item { margin-bottom: 20px; }
-    .ant-form-item:last-child { margin-bottom: 0; }
-    .contact-label {
-      font-family: 'Orbitron', 'Michroma', sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      color: var(--chrome-light);
-      text-transform: uppercase;
-      margin-bottom: 8px;
-      display: block;
-    }
-
-    .ant-input, textarea.ant-input {
-      background: var(--bg-dark) !important;
-      border: 1px solid var(--border-dark) !important;
-      color: var(--chrome-light) !important;
-      border-radius: 0 !important;
-      width: 100%;
-      font-size: 14px !important;
-      padding: 12px 14px !important;
-      font-family: 'Inter', sans-serif !important;
-      transition: border-color 0.3s ease !important;
-    }
-    .ant-input:focus, textarea.ant-input:focus {
-      border-color: var(--neon-cyan) !important;
-      box-shadow: 0 0 8px rgba(0,240,255,0.3) !important;
-      outline: none;
-    }
-    .ant-input::placeholder, textarea.ant-input::placeholder { color: #52525b !important; }
-    textarea.ant-input { resize: none; }
-
-    .footer-row { row-gap: 12px; }
-    .footer-brand { display: flex; align-items: center; gap: 8px; justify-content: center; }
-    .footer-brand span:first-child { font-style: italic; font-weight: bold; font-size: 13px; letter-spacing: 2px; }
-    .footer-brand span:last-child { color: var(--chrome-dark); font-size: 11px; }
-    .footer-social { display: flex; gap: 16px; justify-content: center; }
-    @media (min-width: 768px) {
-      .footer-brand { justify-content: flex-start; }
-      .footer-social { justify-content: flex-end; }
-    }
-    .social-icon { color: var(--chrome-mid); transition: color 0.3s; }
-    .social-icon:hover { color: var(--neon-cyan); }
-  </style>
+  <!-- No hay <link> a estilos.css: la maquetación completa se resuelve con componentes
+       y el sistema de grillas (Row/Col) de AntDesign, no con CSS propio.
+       Tampoco se usa Babel: el JSX se reemplaza por React.createElement directo,
+       así el navegador ejecuta el JS tal cual, sin traducirlo en vivo. -->
 </head>
 <body>
 
-  <div class="cyber-bg" aria-hidden="true">
-    <svg viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" fill="none" stroke="white" stroke-width="0.5">
-      <g>
-        <line x1="0" y1="900" x2="250" y2="0"/><line x1="50" y1="900" x2="280" y2="0"/>
-        <line x1="100" y1="900" x2="310" y2="0"/>
-      </g>
-      <g>
-        <line x1="1400" y1="900" x2="1150" y2="0"/><line x1="1350" y1="900" x2="1120" y2="0"/>
-      </g>
-    </svg>
-  </div>
+  <div id="root"></div>
 
-  <div class="ant-layout">
+  <script>
+    const e = React.createElement;
+    const { ConfigProvider, theme, Layout, Row, Col, Menu, Badge, Space,
+            Typography, Form, Input, Button, Grid } = antd;
+    const { Header, Content, Footer } = Layout;
+    const { Title, Text } = Typography;
 
-    <header class="ant-layout-header" style="position: sticky; top: 0; z-index: 50; width: 100%;">
+    // ---- Íconos como SVG (los mismos trazos que la versión Tailwind) ----
+    function IconSearch() {
+      return e('svg', { width: 20, height: 20, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2 },
+        e('circle', { cx: 11, cy: 11, r: 8 }),
+        e('path', { d: 'm21 21-4.35-4.35' })
+      );
+    }
+    function IconUser() {
+      return e('svg', { width: 20, height: 20, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2 },
+        e('path', { d: 'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2' }),
+        e('circle', { cx: 12, cy: 7, r: 4 })
+      );
+    }
+    function IconCart() {
+      return e('svg', { width: 20, height: 20, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2 },
+        e('path', { d: 'M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z' }),
+        e('line', { x1: 3, y1: 6, x2: 21, y2: 6 }),
+        e('path', { d: 'M16 10a4 4 0 0 1-8 0' })
+      );
+    }
+    function IconArrow() {
+      return e('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2 },
+        e('polyline', { points: '9 18 15 12 9 6' })
+      );
+    }
 
-      <div style="border-bottom: 1px solid var(--border-dark);">
-        <div class="container-custom" style="padding: 10px 0;">
-          <div class="ant-row ant-row-middle ant-row-space-between">
+    // Paleta equivalente a la definida en tailwind.config del sitio
+    const PALETTE = {
+      neonCyan: '#00f0ff',
+      bg: '#050507',
+      card: '#0a0a0e',
+      border: '#1e1e2a',
+      chromeLight: '#e4e4e7',
+      chromeMid: '#a1a1aa',
+      chromeDark: '#52525b',
+    };
 
-            <div class="ant-col ant-col-xs-0 ant-col-sm-0 ant-col-md-6"></div>
+    const catalogoItems = [
+      { key: 'remeras', label: e('a', { href: 'index.html' }, 'Remeras') },
+      { key: 'pantalones', label: e('a', { href: 'index.html' }, 'Pantalones') },
+      { key: 'buzos', label: e('a', { href: 'index.html' }, 'Buzos') },
+      { key: 'gorras', label: e('a', { href: 'index.html' }, 'Gorras') },
+    ];
 
-            <div class="ant-col ant-col-xs-14 ant-col-sm-14 ant-col-md-12" style="text-align: center;">
-              <a href="index.html" style="display: inline-block;">
-                <img src="./img/logo.png" alt="NEW ESSENTIAL — sentí la esencia" class="logo-glow">
-              </a>
-            </div>
+    const menuItems = [
+      { key: 'home', label: e('a', { href: 'index.html' }, 'HOME') },
+      { key: 'catalogo', label: 'CATALOGO', children: catalogoItems },
+      { key: 'new_drops', label: e('a', { href: 'new_drops.html' }, 'NEW DROPS') },
+      { key: 'nosotros', label: e('a', { href: 'quienes_somos.html' }, 'NOSOTROS') },
+      { key: 'contacto', label: e('a', { href: 'contacto.html' }, 'CONTACTO') },
+    ];
 
-            <div class="ant-col ant-col-xs-10 ant-col-sm-10 ant-col-md-6" style="display: flex; justify-content: flex-end; align-items: center; gap: 12px;">
-              <button class="icon-btn" aria-label="Buscar">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-                <span class="font-heading icon-label">SEARCH</span>
-              </button>
+    function SiteHeader() {
+      const screens = Grid.useBreakpoint();
 
-              <button class="icon-btn" aria-label="Perfil">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                <span class="font-heading icon-label">PROFILE</span>
-              </button>
+      function actionButton(iconEl, labelText) {
+        return e(Space, { direction: 'vertical', size: 2, align: 'center' },
+          e(Button, { type: 'text', shape: 'circle', icon: iconEl, style: { color: PALETTE.chromeMid } }),
+          screens.md ? e(Text, {
+            style: { fontFamily: "'Orbitron', sans-serif", fontSize: 9, letterSpacing: 2, color: PALETTE.chromeMid }
+          }, labelText) : null
+        );
+      }
 
-              <button class="icon-btn" style="position: relative;" aria-label="Carrito">
-                <span class="ant-badge" style="position: absolute; top: -4px; right: -4px;">
-                  <span class="ant-badge-count" style="background-color: var(--neon-cyan); color: var(--bg-dark); font-size: 9px; font-weight: bold; min-width: 14px; height: 14px; line-height: 14px;">0</span>
-                </span>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-                <span class="font-heading icon-label">CART</span>
-              </button>
-            </div>
+      return e(Header, {
+        style: {
+          position: 'sticky', top: 0, zIndex: 30, width: '100%', height: 'auto',
+          padding: 0, background: PALETTE.bg, borderBottom: `1px solid ${PALETTE.border}`, lineHeight: 'normal'
+        }
+      },
+        e(Row, { align: 'middle', style: { padding: '10px 16px' } },
+          e(Col, { xs: 0, md: 6 }),
+          e(Col, { xs: 16, md: 12, style: { textAlign: 'center' } },
+            e('a', { href: 'index.html' },
+              e('img', {
+                src: './img/logo.png',
+                alt: 'NEW ESSENTIAL — sentí la esencia',
+                style: { height: 88, width: 'auto', objectFit: 'contain' }
+              })
+            )
+          ),
+          e(Col, { xs: 8, md: 6 },
+            e(Row, { justify: 'end', gutter: 16 },
+              e(Col, null, actionButton(e(IconSearch), 'SEARCH')),
+              e(Col, null, actionButton(e(IconUser), 'PROFILE')),
+              e(Col, null,
+                e(Badge, { count: 0, showZero: true, color: PALETTE.neonCyan, offset: [-4, 4] },
+                  actionButton(e(IconCart), 'CART')
+                )
+              )
+            )
+          )
+        ),
+        e('div', { style: { background: PALETTE.chromeMid, padding: '10px 0' } },
+          e(Menu, {
+            mode: 'horizontal',
+            selectedKeys: ['contacto'],
+            items: menuItems,
+            style: {
+              justifyContent: 'center',
+              background: 'transparent',
+              borderBottom: 'none',
+              fontFamily: "'Orbitron', sans-serif",
+              fontWeight: 700,
+              fontSize: 15,
+              letterSpacing: '0.18em',
+            }
+          })
+        )
+      );
+    }
 
-          </div>
-        </div>
-      </div>
+    function ContactoForm() {
+      const [form] = Form.useForm();
 
-      <nav class="chrome-bg" aria-label="Navegación principal">
-        <div class="container-custom">
-          <ul class="nav-list">
-            <li><a href="index.html" class="font-heading nav-link-custom">HOME</a></li>
-            <li class="nav-separator" aria-hidden="true">|</li>
+      function onFinish(values) {
+        console.log('Transmisión enviada:', values);
+      }
 
-            <li class="dropdown-container">
-              <a href="index.html" class="font-heading nav-link-custom">
-                CATALOGO
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-              </a>
-              <div class="dropdown-menu-pure chrome-filter">
-                <a href="index.html" class="dropdown-item">REMERAS</a>
-                <a href="index.html" class="dropdown-item">PANTALONES</a>
-                <a href="index.html" class="dropdown-item">MYSTERY BOX</a>
-                <a href="index.html" class="dropdown-item">BUZOS</a>
-                <a href="index.html" class="dropdown-item">GORRAS</a>
-              </div>
-            </li>
+      function fieldLabel(text) {
+        return e('span', {
+          style: { fontFamily: "'Orbitron', sans-serif", fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase' }
+        }, text);
+      }
 
-            <li class="nav-separator" aria-hidden="true">|</li>
-            <li><a href="new_drops.html" class="font-heading nav-link-custom">NEW DROPS</a></li>
-            <li class="nav-separator" aria-hidden="true">|</li>
-            <li><a href="quienes_somos.html" class="font-heading nav-link-custom">NOSOTROS</a></li>
-            <li class="nav-separator" aria-hidden="true">|</li>
-            <li><a href="contacto.html" class="font-heading nav-link-custom">CONTACTO</a></li>
-          </ul>
-        </div>
-      </nav>
+      return e(Content, { style: { flex: 1, padding: '48px 16px 80px' } },
+        e(Row, { justify: 'center' },
+          e(Col, { xs: 24, sm: 22, md: 16, lg: 12, xl: 10 },
+            e(Title, {
+              level: 1,
+              style: { textAlign: 'center', fontFamily: "'Orbitron', sans-serif", color: PALETTE.chromeLight, marginBottom: 20 }
+            }, 'CONTACTANOS'),
 
-    </header>
+            e('div', { style: { background: PALETTE.card, border: `1px solid ${PALETTE.border}`, padding: 32 } },
+              e(Form, { form: form, layout: 'vertical', onFinish: onFinish, requiredMark: false },
+                e(Form.Item, { name: 'nombre', label: fieldLabel('Nombre Completo') },
+                  e(Input, { placeholder: 'INGRESÁ TU NOMBRE...', size: 'large' })
+                ),
+                e(Form.Item, { name: 'email', label: fieldLabel('E-mail de Contacto') },
+                  e(Input, { type: 'email', placeholder: 'SYS@SERVER.COM', size: 'large' })
+                ),
+                e(Form.Item, { name: 'mensaje', label: fieldLabel('Mensaje') },
+                  e(Input.TextArea, { rows: 5, placeholder: 'INGRESAR TRANSMISIÓN AQUÍ...' })
+                ),
+                e(Form.Item, { style: { marginBottom: 0 } },
+                  e(Button, {
+                    type: 'text', htmlType: 'submit', block: true, size: 'large',
+                    icon: e(IconArrow), iconPosition: 'end',
+                    style: {
+                      background: 'transparent',
+                      border: 'none',
+                      boxShadow: 'none',
+                      color: PALETTE.chromeLight,
+                      fontFamily: "'Orbitron', sans-serif",
+                      fontWeight: 700,
+                      letterSpacing: '0.15em',
+                      height: 48,
+                    }
+                  }, 'ENVIAR TRANSMISIÓN')
+                )
+              )
+            )
+          )
+        )
+      );
+    }
 
-    <main class="ant-layout-content">
+    function SiteFooter() {
+      return e(Footer, {
+        style: { textAlign: 'center', background: 'rgba(5,5,7,0.9)', borderTop: `1px solid ${PALETTE.border}` }
+      },
+        e(Space, { size: 8 },
+          e(Text, {
+            style: { fontFamily: "'Orbitron', sans-serif", fontWeight: 700, fontStyle: 'italic', letterSpacing: 2, color: PALETTE.chromeLight }
+          }, 'new ESSENTIAL'),
+          e(Text, { style: { color: PALETTE.chromeDark, fontSize: 12 } }, '© 2026. ALL RIGHTS RESERVED.')
+        )
+      );
+    }
 
-      <h1 class="font-heading contact-title">CONTACTANOS</h1>
+    function App() {
+      return e(ConfigProvider, {
+        theme: {
+          algorithm: theme.darkAlgorithm,
+          token: {
+            colorPrimary: PALETTE.neonCyan,
+            colorBgBase: PALETTE.bg,
+            colorBgContainer: PALETTE.card,
+            colorBgLayout: PALETTE.bg,
+            colorBorder: PALETTE.border,
+            colorText: PALETTE.chromeLight,
+            colorTextSecondary: PALETTE.chromeMid,
+            colorTextPlaceholder: PALETTE.chromeDark,
+            fontFamily: "'Inter', sans-serif",
+            borderRadius: 0,
+          },
+          components: {
+            Menu: { itemColor: '#0a0a0a', itemHoverColor: '#000000', horizontalItemSelectedColor: '#000000' },
+            Layout: { headerBg: PALETTE.bg, footerBg: 'transparent', bodyBg: PALETTE.bg },
+          },
+        }
+      },
+        e(Layout, { style: { minHeight: '100vh', background: PALETTE.bg } },
+          e(SiteHeader),
+          e(ContactoForm),
+          e(SiteFooter)
+        )
+      );
+    }
 
-      <div class="contact-card">
-        <form action="#" method="POST">
-
-          <div class="ant-form-item">
-            <label for="nombre" class="contact-label">Nombre Completo</label>
-            <input type="text" id="nombre" name="nombre" class="ant-input" placeholder="INGRESÁ TU NOMBRE..." required>
-          </div>
-
-          <div class="ant-form-item">
-            <label for="email" class="contact-label">E-mail de Contacto</label>
-            <input type="email" id="email" name="email" class="ant-input" placeholder="SYS@SERVER.COM" required>
-          </div>
-
-          <div class="ant-form-item">
-            <label for="mensaje" class="contact-label">Mensaje</label>
-            <textarea id="mensaje" name="mensaje" rows="5" class="ant-input" placeholder="INGRESAR TRANSMISIÓN AQUÍ..." required></textarea>
-          </div>
-
-          <div class="ant-form-item">
-            <button type="submit" class="cta-btn">
-              ENVIAR TRANSMISIÓN
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-            </button>
-          </div>
-
-        </form>
-      </div>
-
-    </main>
-
-    <footer class="ant-layout-footer">
-      <div class="container-custom">
-        <div class="ant-row ant-row-middle ant-row-space-between footer-row">
-
-          <div class="ant-col ant-col-xs-24 ant-col-sm-24 ant-col-md-12 footer-brand">
-            <span class="font-heading chrome-text">new ESSENTIAL</span>
-            <span>© 2026. ALL RIGHTS RESERVED.</span>
-          </div>
-
-          <div class="ant-col ant-col-xs-24 ant-col-sm-24 ant-col-md-12 footer-social">
-            <a href="#" class="social-icon" aria-label="Facebook">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-            </a>
-            <a href="#" class="social-icon" aria-label="Instagram">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-            </a>
-          </div>
-
-        </div>
-      </div>
-    </footer>
-
-  </div>
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(e(App));
+  </script>
 
 </body>
 </html>
