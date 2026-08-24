@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Essential | Catálogo Oficial</title>
+
+  <!-- Google Fonts: Orbitron & Rajdhani & Inter (carga de fuentes, no es CSS propio) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- React + ReactDOM (CDN, sin NPM, versión fija para evitar builds rotos) -->
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin></script>
+
+  <!-- Ant Design (CDN, sin NPM, versión fija). antd v5 inyecta sus propios estilos por JS: no hace falta ningún .css -->
+  <script src="https://unpkg.com/dayjs@1.11.11/dayjs.min.js"></script>
+  <script src="https://unpkg.com/antd@5.21.6/dist/antd.min.js"></script>
+
+  <!-- Babel Standalone: permite escribir JSX directo en el navegador sin build/NPM -->
+  <script src="https://unpkg.com/@babel/standalone@7.25.6/babel.min.js"></script>
+  
+  <style>
+    /* Clases responsivas para cabecera y navegación */
+    .mobile-menu-btn {
+      display: none !important;
+    }
+    .topbar-spacer {
+      display: block;
+    }
+    .logo-img {
+      height: 96px;
+      width: auto;
+      object-fit: contain;
+      transition: height 0.3s ease;
+    }
+    
+    @media (max-width: 768px) {
+      .mobile-menu-btn {
+        display: flex !important;
+        align-items: center;
+        width: 84px !important;
+      }
+      .topbar-spacer {
+        display: none !important;
+      }
+      .icon-label {
+        display: none !important;
+      }
+      .icons-container {
+        gap: 12px !important;
+        min-width: 84px !important;
+        justify-content: flex-end;
+      }
+      .navbar-container {
+        display: none !important;
+      }
+      .logo-img {
+        height: 56px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel" data-presets="react">
+    const {
+      ConfigProvider, Layout, Menu, Row, Col, Card, Button,
+      Typography, Badge, Checkbox, Space, theme, Drawer
+    } = antd;
+    const { Header, Content, Footer } = Layout;
+
+    // Íconos como SVG inline (evita depender de @ant-design/icons por CDN, que es frágil sin bundler)
+    const SearchOutlined = () => (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" /></svg>
+    );
+    const UserOutlined = () => (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+    );
+    const ShoppingCartOutlined = () => (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" /><line x1="3" y1="6" x2="21" y2="6" /><path d="M16 10a4 4 0 0 1-8 0" /></svg>
+    );
+    const { Title, Text } = Typography;
+
+    // Reset del <body> sin usar CSS: se hace por JS, ya que no hay hoja de estilos propia
+    document.body.style.margin = '0';
+    document.body.style.backgroundColor = '#050507';
+    document.documentElement.style.backgroundColor = '#050507';
+
+    // Paleta y fuentes tomadas 1:1 del tailwind.config.js de la versión Tailwind
+    const COLORS = {
+      neonCyan: '#00f0ff',
+      bg: '#050507',
+      card: '#0a0a0e',
+      surface: '#111118',
+      border: '#1e1e2a',
+      chromeLight: '#e4e4e7',
+      chromeMid: '#a1a1aa',
+      chromeDark: '#52525b',
+    };
+    const FONT_HEADING = "'Orbitron', sans-serif";
+    const FONT_ACCENT = "'Rajdhani', sans-serif";
+    const FONT_BODY = "'Inter', sans-serif";
+
+    const productos = [
+      { img: './img/remera_nueva.png', alt: 'New Essential Remera Oversize Seven Words', nombre: 'NEW ESSENTIAL REMERA OVERSIZE SEVEN WORDS', precio: 'ARS 24.999', link: 'remera-drop.html' },
+      { img: './img/pantalon_nuevo.png', alt: 'New Essential Cargo Seven Words', nombre: 'NEW ESSENTIAL CARGO SEVEN WORDS', precio: 'ARS 39.999', link: 'pantalon-cargo.html' },
+      { img: './img/buzo_nuevo.png', alt: 'New Essential Buzo Seven Words', nombre: 'NEW ESSENTIAL BUZO SEVEN WORDS', precio: 'ARS 34.999', link: 'buzo-oversize.html' },
+      { img: './img/gorra.png', alt: 'New Essential Gorra Seven Words', nombre: 'NEW ESSENTIAL GORRA SEVEN WORDS', precio: 'ARS 14.999', link: 'gorra-trucker.html' },
+    ];
+
+    // ---- Header unificado y responsivo ----
+    function Marca() {
+      return (
+        <a href="index.html">
+          <img src="./img/logo.png" alt="NEW ESSENTIAL — sentí la esencia" className="logo-img" />
+        </a>
+      );
+    }
+
+    const btnIconStyle = {
+      background: 'none', border: 'none', color: COLORS.chromeMid, cursor: 'pointer',
+      display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2,
+    };
+    const iconLabelStyle = { fontFamily: FONT_HEADING, fontSize: 9, letterSpacing: '0.1em' };
+
+    function SiteHeader() {
+      const [visible, setVisible] = React.useState(false);
+
+      const linkStyle = { color: '#030712', fontWeight: 700, textDecoration: 'none' };
+      const menuItems = [
+        { key: 'home', label: <a href="index.html" style={linkStyle}>HOME</a> },
+        {
+          key: 'catalogo', label: <span style={linkStyle}>CATALOGO</span>,
+          children: [
+            { key: 'remeras', label: <a href="index.html">Remeras</a> },
+            { key: 'pantalones', label: <a href="index.html">Pantalones</a> },
+            { key: 'buzos', label: <a href="index.html">Buzos</a> },
+            { key: 'gorras', label: <a href="index.html">Gorras</a> },
+          ],
+        },
+        { key: 'new', label: <a href="new_drops.html" style={linkStyle}>NEW DROPS</a> },
+        { key: 'nosotros', label: <a href="quienes_somos.html" style={linkStyle}>NOSOTROS</a> },
+        { key: 'contacto', label: <a href="contacto.html" style={linkStyle}>CONTACTO</a> },
+      ];
+
+      const mobileMenuItems = [
+        { key: 'home', label: <a href="index.html" style={{ color: COLORS.chromeLight }}>HOME</a> },
+        {
+          key: 'catalogo', label: <span style={{ color: COLORS.chromeLight }}>CATALOGO</span>,
+          children: [
+            { key: 'remeras', label: <a href="index.html" style={{ color: COLORS.chromeLight }}>Remeras</a> },
+            { key: 'pantalones', label: <a href="index.html" style={{ color: COLORS.chromeLight }}>Pantalones</a> },
+            { key: 'buzos', label: <a href="index.html" style={{ color: COLORS.chromeLight }}>Buzos</a> },
+            { key: 'gorras', label: <a href="index.html" style={{ color: COLORS.chromeLight }}>Gorras</a> },
+          ],
+        },
+        { key: 'new', label: <a href="new_drops.html" style={{ color: COLORS.chromeLight }}>NEW DROPS</a> },
+        { key: 'nosotros', label: <a href="quienes_somos.html" style={{ color: COLORS.chromeLight }}>NOSOTROS</a> },
+        { key: 'contacto', label: <a href="contacto.html" style={{ color: COLORS.chromeLight }}>CONTACTO</a> },
+      ];
+
+      return (
+        <Header style={{ position: 'sticky', top: 0, zIndex: 30, background: COLORS.bg, borderBottom: `1px solid ${COLORS.border}`, height: 'auto', lineHeight: 'normal', padding: 0 }}>
+          <div className="topbar-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 16px', height: 'auto' }}>
+            <div className="mobile-menu-btn">
+              <button 
+                onClick={() => setVisible(true)}
+                style={{ background: 'none', border: 'none', color: COLORS.chromeMid, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <line x1="4" y1="12" x2="20" y2="12" />
+                  <line x1="4" y1="6" x2="20" y2="6" />
+                  <line x1="4" y1="18" x2="20" y2="18" />
+                </svg>
+              </button>
+            </div>
+            <div className="topbar-spacer" style={{ width: 128 }} />
+            
+            <div style={{ flex: 1, textAlign: 'center' }}>
+              <Marca />
+            </div>
+            
+            <div className="icons-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 20, minWidth: 128 }}>
+              <button style={btnIconStyle} aria-label="Buscar">
+                <SearchOutlined /><span className="icon-label" style={iconLabelStyle}>SEARCH</span>
+              </button>
+              <button style={btnIconStyle} aria-label="Perfil">
+                <UserOutlined /><span className="icon-label" style={iconLabelStyle}>PROFILE</span>
+              </button>
+              <Badge count={0} showZero color={COLORS.neonCyan} style={{ color: COLORS.bg, fontWeight: 700 }}>
+                <button style={btnIconStyle} aria-label="Carrito">
+                  <ShoppingCartOutlined /><span className="icon-label" style={iconLabelStyle}>CART</span>
+                </button>
+              </Badge>
+            </div>
+          </div>
+
+          <div className="navbar-container">
+            <ConfigProvider theme={{ components: { Menu: {
+                itemColor: '#030712', itemHoverColor: '#000000',
+                horizontalItemSelectedColor: '#000000', itemBg: '#9ca3af',
+                horizontalItemHoverBg: '#9ca3af', fontSize: 14, fontWeightStrong: 700,
+                horizontalItemPaddingInline: 24,
+            } } }}>
+              <div style={{ background: '#9ca3af', padding: '10px 0' }}>
+                <Menu
+                  mode="horizontal"
+                  items={menuItems}
+                  selectable={false}
+                  style={{ justifyContent: 'center', background: 'transparent', fontFamily: FONT_HEADING, letterSpacing: '0.18em', borderBottom: 'none', lineHeight: 'normal' }}
+                />
+              </div>
+            </ConfigProvider>
+          </div>
+
+          <Drawer
+            title={<Text style={{ fontFamily: FONT_HEADING, color: COLORS.chromeLight, letterSpacing: 2 }}>MENU</Text>}
+            placement="left"
+            onClose={() => setVisible(false)}
+            open={visible}
+            styles={{
+              body: { padding: 0, background: COLORS.bg },
+              header: { background: COLORS.bg, borderBottom: `1px solid ${COLORS.border}` }
+            }}
+            width={280}
+          >
+            <ConfigProvider theme={{ components: { Menu: {
+              itemColor: COLORS.chromeLight, itemHoverColor: COLORS.neonCyan,
+              itemSelectedColor: COLORS.neonCyan, itemBg: COLORS.bg,
+              fontSize: 16,
+            } } }}>
+              <Menu
+                mode="inline"
+                items={mobileMenuItems}
+                selectable={false}
+                style={{ background: 'transparent', borderRight: 'none', fontFamily: FONT_HEADING, letterSpacing: '0.1em' }}
+              />
+            </ConfigProvider>
+          </Drawer>
+        </Header>
+      );
+    }
+
+    function FiltroCard({ titulo, opciones }) {
+      return (
+        <Card size="small" title={<Text style={{ fontFamily: FONT_ACCENT, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }}>{titulo}</Text>}>
+          <Space direction="vertical" size={8}>
+            {opciones.map((op) => (
+              <Checkbox key={op}><Text style={{ fontFamily: FONT_BODY }}>{op}</Text></Checkbox>
+            ))}
+          </Space>
+        </Card>
+      );
+    }
+
+    function ProductoCard({ p }) {
+      return (
+        <Badge.Ribbon text="DROP 01" color={COLORS.neonCyan} style={{ color: COLORS.bg, fontFamily: FONT_HEADING, fontSize: 9 }}>
+          <a href={p.link} style={{ display: 'block' }}>
+            <Card
+              hoverable
+              size="small"
+              cover={<img src={p.img} alt={p.alt} loading="lazy" style={{ aspectRatio: '1 / 1', objectFit: 'cover' }} />}
+            >
+              <Card.Meta
+                title={<Text style={{ fontFamily: FONT_HEADING, fontSize: 9, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase', color: COLORS.chromeLight }}>{p.nombre}</Text>}
+                description={<Text style={{ fontFamily: FONT_ACCENT, fontWeight: 700, color: COLORS.neonCyan }}>{p.precio}</Text>}
+              />
+            </Card>
+          </a>
+        </Badge.Ribbon>
+      );
+    }
+
+    function App() {
+      return (
+        <ConfigProvider
+          theme={{
+            algorithm: theme.darkAlgorithm,
+            token: {
+              colorPrimary: COLORS.neonCyan,
+              colorBgBase: COLORS.bg,
+              colorBgContainer: COLORS.card,
+              colorBorder: COLORS.border,
+              colorText: COLORS.chromeLight,
+              colorTextSecondary: COLORS.chromeMid,
+              fontFamily: FONT_BODY,
+            },
+            components: {
+              Layout: {
+                headerBg: COLORS.bg,
+                bodyBg: COLORS.bg,
+                footerBg: COLORS.bg,
+              },
+            },
+          }}
+        >
+          <Layout style={{ minHeight: '100vh' }}>
+
+            {/* HEADER (mismo patrón que buzo/pantalón/remera/etc.) */}
+            <SiteHeader />
+
+            {/* CONTENIDO */}
+            <Content style={{ maxWidth: 1152, margin: '0 auto', width: '100%', padding: '12px 16px 0' }}>
+
+              {/* HERO */}
+              <Card
+                bordered
+                style={{ marginBottom: 24, borderColor: COLORS.border, overflow: 'hidden' }}
+                bodyStyle={{ padding: 0 }}
+              >
+                <Row>
+                  <Col xs={24} md={12} style={{ padding: 24, display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#000' }}>
+                    <Title level={1} style={{ fontFamily: FONT_HEADING, color: COLORS.chromeLight, letterSpacing: 2, marginBottom: 24 }}>
+                      SIETE PALABRAS: E.S.E.N.C.I.A
+                    </Title>
+                    <Button type="primary" ghost size="large" href="#catalogo" style={{ fontFamily: FONT_HEADING, letterSpacing: 3, fontWeight: 600 }}>
+                      VER COLECCIÓN
+                    </Button>
+                  </Col>
+                  <Col xs={24} md={12} style={{ height: 320, position: 'relative' }}>
+                    <video
+                      src="./videos/hero-bg.mp4"
+                      autoPlay loop muted playsInline
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    />
+                  </Col>
+                </Row>
+              </Card>
+
+              {/* FILTROS */}
+              <div id="catalogo" style={{ marginBottom: 32 }}>
+                <div style={{ background: '#9ca3af', padding: '10px 16px', marginBottom: 8 }}>
+                  <Text style={{ fontFamily: FONT_ACCENT, fontWeight: 700, letterSpacing: 3, color: '#0a0a0a', textTransform: 'uppercase' }}>FILTROS</Text>
+                </div>
+                <Row gutter={[16, 16]}>
+                  <Col xs={24} md={8}><FiltroCard titulo="Categoría" opciones={['Remeras', 'Pantalones', 'Buzos', 'Gorras']} /></Col>
+                  <Col xs={24} md={8}><FiltroCard titulo="Drops" opciones={['Drop 01']} /></Col>
+                  <Col xs={24} md={8}><FiltroCard titulo="Color" opciones={['Negro']} /></Col>
+                </Row>
+              </div>
+
+              {/* GRILLA DE PRODUCTOS */}
+              <Row gutter={[24, 24]} style={{ paddingBottom: 40 }}>
+                {productos.map((p) => (
+                  <Col key={p.nombre} xs={12} md={8} lg={6}>
+                    <ProductoCard p={p} />
+                  </Col>
+                ))}
+              </Row>
+            </Content>
+
+            {/* FOOTER */}
+            <Footer style={{ textAlign: 'center', borderTop: `1px solid ${COLORS.border}` }}>
+              <Space>
+                <Text italic strong style={{ fontFamily: FONT_HEADING, letterSpacing: 2 }}>new ESSENTIAL</Text>
+                <Text style={{ color: COLORS.chromeDark, fontSize: 12 }}>© 2026. ALL RIGHTS RESERVED.</Text>
+              </Space>
+            </Footer>
+
+          </Layout>
+        </ConfigProvider>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>

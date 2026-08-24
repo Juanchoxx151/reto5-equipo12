@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="New Essential — Contacto. Escribinos para consultas de disponibilidad y pedidos.">
+  <title>Contacto | New Essential</title>
+
+  <!-- Tipografía (igual que la versión Tailwind) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- React + ReactDOM (CDN, versiones fijas y estables) -->
+  <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js" crossorigin></script>
+
+  <!-- dayjs: requerido por AntDesign -->
+  <script src="https://unpkg.com/dayjs@1.11.10/dayjs.min.js"></script>
+
+  <!-- AntDesign (CDN, UMD, versión fija). No carga ningún .css — AntDesign v5 inyecta
+       sus propios estilos vía JS (CSS-in-JS), por eso esta versión no necesita
+       hoja de estilos propia. -->
+  <script src="https://unpkg.com/antd@5.17.0/dist/antd.min.js"></script>
+
+  <!-- No hay <link> a estilos.css: la maquetación completa se resuelve con componentes
+       y el sistema de grillas (Row/Col) de AntDesign, no con CSS propio.
+       Tampoco se usa Babel: el JSX se reemplaza por React.createElement directo,
+       así el navegador ejecuta el JS tal cual, sin traducirlo en vivo. -->
+  
+  <style>
+    /* Reset básico para evitar el borde blanco del navegador */
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #050507;
+    }
+
+    /* Clases responsivas para cabecera y navegación */
+    .mobile-menu-btn {
+      display: none !important;
+    }
+    .topbar-spacer {
+      display: block;
+    }
+    .logo-img {
+      height: 96px;
+      width: auto;
+      object-fit: contain;
+      transition: height 0.3s ease;
+    }
+    
+    @media (max-width: 768px) {
+      .mobile-menu-btn {
+        display: flex !important;
+        align-items: center;
+        width: 84px !important;
+      }
+      .topbar-spacer {
+        display: none !important;
+      }
+      .icon-label {
+        display: none !important;
+      }
+      .icons-container {
+        gap: 12px !important;
+        min-width: 84px !important;
+        justify-content: flex-end;
+      }
+      .navbar-container {
+        display: none !important;
+      }
+      .logo-img {
+        height: 56px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="root"></div>
+
+  <script>
+    const e = React.createElement;
+    const { ConfigProvider, theme, Layout, Row, Col, Menu, Badge, Space,
+            Typography, Form, Input, Button, Drawer } = antd;
+    const { Header, Content, Footer } = Layout;
+    const { Title, Text } = Typography;
+
+    // ---- Íconos como SVG (los mismos trazos que la versión Tailwind) ----
+    function IconSearch() {
+      return e('svg', { width: 20, height: 20, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2 },
+        e('circle', { cx: 11, cy: 11, r: 8 }),
+        e('path', { d: 'm21 21-4.35-4.35' })
+      );
+    }
+    function IconUser() {
+      return e('svg', { width: 20, height: 20, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2 },
+        e('path', { d: 'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2' }),
+        e('circle', { cx: 12, cy: 7, r: 4 })
+      );
+    }
+    function IconCart() {
+      return e('svg', { width: 20, height: 20, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2 },
+        e('path', { d: 'M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z' }),
+        e('line', { x1: 3, y1: 6, x2: 21, y2: 6 }),
+        e('path', { d: 'M16 10a4 4 0 0 1-8 0' })
+      );
+    }
+    function IconArrow() {
+      return e('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2 },
+        e('polyline', { points: '9 18 15 12 9 6' })
+      );
+    }
+
+    // Paleta equivalente a la definida en tailwind.config del sitio
+    const PALETTE = {
+      neonCyan: '#00f0ff',
+      bg: '#050507',
+      card: '#0a0a0e',
+      border: '#1e1e2a',
+      chromeLight: '#e4e4e7',
+      chromeMid: '#a1a1aa',
+      chromeDark: '#52525b',
+    };
+
+    // ---- Header unificado y responsivo ----
+    function Marca() {
+      return e('a', { href: 'index.html' },
+        e('img', {
+          src: './img/logo.png',
+          alt: 'NEW ESSENTIAL — sentí la esencia',
+          className: 'logo-img'
+        })
+      );
+    }
+
+    const btnIconStyle = {
+      background: 'none', border: 'none', color: PALETTE.chromeMid, cursor: 'pointer',
+      display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2,
+    };
+    const iconLabelStyle = { fontFamily: "'Orbitron', sans-serif", fontSize: 9, letterSpacing: '0.1em' };
+
+    function SiteHeader() {
+      const [visible, setVisible] = React.useState(false);
+
+      const linkStyle = { color: '#030712', fontWeight: 700, textDecoration: 'none' };
+      const menuItems = [
+        { key: 'home', label: e('a', { href: 'index.html', style: linkStyle }, 'HOME') },
+        {
+          key: 'catalogo', label: e('span', { style: linkStyle }, 'CATALOGO'),
+          children: [
+            { key: 'remeras', label: e('a', { href: 'index.html' }, 'Remeras') },
+            { key: 'pantalones', label: e('a', { href: 'index.html' }, 'Pantalones') },
+            { key: 'buzos', label: e('a', { href: 'index.html' }, 'Buzos') },
+            { key: 'gorras', label: e('a', { href: 'index.html' }, 'Gorras') },
+          ],
+        },
+        { key: 'new', label: e('a', { href: 'new_drops.html', style: linkStyle }, 'NEW DROPS') },
+        { key: 'nosotros', label: e('a', { href: 'quienes_somos.html', style: linkStyle }, 'NOSOTROS') },
+        { key: 'contacto', label: e('a', { href: 'contacto.html', style: linkStyle }, 'CONTACTO') },
+      ];
+
+      const mobileMenuItems = [
+        { key: 'home', label: e('a', { href: 'index.html', style: { color: PALETTE.chromeLight } }, 'HOME') },
+        {
+          key: 'catalogo', label: e('span', { style: { color: PALETTE.chromeLight } }, 'CATALOGO'),
+          children: [
+            { key: 'remeras', label: e('a', { href: 'index.html', style: { color: PALETTE.chromeLight } }, 'Remeras') },
+            { key: 'pantalones', label: e('a', { href: 'index.html', style: { color: PALETTE.chromeLight } }, 'Pantalones') },
+            { key: 'buzos', label: e('a', { href: 'index.html', style: { color: PALETTE.chromeLight } }, 'Buzos') },
+            { key: 'gorras', label: e('a', { href: 'index.html', style: { color: PALETTE.chromeLight } }, 'Gorras') },
+          ],
+        },
+        { key: 'new', label: e('a', { href: 'new_drops.html', style: { color: PALETTE.chromeLight } }, 'NEW DROPS') },
+        { key: 'nosotros', label: e('a', { href: 'quienes_somos.html', style: { color: PALETTE.chromeLight } }, 'NOSOTROS') },
+        { key: 'contacto', label: e('a', { href: 'contacto.html', style: { color: PALETTE.chromeLight } }, 'CONTACTO') },
+      ];
+
+      return e(Header, {
+        style: { position: 'sticky', top: 0, zIndex: 30, background: PALETTE.bg, borderBottom: `1px solid ${PALETTE.border}`, height: 'auto', lineHeight: 'normal', padding: 0 }
+      },
+        e('div', { className: 'topbar-container', style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 16px', height: 'auto' } },
+          e('div', { className: 'mobile-menu-btn' },
+            e('button', {
+              onClick: () => setVisible(true),
+              style: { background: 'none', border: 'none', color: PALETTE.chromeMid, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0 }
+            },
+              e('svg', { width: 24, height: 24, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2 },
+                e('line', { x1: 4, y1: 12, x2: 20, y2: 12 }),
+                e('line', { x1: 4, y1: 6, x2: 20, y2: 6 }),
+                e('line', { x1: 4, y1: 18, x2: 20, y2: 18 })
+              )
+            )
+          ),
+          e('div', { className: 'topbar-spacer', style: { width: 128 } }),
+          e('div', { style: { flex: 1, textAlign: 'center' } }, e(Marca)),
+          e('div', { className: 'icons-container', style: { display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 20, minWidth: 128 } },
+            e('button', { style: btnIconStyle, 'aria-label': 'Buscar' },
+              e(IconSearch), e('span', { className: 'icon-label', style: iconLabelStyle }, 'SEARCH')
+            ),
+            e('button', { style: btnIconStyle, 'aria-label': 'Perfil' },
+              e(IconUser), e('span', { className: 'icon-label', style: iconLabelStyle }, 'PROFILE')
+            ),
+            e(Badge, { count: 0, showZero: true, color: PALETTE.neonCyan, style: { color: PALETTE.bg, fontWeight: 700 } },
+              e('button', { style: btnIconStyle, 'aria-label': 'Carrito' },
+                e(IconCart), e('span', { className: 'icon-label', style: iconLabelStyle }, 'CART')
+              )
+            )
+          )
+        ),
+        e('div', { className: 'navbar-container' },
+          e(ConfigProvider, {
+            theme: { components: { Menu: {
+              itemColor: '#030712', itemHoverColor: '#000000',
+              horizontalItemSelectedColor: '#000000', itemBg: '#9ca3af',
+              horizontalItemHoverBg: '#9ca3af', fontSize: 14, fontWeightStrong: 700,
+              horizontalItemPaddingInline: 24,
+            } } }
+          },
+            e('div', { style: { background: '#9ca3af', padding: '10px 0' } },
+              e(Menu, {
+                mode: 'horizontal',
+                items: menuItems,
+                selectable: false,
+                style: { justifyContent: 'center', background: 'transparent', fontFamily: "'Orbitron', sans-serif", letterSpacing: '0.18em', borderBottom: 'none', lineHeight: 'normal' }
+              })
+            )
+          )
+        ),
+        e(Drawer, {
+          title: e(Text, { style: { fontFamily: "'Orbitron', sans-serif", color: PALETTE.chromeLight, letterSpacing: 2 } }, 'MENU'),
+          placement: 'left',
+          onClose: () => setVisible(false),
+          open: visible,
+          styles: {
+            body: { padding: 0, background: PALETTE.bg },
+            header: { background: PALETTE.bg, borderBottom: `1px solid ${PALETTE.border}` }
+          },
+          width: 280
+        },
+          e(ConfigProvider, {
+            theme: { components: { Menu: {
+              itemColor: PALETTE.chromeLight, itemHoverColor: PALETTE.neonCyan,
+              itemSelectedColor: PALETTE.neonCyan, itemBg: PALETTE.bg,
+              fontSize: 16,
+            } } }
+          },
+            e(Menu, {
+              mode: 'inline',
+              items: mobileMenuItems,
+              selectable: false,
+              style: { background: 'transparent', borderRight: 'none', fontFamily: "'Orbitron', sans-serif", letterSpacing: '0.1em' }
+            })
+          )
+        )
+      );
+    }
+
+    function ContactoForm() {
+      const [form] = Form.useForm();
+
+      function onFinish(values) {
+        console.log('Transmisión enviada:', values);
+      }
+
+      function fieldLabel(text) {
+        return e('span', {
+          style: { fontFamily: "'Orbitron', sans-serif", fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase' }
+        }, text);
+      }
+
+      return e(Content, { style: { flex: 1, padding: '48px 16px 80px' } },
+        e(Row, { justify: 'center' },
+          e(Col, { xs: 24, sm: 22, md: 16, lg: 12, xl: 10 },
+            e(Title, {
+              level: 1,
+              style: { textAlign: 'center', fontFamily: "'Orbitron', sans-serif", color: PALETTE.chromeLight, marginBottom: 20 }
+            }, 'CONTACTANOS'),
+
+            e('div', { style: { background: PALETTE.card, border: `1px solid ${PALETTE.border}`, padding: 32 } },
+              e(Form, { form: form, layout: 'vertical', onFinish: onFinish, requiredMark: false },
+                e(Form.Item, { name: 'nombre', label: fieldLabel('Nombre Completo') },
+                  e(Input, { placeholder: 'INGRESÁ TU NOMBRE...', size: 'large' })
+                ),
+                e(Form.Item, { name: 'email', label: fieldLabel('E-mail de Contacto') },
+                  e(Input, { type: 'email', placeholder: 'SYS@SERVER.COM', size: 'large' })
+                ),
+                e(Form.Item, { name: 'mensaje', label: fieldLabel('Mensaje') },
+                  e(Input.TextArea, { rows: 5, placeholder: 'INGRESAR TRANSMISIÓN AQUÍ...' })
+                ),
+                e(Form.Item, { style: { marginBottom: 0 } },
+                  e(Button, {
+                    type: 'text', htmlType: 'submit', block: true, size: 'large',
+                    icon: e(IconArrow), iconPosition: 'end',
+                    style: {
+                      background: 'transparent',
+                      border: 'none',
+                      boxShadow: 'none',
+                      color: PALETTE.chromeLight,
+                      fontFamily: "'Orbitron', sans-serif",
+                      fontWeight: 700,
+                      letterSpacing: '0.15em',
+                      height: 48,
+                    }
+                  }, 'ENVIAR TRANSMISIÓN')
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+
+    function SiteFooter() {
+      return e(Footer, {
+        style: { textAlign: 'center', background: 'rgba(5,5,7,0.9)', borderTop: `1px solid ${PALETTE.border}` }
+      },
+        e(Space, { size: 8 },
+          e(Text, {
+            style: { fontFamily: "'Orbitron', sans-serif", fontWeight: 700, fontStyle: 'italic', letterSpacing: 2, color: PALETTE.chromeLight }
+          }, 'new ESSENTIAL'),
+          e(Text, { style: { color: PALETTE.chromeDark, fontSize: 12 } }, '© 2026. ALL RIGHTS RESERVED.')
+        )
+      );
+    }
+
+    function App() {
+      return e(ConfigProvider, {
+        theme: {
+          algorithm: theme.darkAlgorithm,
+          token: {
+            colorPrimary: PALETTE.neonCyan,
+            colorBgBase: PALETTE.bg,
+            colorBgContainer: PALETTE.card,
+            colorBgLayout: PALETTE.bg,
+            colorBorder: PALETTE.border,
+            colorText: PALETTE.chromeLight,
+            colorTextSecondary: PALETTE.chromeMid,
+            colorTextPlaceholder: PALETTE.chromeDark,
+            fontFamily: "'Inter', sans-serif",
+            borderRadius: 0,
+          },
+          components: {
+            Menu: { itemColor: '#0a0a0a', itemHoverColor: '#000000', horizontalItemSelectedColor: '#000000' },
+            Layout: { headerBg: PALETTE.bg, footerBg: 'transparent', bodyBg: PALETTE.bg },
+          },
+        }
+      },
+        e(Layout, { style: { minHeight: '100vh', background: PALETTE.bg } },
+          e(SiteHeader),
+          e(ContactoForm),
+          e(SiteFooter)
+        )
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(e(App));
+  </script>
+
+</body>
+</html>
