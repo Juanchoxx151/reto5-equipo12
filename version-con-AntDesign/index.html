@@ -1,259 +1,286 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>New Essential | Catálogo Oficial</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="New Essential — Catálogo oficial. Streetwear brutalista Y2K.">
+<title>New Essential | Catálogo Oficial</title>
 
-  <!-- Google Fonts: Orbitron & Rajdhani & Inter (carga de fuentes, no es CSS propio) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<!-- Fuentes (mismas que la versión Tailwind) -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 
-  <!-- React + ReactDOM (CDN, sin NPM, versión fija para evitar builds rotos) -->
-  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin></script>
-
-  <!-- Ant Design (CDN, sin NPM, versión fija). antd v5 inyecta sus propios estilos por JS: no hace falta ningún .css -->
-  <script src="https://unpkg.com/dayjs@1.11.11/dayjs.min.js"></script>
-  <script src="https://unpkg.com/antd@5.21.6/dist/antd.min.js"></script>
-
-  <!-- Babel Standalone: permite escribir JSX directo en el navegador sin build/NPM -->
-  <script src="https://unpkg.com/@babel/standalone@7.25.6/babel.min.js"></script>
+<!-- React -->
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<!-- Dependencia de antd -->
+<script src="https://unpkg.com/dayjs@1/dayjs.min.js"></script>
+<!-- Ant Design (reset propio del framework, no es CSS nuestro) -->
+<link rel="stylesheet" href="https://unpkg.com/antd@5/dist/reset.css">
+<script src="https://unpkg.com/antd@5/dist/antd.min.js"></script>
+<!-- Babel para poder escribir JSX directo en el navegador, sin build -->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
-<body>
-  <div id="root"></div>
+<body style="margin:0;">
+<div id="root"></div>
 
-  <script type="text/babel" data-presets="react">
-    const {
-      ConfigProvider, Layout, Menu, Row, Col, Card, Button,
-      Typography, Badge, Checkbox, Space, Grid, theme
-    } = antd;
-    const { Header, Content, Footer } = Layout;
+<script type="text/babel">
+const { ConfigProvider, theme, Layout, Menu, Badge, Row, Col, Card, Button,
+        Typography, Checkbox, Space } = antd;
+const { Header, Content, Footer } = Layout;
+const { Title, Text } = Typography;
 
-    // Íconos como SVG inline (evita depender de @ant-design/icons por CDN, que es frágil sin bundler)
-    const SearchOutlined = () => (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" /></svg>
-    );
-    const UserOutlined = () => (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
-    );
-    const ShoppingCartOutlined = () => (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" /><line x1="3" y1="6" x2="21" y2="6" /><path d="M16 10a4 4 0 0 1-8 0" /></svg>
-    );
-    const { Title, Text } = Typography;
-    const { useBreakpoint } = Grid;
+/* ---------- Iconos (SVG inline, iguales al resto del sitio) ---------- */
+const IconSearch = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+  </svg>
+);
+const IconUser = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+  </svg>
+);
+const IconCart = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+    <line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+  </svg>
+);
 
-    // Reset del <body> sin usar CSS: se hace por JS, ya que no hay hoja de estilos propia
-    document.body.style.margin = '0';
-    document.body.style.backgroundColor = '#050507';
-    document.documentElement.style.backgroundColor = '#050507';
+/* ---------- Paleta / tipografía (idéntica a quienes_somos.html y contacto.html) -------- */
+const neonCyan    = '#00f0ff';
+const darkBg      = '#050507';
+const darkCard    = '#0a0a0e';
+const darkBorder  = '#1e1e2a';
+const chromeLight = '#e4e4e7';
+const chromeMid   = '#a1a1aa';
+const chromeDark  = '#52525b';
+const fontHeading = '"Orbitron", sans-serif';
+const fontAccent  = '"Rajdhani", sans-serif';
+const fontBody    = '"Inter", sans-serif';
 
-    // Paleta y fuentes tomadas 1:1 del tailwind.config.js de la versión Tailwind
-    const COLORS = {
-      neonCyan: '#00f0ff',
-      bg: '#050507',
-      card: '#0a0a0e',
-      surface: '#111118',
-      border: '#1e1e2a',
-      chromeLight: '#e4e4e7',
-      chromeMid: '#a1a1aa',
-      chromeDark: '#52525b',
-    };
-    const FONT_HEADING = "'Orbitron', sans-serif";
-    const FONT_ACCENT = "'Rajdhani', sans-serif";
-    const FONT_BODY = "'Inter', sans-serif";
+function Marca() {
+  return (
+    <a href="index.html">
+      <img src="img/logo.png" alt="NEW ESSENTIAL — sentí la esencia" style={{ height: 96, width: 'auto', objectFit: 'contain' }} />
+    </a>
+  );
+}
 
-    const productos = [
-      { img: './img/remera_nueva.png', alt: 'New Essential Remera Oversize Seven Words', nombre: 'NEW ESSENTIAL REMERA OVERSIZE SEVEN WORDS', precio: 'ARS 24.999', link: 'remera-drop.html' },
-      { img: './img/pantalon_nuevo.png', alt: 'New Essential Cargo Seven Words', nombre: 'NEW ESSENTIAL CARGO SEVEN WORDS', precio: 'ARS 39.999', link: 'pantalon-cargo.html' },
-      { img: './img/buzo_nuevo.png', alt: 'New Essential Buzo Seven Words', nombre: 'NEW ESSENTIAL BUZO SEVEN WORDS', precio: 'ARS 34.999', link: 'buzo-oversize.html' },
-      { img: './img/gorra.png', alt: 'New Essential Gorra Seven Words', nombre: 'NEW ESSENTIAL GORRA SEVEN WORDS', precio: 'ARS 14.999', link: 'gorra-trucker.html' },
-    ];
+/* ---------- TopBar: idéntico al de quienes_somos.html / contacto.html ------------- */
+function TopBar() {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', padding: '0 16px' }}>
+      <div style={{ width: 114 }} />
+      <div style={{ flex: 1, textAlign: 'center' }}>
+        <Marca />
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+        <button style={btnIconStyle} aria-label="Buscar">
+          <IconSearch /><span style={iconLabelStyle}>SEARCH</span>
+        </button>
+        <button style={btnIconStyle} aria-label="Perfil">
+          <IconUser /><span style={iconLabelStyle}>PROFILE</span>
+        </button>
+        <Badge count={0} showZero color={neonCyan} style={{ color: darkBg, fontWeight: 700 }}>
+          <button style={btnIconStyle} aria-label="Carrito">
+            <IconCart /><span style={iconLabelStyle}>CART</span>
+          </button>
+        </Badge>
+      </div>
+    </div>
+  );
+}
+const btnIconStyle = {
+  background: 'none', border: 'none', color: chromeMid, cursor: 'pointer',
+  display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, width: 40,
+};
+const iconLabelStyle = { fontFamily: fontHeading, fontSize: 9, letterSpacing: '0.1em' };
 
-    const menuItems = [
-      { key: 'home', label: <a href="index.html">HOME</a> },
-      {
-        key: 'catalogo',
-        label: 'CATALOGO',
-        children: [
-          { key: 'remeras', label: <a href="index.html">Remeras</a> },
-          { key: 'pantalones', label: <a href="index.html">Pantalones</a> },
-          { key: 'buzos', label: <a href="index.html">Buzos</a> },
-          { key: 'gorras', label: <a href="index.html">Gorras</a> },
-        ],
-      },
-      { key: 'newdrops', label: <a href="new_drops.html">NEW DROPS</a> },
-      { key: 'nosotros', label: <a href="quienes_somos.html">NOSOTROS</a> },
-      { key: 'contacto', label: <a href="contacto.html">CONTACTO</a> },
-    ];
+/* ---------- NavBar: idéntico al de quienes_somos.html / contacto.html, con separadores y tokens corregidos ---------- */
+function NavBar() {
+  const sepStyle = {
+    color: '#4b5563',
+    fontWeight: 300,
+    fontSize: 18,
+    cursor: 'default',
+    userSelect: 'none',
+    opacity: 1,
+  };
 
-    function FiltroCard({ titulo, opciones }) {
-      return (
-        <Card size="small" title={<Text style={{ fontFamily: FONT_ACCENT, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }}>{titulo}</Text>}>
-          <Space direction="vertical" size={8}>
-            {opciones.map((op) => (
-              <Checkbox key={op}><Text style={{ fontFamily: FONT_BODY }}>{op}</Text></Checkbox>
-            ))}
-          </Space>
-        </Card>
-      );
-    }
+  const linkStyle = {
+    color: '#030712',
+    fontWeight: 600,
+    textDecoration: 'none',
+  };
 
-    function ProductoCard({ p }) {
-      return (
-        <Badge.Ribbon text="DROP 01" color={COLORS.neonCyan} style={{ color: COLORS.bg, fontFamily: FONT_HEADING, fontSize: 9 }}>
-          <a href={p.link} style={{ display: 'block' }}>
-            <Card
-              hoverable
-              size="small"
-              cover={<img src={p.img} alt={p.alt} loading="lazy" style={{ aspectRatio: '1 / 1', objectFit: 'cover' }} />}
-            >
-              <Card.Meta
-                title={<Text style={{ fontFamily: FONT_HEADING, fontSize: 9, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase', color: COLORS.chromeLight }}>{p.nombre}</Text>}
-                description={<Text style={{ fontFamily: FONT_ACCENT, fontWeight: 700, color: COLORS.neonCyan }}>{p.precio}</Text>}
-              />
-            </Card>
-          </a>
-        </Badge.Ribbon>
-      );
-    }
+  const subLinkStyle = { color: '#030712' };
 
-    function App() {
-      const screens = useBreakpoint();
+  const menuItems = [
+    { key: 'home', label: <a href="index.html" style={linkStyle}>HOME</a> },
+    { key: 'sep1', label: <span style={sepStyle}>|</span>, disabled: true },
+    {
+      key: 'catalogo', label: <span style={linkStyle}>CATALOGO</span>,
+      children: [
+        { key: 'remeras', label: <a href="new_drops.html" style={subLinkStyle}>Remeras</a> },
+        { key: 'pantalones', label: <a href="new_drops.html" style={subLinkStyle}>Pantalones</a> },
+        { key: 'buzos', label: <a href="new_drops.html" style={subLinkStyle}>Buzos</a> },
+        { key: 'gorras', label: <a href="new_drops.html" style={subLinkStyle}>Gorras</a> },
+      ],
+    },
+    { key: 'sep2', label: <span style={sepStyle}>|</span>, disabled: true },
+    { key: 'new', label: <a href="new_drops.html" style={linkStyle}>NEW DROPS</a> },
+    { key: 'sep3', label: <span style={sepStyle}>|</span>, disabled: true },
+    { key: 'nosotros', label: <a href="quienes_somos.html" style={linkStyle}>NOSOTROS</a> },
+    { key: 'sep4', label: <span style={sepStyle}>|</span>, disabled: true },
+    { key: 'contacto', label: <a href="contacto.html" style={linkStyle}>CONTACTO</a> },
+  ];
+  return (
+    <ConfigProvider theme={{ components: { Menu: {
+        itemColor: '#030712', itemHoverColor: '#000000',
+        horizontalItemSelectedColor: '#000000', itemBg: '#9ca3af',
+        horizontalItemHoverBg: '#9ca3af', fontSize: 14.9, fontWeightStrong: 700,
+        itemPaddingInline: 11,
+        popupBg: '#ffffff',
+    } } }}>
+      <div style={{ background: '#9ca3af', padding: '13px 0' }}>
+        <Menu
+          mode="horizontal"
+          items={menuItems}
+          selectable={false}
+          style={{ justifyContent: 'center', background: 'transparent', fontFamily: fontHeading, letterSpacing: '0.15em', borderBottom: 'none', lineHeight: 'normal' }}
+        />
+      </div>
+    </ConfigProvider>
+  );
+}
 
-      return (
-        <ConfigProvider
-          theme={{
-            algorithm: theme.darkAlgorithm,
-            token: {
-              colorPrimary: COLORS.neonCyan,
-              colorBgBase: COLORS.bg,
-              colorBgContainer: COLORS.card,
-              colorBorder: COLORS.border,
-              colorText: COLORS.chromeLight,
-              colorTextSecondary: COLORS.chromeMid,
-              fontFamily: FONT_BODY,
-            },
-            components: {
-              Layout: {
-                headerBg: COLORS.bg,
-                bodyBg: COLORS.bg,
-                footerBg: COLORS.bg,
-              },
-            },
-          }}
+/* ---------- Datos de productos (igual al original) ---------- */
+const productos = [
+  { img: 'img/remera_nueva.png', alt: 'New Essential Remera Oversize Seven Words', nombre: 'NEW ESSENTIAL REMERA OVERSIZE SEVEN WORDS', precio: 'ARS 24.999', link: 'remera-drop.html' },
+  { img: 'img/pantalon_nuevo.png', alt: 'New Essential Cargo Seven Words', nombre: 'NEW ESSENTIAL CARGO SEVEN WORDS', precio: 'ARS 39.999', link: 'pantalon-cargo.html' },
+  { img: 'img/buzo_nuevo.png', alt: 'New Essential Buzo Seven Words', nombre: 'NEW ESSENTIAL BUZO SEVEN WORDS', precio: 'ARS 34.999', link: 'buzo-oversize.html' },
+  { img: 'img/gorra.png', alt: 'New Essential Gorra Seven Words', nombre: 'NEW ESSENTIAL GORRA SEVEN WORDS', precio: 'ARS 14.999', link: 'gorra-trucker.html' },
+];
+
+/* ---------- Filtros ---------- */
+function FiltroCard({ titulo, opciones }) {
+  return (
+    <Card size="small" title={<Text style={{ fontFamily: fontAccent, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase', color: chromeLight }}>{titulo}</Text>}>
+      <Space direction="vertical" size={8}>
+        {opciones.map((op) => (
+          <Checkbox key={op}><Text style={{ fontFamily: fontBody, color: chromeMid }}>{op}</Text></Checkbox>
+        ))}
+      </Space>
+    </Card>
+  );
+}
+
+/* ---------- Card de producto ---------- */
+function ProductoCard({ p }) {
+  return (
+    <Badge.Ribbon text="DROP 01" color={neonCyan} style={{ color: darkBg, fontFamily: fontHeading, fontSize: 9 }}>
+      <a href={p.link} style={{ display: 'block' }}>
+        <Card
+          hoverable
+          size="small"
+          cover={<img src={p.img} alt={p.alt} loading="lazy" style={{ aspectRatio: '1 / 1', objectFit: 'cover' }} />}
         >
-          <Layout style={{ minHeight: '100vh' }}>
+          <Card.Meta
+            title={<Text style={{ fontFamily: fontHeading, fontSize: 9, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase', color: chromeLight }}>{p.nombre}</Text>}
+            description={<Text style={{ fontFamily: fontAccent, fontWeight: 700, color: neonCyan }}>{p.precio}</Text>}
+          />
+        </Card>
+      </a>
+    </Badge.Ribbon>
+  );
+}
 
-            {/* HEADER */}
-            <Header style={{ position: 'sticky', top: 0, zIndex: 30, height: 'auto', lineHeight: 'normal', padding: '0 16px', borderBottom: `1px solid ${COLORS.border}` }}>
-              <Row align="middle" style={{ padding: '8px 0' }}>
-                <Col xs={0} md={8} />
-                <Col xs={16} md={8} style={{ textAlign: 'center' }}>
-                  <a href="index.html">
-                    <img src="./img/logo.png" alt="NEW ESSENTIAL — sentí la esencia" style={{ height: 64, width: 'auto', objectFit: 'contain' }} />
-                  </a>
+function App() {
+  return (
+    <ConfigProvider theme={{
+      algorithm: theme.darkAlgorithm,
+      token: {
+        colorPrimary: neonCyan,
+        colorBgBase: darkBg,
+        colorBgContainer: darkCard,
+        colorBorder: darkBorder,
+        colorText: chromeLight,
+        colorTextSecondary: chromeMid,
+        colorTextTertiary: chromeDark,
+        fontFamily: fontBody,
+      },
+    }}>
+      <Layout style={{ minHeight: '100vh', background: darkBg }}>
+        <Header style={{ position: 'sticky', top: 0, zIndex: 30, background: darkBg, borderBottom: `1px solid ${darkBorder}`, height: 'auto', lineHeight: 'normal', padding: 0 }}>
+          <TopBar />
+          <NavBar />
+        </Header>
+
+        <Content style={{ padding: '24px 24px 0' }}>
+          <div style={{ maxWidth: 1152, margin: '0 auto' }}>
+
+            {/* HERO */}
+            <Card
+              bordered
+              style={{ marginBottom: 24, borderColor: darkBorder, overflow: 'hidden' }}
+              styles={{ body: { padding: 0 } }}
+            >
+              <Row>
+                <Col xs={24} md={12} style={{ padding: 24, display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#000' }}>
+                  <Title level={1} style={{ fontFamily: fontHeading, color: chromeLight, letterSpacing: 2, marginBottom: 24 }}>
+                    SIETE PALABRAS: E.S.E.N.C.I.A
+                  </Title>
+                  <Button type="primary" ghost size="large" href="#catalogo" style={{ fontFamily: fontHeading, letterSpacing: 3, fontWeight: 600, width: 'fit-content' }}>
+                    VER COLECCIÓN
+                  </Button>
                 </Col>
-                <Col xs={8} md={8} style={{ textAlign: 'right' }}>
-                  <Space size="large">
-                    <Space direction="vertical" size={0} align="center" style={{ cursor: 'pointer', color: COLORS.chromeMid }}>
-                      <SearchOutlined />
-                      {screens.md && <Text style={{ fontFamily: FONT_HEADING, fontSize: 9, letterSpacing: 2 }}>SEARCH</Text>}
-                    </Space>
-                    <Space direction="vertical" size={0} align="center" style={{ cursor: 'pointer', color: COLORS.chromeMid }}>
-                      <UserOutlined />
-                      {screens.md && <Text style={{ fontFamily: FONT_HEADING, fontSize: 9, letterSpacing: 2 }}>PROFILE</Text>}
-                    </Space>
-                    <Badge count={0} showZero color={COLORS.neonCyan} style={{ color: COLORS.bg }}>
-                      <Space direction="vertical" size={0} align="center" style={{ cursor: 'pointer', color: COLORS.chromeMid }}>
-                        <ShoppingCartOutlined />
-                        {screens.md && <Text style={{ fontFamily: FONT_HEADING, fontSize: 9, letterSpacing: 2 }}>CART</Text>}
-                      </Space>
-                    </Badge>
-                  </Space>
+                <Col xs={24} md={12} style={{ height: 320, position: 'relative' }}>
+                  <video
+                    src="videos/hero-bg.mp4"
+                    autoPlay loop muted playsInline
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  />
                 </Col>
               </Row>
+            </Card>
 
-              {/* NAV */}
-              <div style={{ background: '#9ca3af' }}>
-                <Menu
-                  mode="horizontal"
-                  items={menuItems}
-                  selectable={false}
-                  style={{
-                    background: 'transparent',
-                    borderBottom: 'none',
-                    justifyContent: 'center',
-                    fontFamily: FONT_HEADING,
-                    color: '#0a0a0a',
-                  }}
-                />
+            {/* FILTROS */}
+            <div id="catalogo" style={{ marginBottom: 32 }}>
+              <div style={{ background: '#9ca3af', padding: '10px 16px', marginBottom: 8 }}>
+                <Text style={{ fontFamily: fontAccent, fontWeight: 700, letterSpacing: 3, color: '#0a0a0a', textTransform: 'uppercase' }}>FILTROS</Text>
               </div>
-            </Header>
-
-            {/* CONTENIDO */}
-            <Content style={{ maxWidth: 1152, margin: '0 auto', width: '100%', padding: '12px 16px 0' }}>
-
-              {/* HERO */}
-              <Card
-                bordered
-                style={{ marginBottom: 24, borderColor: COLORS.border, overflow: 'hidden' }}
-                bodyStyle={{ padding: 0 }}
-              >
-                <Row>
-                  <Col xs={24} md={12} style={{ padding: 24, display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#000' }}>
-                    <Title level={1} style={{ fontFamily: FONT_HEADING, color: COLORS.chromeLight, letterSpacing: 2, marginBottom: 24 }}>
-                      SIETE PALABRAS: E.S.E.N.C.I.A
-                    </Title>
-                    <Button type="primary" ghost size="large" href="#catalogo" style={{ fontFamily: FONT_HEADING, letterSpacing: 3, fontWeight: 600 }}>
-                      VER COLECCIÓN
-                    </Button>
-                  </Col>
-                  <Col xs={24} md={12} style={{ height: 320, position: 'relative' }}>
-                    <video
-                      src="./videos/hero-bg.mp4"
-                      autoPlay loop muted playsInline
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                    />
-                  </Col>
-                </Row>
-              </Card>
-
-              {/* FILTROS */}
-              <div id="catalogo" style={{ marginBottom: 32 }}>
-                <div style={{ background: '#9ca3af', padding: '10px 16px', marginBottom: 8 }}>
-                  <Text style={{ fontFamily: FONT_ACCENT, fontWeight: 700, letterSpacing: 3, color: '#0a0a0a', textTransform: 'uppercase' }}>FILTROS</Text>
-                </div>
-                <Row gutter={[16, 16]}>
-                  <Col xs={24} md={8}><FiltroCard titulo="Categoría" opciones={['Remeras', 'Pantalones', 'Buzos', 'Gorras']} /></Col>
-                  <Col xs={24} md={8}><FiltroCard titulo="Drops" opciones={['Drop 01']} /></Col>
-                  <Col xs={24} md={8}><FiltroCard titulo="Color" opciones={['Negro']} /></Col>
-                </Row>
-              </div>
-
-              {/* GRILLA DE PRODUCTOS */}
-              <Row gutter={[24, 24]} style={{ paddingBottom: 40 }}>
-                {productos.map((p) => (
-                  <Col key={p.nombre} xs={12} md={8} lg={6}>
-                    <ProductoCard p={p} />
-                  </Col>
-                ))}
+              <Row gutter={[16, 16]}>
+                <Col xs={24} md={8}><FiltroCard titulo="Categoría" opciones={['Remeras', 'Pantalones', 'Buzos', 'Gorras']} /></Col>
+                <Col xs={24} md={8}><FiltroCard titulo="Drops" opciones={['Drop 01']} /></Col>
+                <Col xs={24} md={8}><FiltroCard titulo="Color" opciones={['Negro']} /></Col>
               </Row>
-            </Content>
+            </div>
 
-            {/* FOOTER */}
-            <Footer style={{ textAlign: 'center', borderTop: `1px solid ${COLORS.border}` }}>
-              <Space>
-                <Text italic strong style={{ fontFamily: FONT_HEADING, letterSpacing: 2 }}>new ESSENTIAL</Text>
-                <Text style={{ color: COLORS.chromeDark, fontSize: 12 }}>© 2026. ALL RIGHTS RESERVED.</Text>
-              </Space>
-            </Footer>
+            {/* GRILLA DE PRODUCTOS */}
+            <Row gutter={[24, 24]} style={{ paddingBottom: 40 }}>
+              {productos.map((p) => (
+                <Col key={p.nombre} xs={12} md={8} lg={6}>
+                  <ProductoCard p={p} />
+                </Col>
+              ))}
+            </Row>
 
-          </Layout>
-        </ConfigProvider>
-      );
-    }
+          </div>
+        </Content>
 
-    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-  </script>
+        <Footer style={{ textAlign: 'center', borderTop: `1px solid ${darkBorder}`, background: 'rgba(5,5,7,0.9)' }}>
+          <Space size={8} style={{ fontFamily: fontHeading }}>
+            <Text style={{ color: chromeLight, fontStyle: 'italic', fontWeight: 700, letterSpacing: '0.15em' }}>new ESSENTIAL</Text>
+            <Text style={{ color: chromeDark, fontSize: 12 }}>© 2026. ALL RIGHTS RESERVED.</Text>
+          </Space>
+        </Footer>
+      </Layout>
+    </ConfigProvider>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
 </body>
 </html>

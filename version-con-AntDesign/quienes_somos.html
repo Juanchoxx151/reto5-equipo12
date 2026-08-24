@@ -69,7 +69,7 @@ function Marca() {
 function TopBar() {
   return (
     <div style={{ display: 'flex', alignItems: 'center', padding: '0 16px' }}>
-      <div style={{ width: 128 }} />
+      <div style={{ width: 114 }} />
       <div style={{ flex: 1, textAlign: 'center' }}>
         <Marca />
       </div>
@@ -80,7 +80,7 @@ function TopBar() {
         <button style={btnIconStyle} aria-label="Perfil">
           <IconUser /><span style={iconLabelStyle}>PROFILE</span>
         </button>
-        <Badge count={0} showZero color={neonCyan} style={{ color: darkBg, fontWeight: 700 }}>
+        <Badge count={0} showZero color={neonCyan} style={{ color: darkBg, fontWeight: 700}}>
           <button style={btnIconStyle} aria-label="Carrito">
             <IconCart /><span style={iconLabelStyle}>CART</span>
           </button>
@@ -91,18 +91,28 @@ function TopBar() {
 }
 const btnIconStyle = {
   background: 'none', border: 'none', color: chromeMid, cursor: 'pointer',
-  display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2
+  display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, width: 40,
 };
-const iconLabelStyle = { fontFamily: fontHeading, fontSize: 9, letterSpacing: '0.1em' };
+const iconLabelStyle = { fontFamily: fontHeading, fontSize: 6.5, letterSpacing: '0.1em' };
 
 function NavBar() {
+  const sepStyle = {
+    color: '#4b5563',
+    fontWeight: 300,
+    fontSize: 18,       
+    cursor: 'default',
+    userSelect: 'none',
+    opacity: 1,
+  };
+  
   const linkStyle = {
     color: '#030712',
-    fontWeight: 700,
+    fontWeight: 600,
     textDecoration: 'none',
   };
   const menuItems = [
     { key: 'home', label: <a href="index.html" style={linkStyle}>HOME</a> },
+    { key: 'sep1', label: <span style={sepStyle}>|</span>, disabled: true},
     {
       key: 'catalogo', label: <span style={linkStyle}>CATALOGO</span>,
       children: [
@@ -112,23 +122,27 @@ function NavBar() {
         { key: 'gorras', label: <a href="new_drops.html">Gorras</a> },
       ],
     },
+    { key: 'sep2', label: <span style={sepStyle}>|</span>, disabled: true},
     { key: 'new', label: <a href="new_drops.html" style={linkStyle}>NEW DROPS</a> },
+    { key: 'sep3', label: <span style={sepStyle}>|</span>, disabled: true},
     { key: 'nosotros', label: <a href="quienes_somos.html" style={linkStyle}>NOSOTROS</a> },
+    { key: 'sep4', label: <span style={sepStyle}>|</span>, disabled: true},
     { key: 'contacto', label: <a href="contacto.html" style={linkStyle}>CONTACTO</a> },
   ];
   return (
     <ConfigProvider theme={{ components: { Menu: {
         itemColor: '#030712', itemHoverColor: '#000000',
         horizontalItemSelectedColor: '#000000', itemBg: '#9ca3af',
-        horizontalItemHoverBg: '#9ca3af', fontSize: 14, fontWeightStrong: 700,
-        horizontalItemPaddingInline: 24,
+        horizontalItemHoverBg: '#9ca3af', fontSize: 14.9, fontWeightStrong: 700,
+        itemPaddingInline: 11,
+        popupBg: '#ffffff',
     } } }}>
-      <div style={{ background: '#9ca3af', padding: '10px 0' }}>
+      <div style={{ background: '#9ca3af', padding: '13px 0' }}>
         <Menu
           mode="horizontal"
           items={menuItems}
           selectable={false}
-          style={{ justifyContent: 'center', background: 'transparent', fontFamily: fontHeading, letterSpacing: '0.18em', borderBottom: 'none', lineHeight: 'normal' }}
+          style={{ justifyContent: 'center', background: 'transparent', fontFamily: fontHeading, letterSpacing: '0.15em', borderBottom: 'none', lineHeight: 'normal' }}
         />
       </div>
     </ConfigProvider>
@@ -187,7 +201,7 @@ function App() {
                 Cada prenda es una pieza de hardware. Trabajamos con algodón de alto gramaje, interfaces gráficas vectorizadas y técnicas de impresión de alta densidad para asegurar que lo que usás sea más que ropa: sea una extensión de tu identidad cibernética.
               </Paragraph>
               <Paragraph style={{ fontFamily: fontBody, color: chromeMid, lineHeight: 1.7, marginBottom: 0, fontSize: 14 }}>
-                Somos una marca independiente de Buenos Aires. Producción local, tirajes limitados, diseño sin concesiones.
+                Somos una marca independiente de Río Cuarto. Producción local, tirajes limitados, diseño sin concesiones.
               </Paragraph>
 
               {/* MENSAJE DE MARCA */}

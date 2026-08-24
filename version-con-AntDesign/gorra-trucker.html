@@ -29,7 +29,7 @@ const { ConfigProvider, theme, Layout, Menu, Badge, Row, Col, Image,
 const { Header, Content, Footer } = Layout;
 const { Title, Text, Paragraph } = Typography;
 
-/* ---------- Iconos (SVG inline, igual que la versión Tailwind) ---------- */
+/* ---------- Iconos (SVG inline, iguales al resto del sitio) ---------- */
 const IconSearch = () => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
     <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
@@ -57,10 +57,11 @@ const IconChevronRight = () => (
   </svg>
 );
 
-/* ---------- Paleta / tipografía (equivalente al tailwind.config) -------- */
+/* ---------- Paleta / tipografía (idéntica al resto del sitio) -------- */
 const neonCyan   = '#00f0ff';
 const darkBg     = '#050507';
 const darkCard   = '#0a0a0e';
+const darkSurface = '#111118';
 const darkBorder = '#1e1e2a';
 const chromeLight = '#e4e4e7';
 const chromeMid   = '#a1a1aa';
@@ -83,31 +84,29 @@ const producto = {
 function Marca() {
   return (
     <a href="index.html">
-      <img src="img/logo.png" alt="NEW ESSENTIAL — sentí la esencia" style={{ height: 64, width: 'auto', objectFit: 'contain' }} />
+      <img src="img/logo.png" alt="NEW ESSENTIAL — sentí la esencia" style={{ height: 96, width: 'auto', objectFit: 'contain' }} />
     </a>
   );
 }
 
+/* ---------- TopBar: idéntico al resto del sitio ------------- */
 function TopBar() {
   return (
     <div style={{ display: 'flex', alignItems: 'center', padding: '0 16px' }}>
-      <div style={{ width: 128 }} />
+      <div style={{ width: 114 }} />
       <div style={{ flex: 1, textAlign: 'center' }}>
         <Marca />
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
         <button style={btnIconStyle} aria-label="Buscar">
-          <IconSearch />
-          <span style={iconLabelStyle}>SEARCH</span>
+          <IconSearch /><span style={iconLabelStyle}>SEARCH</span>
         </button>
         <button style={btnIconStyle} aria-label="Perfil">
-          <IconUser />
-          <span style={iconLabelStyle}>PROFILE</span>
+          <IconUser /><span style={iconLabelStyle}>PROFILE</span>
         </button>
         <Badge count={0} showZero color={neonCyan} style={{ color: darkBg, fontWeight: 700 }}>
           <button style={btnIconStyle} aria-label="Carrito">
-            <IconCart />
-            <span style={iconLabelStyle}>CART</span>
+            <IconCart /><span style={iconLabelStyle}>CART</span>
           </button>
         </Badge>
       </div>
@@ -116,39 +115,60 @@ function TopBar() {
 }
 const btnIconStyle = {
   background: 'none', border: 'none', color: chromeMid, cursor: 'pointer',
-  display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2
+  display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, width: 40,
 };
-const iconLabelStyle = { fontFamily: fontHeading, fontSize: 9, letterSpacing: '0.2em' };
+const iconLabelStyle = { fontFamily: fontHeading, fontSize: 6.5, letterSpacing: '0.1em' };
 
-/* Barra de navegación: ahora más alta (padding vertical extra en el contenedor) */
+/* ---------- NavBar: idéntico al resto del sitio ---------- */
 function NavBar() {
+  const sepStyle = {
+    color: '#4b5563',
+    fontWeight: 300,
+    fontSize: 18,
+    cursor: 'default',
+    userSelect: 'none',
+    opacity: 1,
+  };
+
+  const linkStyle = {
+    color: '#030712',
+    fontWeight: 600,
+    textDecoration: 'none',
+  };
+
   const menuItems = [
-    { key: 'home', label: <a href="index.html">HOME</a> },
+    { key: 'home', label: <a href="index.html" style={linkStyle}>HOME</a> },
+    { key: 'sep1', label: <span style={sepStyle}>|</span>, disabled: true },
     {
-      key: 'catalogo', label: 'CATALOGO',
+      key: 'catalogo', label: <span style={linkStyle}>CATALOGO</span>,
       children: [
-        { key: 'remeras', label: <a href="index.html">Remeras</a> },
-        { key: 'pantalones', label: <a href="index.html">Pantalones</a> },
-        { key: 'buzos', label: <a href="index.html">Buzos</a> },
-        { key: 'gorras', label: <a href="index.html">Gorras</a> },
+        { key: 'remeras', label: <a href="new_drops.html">Remeras</a> },
+        { key: 'pantalones', label: <a href="new_drops.html">Pantalones</a> },
+        { key: 'buzos', label: <a href="new_drops.html">Buzos</a> },
+        { key: 'gorras', label: <a href="new_drops.html">Gorras</a> },
       ],
     },
-    { key: 'new', label: <a href="new_drops.html">NEW DROPS</a> },
-    { key: 'nosotros', label: <a href="quienes_somos.html">NOSOTROS</a> },
-    { key: 'contacto', label: <a href="contacto.html">CONTACTO</a> },
+    { key: 'sep2', label: <span style={sepStyle}>|</span>, disabled: true },
+    { key: 'new', label: <a href="new_drops.html" style={linkStyle}>NEW DROPS</a> },
+    { key: 'sep3', label: <span style={sepStyle}>|</span>, disabled: true },
+    { key: 'nosotros', label: <a href="quienes_somos.html" style={linkStyle}>NOSOTROS</a> },
+    { key: 'sep4', label: <span style={sepStyle}>|</span>, disabled: true },
+    { key: 'contacto', label: <a href="contacto.html" style={linkStyle}>CONTACTO</a> },
   ];
   return (
     <ConfigProvider theme={{ components: { Menu: {
-        itemColor: '#111827', itemHoverColor: '#000000',
+        itemColor: '#030712', itemHoverColor: '#000000',
         horizontalItemSelectedColor: '#000000', itemBg: '#9ca3af',
-        horizontalItemHoverBg: '#9ca3af', fontSize: 13, fontWeightStrong: 700,
+        horizontalItemHoverBg: '#9ca3af', fontSize: 14.9, fontWeightStrong: 700,
+        itemPaddingInline: 11,
+        popupBg: '#ffffff',
     } } }}>
-      <div style={{ background: '#9ca3af', padding: '16px 0' }}>
+      <div style={{ background: '#9ca3af', padding: '13px 0' }}>
         <Menu
           mode="horizontal"
           items={menuItems}
           selectable={false}
-          style={{ justifyContent: 'center', background: 'transparent', fontFamily: fontHeading, borderBottom: 'none', lineHeight: 'normal' }}
+          style={{ justifyContent: 'center', background: 'transparent', fontFamily: fontHeading, letterSpacing: '0.15em', borderBottom: 'none', lineHeight: 'normal' }}
         />
       </div>
     </ConfigProvider>
@@ -185,7 +205,7 @@ function App() {
 
             <Row gutter={[64, 32]}>
               <Col xs={24} lg={12}>
-                <div style={{ aspectRatio: '1 / 1', background: darkCard, border: `1px solid ${darkBorder}`, overflow: 'hidden' }}>
+                <div style={{ aspectRatio: '1 / 1', background: darkSurface, border: `1px solid ${darkBorder}`, overflow: 'hidden' }}>
                   <Image
                     src={producto.imagen}
                     alt={producto.nombre}
@@ -231,7 +251,6 @@ function App() {
                   {producto.descripcion}
                 </Paragraph>
 
-                {/* Texto en blanco, borde cyan */}
                 <Button
                   type="primary"
                   ghost
